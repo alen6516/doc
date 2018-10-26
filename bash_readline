@@ -1,0 +1,6 @@
+exec << $FILENAME
+
+while read line
+do
+    printf "%b\n" $line
+done
