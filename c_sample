@@ -1,0 +1,14 @@
+# size of data type
+void        1 byte
+char        1 byte
+short       2 bytes
+int         4 bytes
+float       4 bytes
+double      8 bytes
+long        8 bytes
+pointer     8 bytes
+NULL        8 bytes
+long double 16 bytes
+
+# C11 recommends to use int8_t, int16_t, int32_t, int64_t
+# uint8_t, uint16_t, uint32_t, uint64_t to avoid dependence problem.
