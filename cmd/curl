@@ -1,0 +1,15 @@
+# Usage
+curl [options] [URL...]
+
+# Options
+-s
+    Silent mode
+
+-o FILENAME
+    Save the output to certain file.
+
+-I
+    Fetch the headers only.
+
+-w %{PATTERN}
+    Display information after completed transfer. For example, "-w %{http_code}" will display the http code.
