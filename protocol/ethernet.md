@@ -15,6 +15,7 @@
 * Min length is 64 bytes
     * Ethernet header = 18 bytes (dst MAC 6 bytes + src MAC 6 bytes + Length 2 bytes + CRC 4 bytes)
     * Minimum payload = 46 bytes
+    * 
 
 * MTU
     * Maximum Transmission Unit
