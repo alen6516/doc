@@ -25,11 +25,11 @@
 
 # Structure
 
-    (Hide): Preamble (7 octets) + STD (1 octet) +
+    (Hide): Preamble (7 octets) + STD (1 octet)
     
-    (Show): dst MAC (6 octets) + src MAC (6 octets) +
+    (Show): dst MAC (6 octets) + src MAC (6 octets)
 
-    (Optional): 802.1Q tag (4 octets) + 
+    (Optional): 802.1Q tag (4 octets) 
 
     (Show): Type or Length (2 octets)
 
