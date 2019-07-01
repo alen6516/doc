@@ -14,7 +14,7 @@ iface eth0 inet static
     #network 192.168.1.0
     #broadcast 192.168.1.255
     gateway 192.168.1.1
-    dms-nameservers 8.8.8.8
+    dns-nameservers 8.8.8.8
     
 # ipv4 route
 up route add -net 20.20.20.0/24 gw 192.168.1.2 dev eth0
