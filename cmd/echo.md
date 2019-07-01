@@ -3,12 +3,15 @@
 # Overview
 
 # Options
+-E
+    do not interpret backslash escape
+
 -e
-    enable interpretation of backslash escapes
+    interpret backslash escape
 
--n
-    do not output in new line 
-
+-n  
+    do not change line
+    
 # Example
 $ echo "GET / HTTP/1.0\r\n\" | nc 87.87.87.87 8080
     Use echo to send data which allow escape character

@@ -2,9 +2,23 @@
 
 
 # Overview
-* detect and correct error
 
-* 2 sublayer    
+* Ethernet header length is usually 14 bytes
+
+* Min length of a ethernet frame is 64 bytes
+    * header + trailer = 18 bytes (14 bytes + 4 bytes)
+    * Minimum payload = 46 bytes
+    * 不夠的部分用 00000... 的 padding 補在 frame 的最後
+
+* MTU
+    * Maximum Transmission Unit
+    * ethernet header + tail = 14 + 4 bytes
+    * payload max is 1500 bytes => called "MTU is 1500 bytes"
+    * so max total length of a frame is 1518 bytes
+
+* Layer 2 is responsible for detecting and correcting error
+
+* Layer 2 has 2 sublayer    
     * mac layer: 
         * detect if media is busy
     
@@ -12,25 +26,13 @@
         * CRC32
         * do checksum, and record RX error count
 
-* Min length is 64 bytes
-    * Ethernet header = 18 bytes (dst MAC 6 bytes + src MAC 6 bytes + Length 2 bytes + CRC 4 bytes)
-    * Minimum payload = 46 bytes
-    * 
-
-* MTU
-    * Maximum Transmission Unit
-    * ethernet header + tail = 14 + 4 bytes
-    * payload max is 1500 bytes => called MTU is 1500
-    * so max total length of a frame is 1518 bytes
-
-
 # Structure
 
-    (Hide): Preamble (7 octets) + STD (1 octet) +
+    (Hide): Preamble (7 octets) + STD (1 octet)
     
-    (Show): dst MAC (6 octets) + src MAC (6 octets) +
+    (Show): dst MAC (6 octets) + src MAC (6 octets)
 
-    (Optional): 802.1Q tag (4 octets) + 
+    (Optional): 802.1Q tag (4 octets) 
 
     (Show): Type or Length (2 octets)
 
