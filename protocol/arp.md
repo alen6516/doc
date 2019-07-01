@@ -2,11 +2,14 @@
 
 
 # Overview
+* Length of a ARP header is usually 28 octets
+
 * having dst's IP address and asking its MAC address
+
 * the one who reply the request will also record the requester's MAC address
+
 * gratutious ARP
-    * No one ask my MAC address, but I activly broadcast to tell everyone my ARP entry
-        * Because OS may age ARP entry which is expired
+    * No one ask my MAC address, but I activly broadcast to tell everyone my ARP entry, because OS may delete ARP entry which is expired
 
 # Structure
 
@@ -49,6 +52,6 @@
 * Sender IP address
 
 * Target MAC address
-* Target IP address 
+* Target IP address
 
 
