@@ -1,13 +1,9 @@
-# Description
+# Usage
 grep [options] PATTERN [FILE...]
-
-# Overview
 
 # Option
 -V, --version
     Show version information.
 
--r PATH
-    Recursively search in PATH
-
-# Example
+-r
+    Recursively search in each directory.
