@@ -4,12 +4,16 @@
 # Overview
 * Length of a ARP header is usually 28 octets
 
+* RFC 826
+
 * having dst's IP address and asking its MAC address
 
 * the one who reply the request will also record the requester's MAC address
 
 * gratutious ARP
     * No one ask my MAC address, but I activly broadcast to tell everyone my ARP entry, because OS may delete ARP entry which is expired
+
+* IPv6 discard ARP and use neighbor discovery protocol (RFC 4861 and RFC 4862)
 
 # Structure
 
