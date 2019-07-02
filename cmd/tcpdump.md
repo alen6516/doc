@@ -15,6 +15,9 @@
 -e
     show ethernet mac address
 
+-n
+    don't convert address to name
+
 -v
     show more detail information
 
