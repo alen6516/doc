@@ -12,6 +12,9 @@
 -w FILENAME
     write to a pcap file
 
+-e
+    show ethernet mac address
+
 -v
     show more detail information
 
