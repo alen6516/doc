@@ -27,10 +27,10 @@
 * Checksum
     * checksum of the entire UDP segment and pseudo header
         * pseudo header is 12-byte long, including
-            * Source IP address (4 bytes)
-            * Destinatioin IP address (4 bytes)
-            * Zero (1 byte)
-            * PTCL (1 byte)
+            * Src IP address (4 bytes):
+            * Dst IP address (4 bytes):
+            * Zero           (1 byte) : 0000...
+            * PTCL           (1 byte) : 0x11 for UDP
             * UDP length (2 bytes)
         * why we need pseudo header in TCP/UDP checksum?
             * historical reasons, it is designed to examine if IP addresses have been modified during transmission or not
