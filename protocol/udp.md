@@ -2,9 +2,11 @@
 
 
 # Overview
-* Length of a UDP header is usually  octets
+* Length of a UDP header is 8 octets
 
-* having dst's IP address and asking its MAC address
+* no session, no state => connectionless
+    * each UDP segment is handled inidependently from another
+    * Datagram socket
 
 # Structure
 
