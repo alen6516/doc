@@ -1,7 +1,8 @@
 # Description
 
 # Overview
-* ping echo request on linux may carry a timestemp
+* ping echo request on linux may carry a 8-byte timestemp and 48-byte data in ICMP packet
+* in the stdout, the length means ICMP packet's length
 
 # Options
 -I INTERFACE
