@@ -16,7 +16,8 @@
     assign how many requests to send
 
 -s SIZE
-    assign packet data size in bytes
+    * assign packet data size in bytes
+    * 理論上不能超過 65507 bytes ( IP tatol length max is 65535 = ip header 20 bytes + icmp header 8 bytes + icmp data 65507)
     
 # Example
 
