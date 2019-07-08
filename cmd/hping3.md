@@ -4,6 +4,8 @@ packet maker
 # Overview
 
 # Options
+
+## General
 -i INTERVAL
     * INTERVAL set u1000 means 1 ms
 
@@ -12,6 +14,14 @@ packet maker
 
 -c COUNT
 
+## IP
+-a IP_addr
+    * use a specified IP addr as my src_ip (spoofing)
+    
+--rand-source
+    * random the src IP
+
+## TCP/UDP
 -p PORT
     dst port
 
