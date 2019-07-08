@@ -4,6 +4,8 @@
 # Overview
 * Length of a UDP header is 8 octets
 
+* RFC 768
+
 * no session, no state => connectionless
     * each UDP segment is handled inidependently from another
     * Datagram socket
