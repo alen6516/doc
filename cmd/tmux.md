@@ -36,6 +36,7 @@ window相關   |
 w            | choose window (window tree)            
 &            | kill window                            
 f            | find window through name               
+:move-window -t 0       將當前 window 移至編號 0 (最前)
 
 
 pane 相關    |                                        
@@ -61,3 +62,4 @@ b            | send prefix
 ?            | list keys                              
 d            | detach client                          
 [            | 游標可以移動                               
+:set -g mouse on/off        允許滑鼠select window, select pane, resize pane
