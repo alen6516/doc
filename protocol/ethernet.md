@@ -67,7 +67,9 @@
 * Type or Length
     * if this value >= 1536
         * Type, indicate which protocol OS encap in the payload
-            * eg. 0x0800 => IPv4, 0x0806 => ARP
+            * 0x0800 => IPv4
+            * 0x0806 => ARP
+            * 0x86dd => IPv6
     * else
         * Length, indicate the size of the payload on octets (except padding)
 
