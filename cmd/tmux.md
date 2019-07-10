@@ -20,15 +20,13 @@ $ tmux kill-session -t 0
 
 ## ctrl-q
 
-
-
 session 相關 |                                        
 ------------ | -------------------------------------- 
 $            | rename session                         
 s            | choose tree (session tree)             
 
 
-window相關   |                                        
+window 相關   |                                        
 ------------ | -------------------------------------- 
 , (comma)    | rename window                          
 . (dot)      | change the number of a window          
