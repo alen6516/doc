@@ -1,0 +1,7 @@
+## API
+fork()
+signal()
+kill()
+getppid()
+waitpid()
+exit()
