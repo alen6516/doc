@@ -12,7 +12,9 @@
 # Structure
 
 ## Field description
-* Start-line
+
+### reqeust
+* Status-line
     * request method: GET, POST, PUT, DELETE, HEAD
 
 * Host
@@ -30,4 +32,6 @@
 * Accept-Charset
 * Keep-Alive
 * Connection
+
+### response
 

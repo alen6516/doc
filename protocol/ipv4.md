@@ -55,6 +55,9 @@
 * Total length
 
 * Identification (ID)
+    * fragments from the same IP packet obtain the same ID value
+    * in transmission, usually htis val becomes larger
+        * so if see in the same session of transmission, some times this ID become smaller, then it may indicate there is multiple machine in the server side (such load balance)
 
 * Flags
     * bit 0: Reserved; must be zero

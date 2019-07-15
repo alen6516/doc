@@ -56,8 +56,8 @@
 * Rest of Header
     * the structure varied depends on the Type of the ICMP msg
     * some example element of this column
-        * ID: represent which echo msg is associated with this reply msg
-        * Sequence: a number which is incremantal by 1 from 0, usually used in echo request/reply
+        * ID: identify this icmp session, echo requests/responses of the same session obtains the same ID.
+        * Sequence: a number which is incremantal by 1 from 0, indicating the order of packet in the same icmp session
 
 * Data
     * includes a copy of the entire IPv4 header, plus at least the first eight bytes of data from the IPv4 packet that caused the error message

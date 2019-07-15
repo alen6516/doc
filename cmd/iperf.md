@@ -6,6 +6,9 @@
 -c
     use as a client
 
+-s
+    use as a server
+
 -u 
     use UDP
 

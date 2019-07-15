@@ -15,6 +15,22 @@
 
 * IPv6 discard ARP and use neighbor discovery protocol (RFC 4861 and RFC 4862)
 
+* An arp request packet:
+    * if no such entry in my arp table
+        * eth header
+            * src mac: my mac
+            * dst mac: ff:ff:ff:ff:ff:ff
+        * arp header
+            * src mac: my mac
+            * dst mac: 00:00:00:00:00:00
+    * if there is such entry in my arp table, just send request for update
+        * eth header
+            * src mac: my mac
+            * dst mac: target's dst mac in my entry
+        * arp header
+            * src mac: my mac
+            * dst mac: 00:00:00:00:00:00
+
 # Structure
 
     Hardware type (2 octets)
