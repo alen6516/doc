@@ -18,11 +18,15 @@
 -n
     don't convert address to name
 
+-r PCAP_FILE
+    read a pcap file
+
 -v
     show more detail information
 
 -vv
     show more more detail information
+
 
 # Example
 $ tcpdump -i ens33 -w icmp.pcap
@@ -30,6 +34,9 @@ $ tcpdump -i ens33 -w icmp.pcap
 
 $ tcpdump -i ens33 dst host 192.168.87.87
     * only capture packets whose dst IP addr is 192.168.87.87
+
+$ tcpdump -i ens33 -vv | tee file
+    * print output to screen and file simultaniously
 
 ## BPF example
 $ dst host HOST

@@ -10,7 +10,7 @@
 
 * unreliable
 
-* The maximum length of ICMP error messages is 576 bytes (from wiki).
+* structure of a ICMP echo request: Type + Code + Checksum + ID + Seq num + Timestamp (8 bytes) + data (48 bytes)
 
 # Structure
 
