@@ -120,3 +120,32 @@
 
         * timestamp
 
+## TCP action when receive different flag
+
+* SYN (seq=x, ack=0)
+    * port open
+        * send SYN/ACK back (seq=y, ack=x+1)
+    * port closed
+        * send RST back (seq=?, ack=?)
+* FIN (seq=?, ack=?) 
+    * port open
+        * no response
+    * port close
+        * send RST/ACK back (seq=?, ack=?) (according RFC 793 defining actions when open/closed port received FIN packet)
+* Xmas scan (send FIN/URG/PSH) (seq=?, ack=?)
+    * port open
+        * no response
+    * port closed
+        * send RST/ACK back (seq=?, ack=?) (according RFC 793 defining actions when open/closed port received FIN packet)
+* Null scan (no flags) (seq=?, ack=?)
+    * port open
+        * no response
+    * port closed
+        * send RST/ACK back (seq=?, ack=?)
+* IP TTL scan the server behind a filter
+    * already knows the hop-counts from client to server (eg. 4), setting the TTL val as 4 and send to server
+    * port open
+        * server reply TTL time exceed
+    * port closed
+        * packet dropped by the firewall and no response
+    * if the filter is a network firewall, then it method is useful, if it is a proxy, then this method will not work because proxy will create a new packet and destroy old TTL
