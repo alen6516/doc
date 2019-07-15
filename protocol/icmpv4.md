@@ -47,6 +47,7 @@
             * 1:  destination host unreachable
             * 2:  destination protocol unreachable
             * 3:  destination port unreachable
+            * 4:  fragmentation required, and DF set
         * 8:  Echo request
             * 0:  echo reply
         * 11: Time exceed
