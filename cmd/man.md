@@ -17,8 +17,12 @@
 
 * 對於某關鍵字，列出所有章節
     * $ man -aw printf
+
 * 一次查詢所有章節
     * $ man -a printf
+
+* look up a command in a specified chapter
+    * $ man 3 sleep
 
 * 2 種方式獲得彩色的 man page
     * 使用 most 作為 pager
