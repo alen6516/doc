@@ -14,3 +14,4 @@ int gettimeofday(struct timeval *tv, struct timezone *tz);
 
 
 // Note header file <sys/time.h> is provided by Linux, is different from <time.h> which is provided by C99, but <sys/time.h> usually includes <time.h>
+// However, <time.h> need user to define struct time_t and timespec by themself.
