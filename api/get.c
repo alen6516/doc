@@ -5,7 +5,7 @@ int fgetc (FILE *stream);
     // read next char from stream and return it as an unsigned char cast to an int, or EOF on end of file error
 
 
-int fgets (char *s, int size, FILE *stream);
+char*  fgets (char *s, int size, FILE *stream);
 
 int getc (FILE *stream);
     
@@ -13,7 +13,7 @@ int getc (FILE *stream);
 
 int getchar (void);
 
-int gets (char *s);
+char* gets (char *s);
 
 
 // Briefly, f-start API means this API is implemented by function rather than Macro.
