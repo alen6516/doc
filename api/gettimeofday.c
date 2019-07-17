@@ -12,3 +12,5 @@ int gettimeofday(struct timeval *tv, struct timezone *tz);
 
         unsigned long per = 1000000 * (end_t.tv_sec-start_t.tv_sec) + end_t.tv_usec-start_t.tv_usec;
 
+
+// Note header file <sys/time.h> is provided by Linux, is different from <time.h> which is provided by C99, but <sys/time.h> usually includes <time.h>
