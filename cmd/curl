@@ -13,3 +13,7 @@ curl [options] [URL...]
 
 -w %{PATTERN}
     Display information after completed transfer. For example, "-w %{http_code}" will display the http code.
+
+# Example
+$ curl -k https://www.example.com
+    * connect to the web in https
