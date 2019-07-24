@@ -16,4 +16,4 @@ curl [options] [URL...]
 
 # Example
 $ curl -k https://www.example.com
-    * connect to the web in https
+    * connect to the web in https, but don't verify the certifacation.
