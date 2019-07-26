@@ -111,10 +111,12 @@
     * kind
         * window scaling
             * if this val =x, and windows val = N, then the true window size is N * (2^x) bytes
+
         * MSS
-            * in order to avoid the data being fragmented in transport, the 2 end negotiate a MSS val to use
+			* it's an end-to-end thing, which TCP layer tells the counterpart "I accept at most X bytes of data"
             * MTU test packet is layer 3 method to determine to proper MTU value
-            * MSS negotiate is layer 4 method, so it can only utilize the sender & receiver’s MTU and choose the smaller one.
+			* it is not a negotiation, the 2 directions of the connection can use different mss
+			* according to RFC 879, the default mss is 536
 
         * selective acknowledgement
 
