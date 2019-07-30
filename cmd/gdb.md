@@ -79,7 +79,7 @@
         * on server, execute the file
         * on server, execute "$ gdbserver :PORT --attach RUNNING_PID"
         * on client, enter gdb, execute "$ target remote SERVER_IP:PORT"
-        * to detach the debug
+        * to detach the debug, use "detach"
 
 # Options
     
