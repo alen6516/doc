@@ -19,6 +19,12 @@
     * l (list)
         * $ l FUNCTION_A
     * b (breakpoint)
+    * b NN if VAR > 10
+        * condition break point
+        * add break point on line NN when variable VAR > 10
+    * b NN thread thread-ID
+        * trace under certain thread NT
+        * when stop, all threads are stop
     * r (run)
     * info
         * $ info b
@@ -51,9 +57,6 @@
     * watch VAR
         * when VAR is written, set a breakpoint
 
-    * b NN if VAR > 10
-        * condition
-        * add break point on line NN when variable VAR > 10
     
     * thread THREAD_ID
         * switch to specific thread, debugging on this thread

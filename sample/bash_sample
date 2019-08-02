@@ -44,6 +44,8 @@ ${PATH##/*:}
 
 ${PATH%:*bin}
     * % means delete leftward from the end of VAR to the 1st matched pattern
+    * ${FILE%.txt}
+        * remove the suffix ".txt" from $FILE
    
 ${PATH%%:*bin}
     * %% means delete leftward from the end of VAR to the longest matched pattern
