@@ -360,6 +360,7 @@ ctrl + x    | 遞減游標所在數字
 <Ctrl-w> z  | close preview window (YCM hint will show in preview window)
 K           | lookup a API in manpage
 gd          | jump to the definition if function
+f           | show status
 
 # Note
 - ctags
