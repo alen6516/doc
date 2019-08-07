@@ -109,6 +109,17 @@ B           | 同上，但忽略一些標點符號
 :NUM        | 跳到第 NUM 行
 ''          | 回到剛才游標所在行
 
+
+# scroll window
+short cut   | function
+------------|:--------
+ctrl + e    | scroll down
+ctrl + y    | scroll up
+shift + down| scroll down
+shift + up  | scroll up
+    
+
+
 # 開檔時自動移動游標
 vim myfile.txt +28  : 移動到該行
 vim myfile.txt +/foo: 移動到第一次出現 pattern 處
