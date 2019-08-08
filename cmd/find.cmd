@@ -1,8 +1,11 @@
 # Description
+recursively find a target from the specified path
+
+# Usage
+find PATH -name FILE_NAME
 
 # Overview
 
-* usage: $ find PATH -name FILE_NAME
 
 # Options
 
@@ -15,8 +18,10 @@
 -type d/f/l/s/p
     * specify the type of target (dir, file, link, ...)
     
--exec CMD
-    * for the result, execute CMD
+-exec CMD {} \;
+    * for every single result, execute CMD one time
+    * {} is the single result of find
+    * \; ending char
 
 -empty
     * find empty file or dir (by assigning -type f/d)
@@ -24,6 +29,20 @@
 -size SIZE
     * specify size of the target
 
+-atime +DAY
+    * specify file that hasn't be accessed for more than DAY days
+
+-amin -MIN
+    * specify file that has been accessed for less than MIN minutes 
+
+-ctime +DAY
+    * specify file that has been created for more than DAY days
+
+-user USER
+    * specify the file which belongs to USER
+
+-o CONDITION
+    * if want to find files with multiple conditions, use -o to cascade conditions
 
 # Example
 $ find . -type f -name "*.php"
@@ -41,3 +60,5 @@ $ find . -size +50M -size -100M
 
 $ find ./ -name "*.c" -exec grep -wl main {} \;
     * find .c file which contains "main"
+
+$ find ./ -name "*.mp3" -o -name "*.mp4"

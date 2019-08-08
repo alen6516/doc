@@ -1,3 +1,6 @@
+# Description
+find the given pattern in files
+
 # Usage
 grep [options] PATTERN [FILE...]
 
