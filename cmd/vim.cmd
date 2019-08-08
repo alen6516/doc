@@ -44,27 +44,28 @@ vim-autopep8			| 重整python符合pep8風格，depend on autopep8
 None
 
 ## plug 快捷鍵 (plug shortcut)
-short cut   | function
-------------|:--------
-Shift + e	| nerdtree
-Shift + r	| syntastic
-Shift + s	| src explore
-Shift + t	| tagbar
-Shift + u	| undo tree
-\\w         | easy-motion
-\c<Space>   | commenter
-ga          | easy-align
-Ctrl + n	| multiple-cursor select
+short cut       | function
+----------------|:--------
+<leaedr> + e	| nerdtree
+<leaedr> + r	| syntastic
+<leaedr> + s	| src explore
+<leaedr> + t	| tagbar
+<leaedr> + u	| undo tree
+\\w             | easy-motion
+\c<Space>       | commenter
+ga              | easy-align
+Ctrl + n	    | multiple-cursor select
 
 # 控制 (control)
-short cut   | function
-------------|:--------
-qqq	        | q
-Ctrl + l	| 行號開關
-Ctrl + y	| file 間複製
-Ctrl + p	| file 間貼上
-Tab	        | indent
-Shift + Tab	| unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
+short cut       | function
+----------------|:--------
+qqq	            | q
+<leader> + l    | 行號開關
+<leader> + y	| file 間複製
+<leader> + p	| file 間貼上
+<leader> + h    | :noh
+Tab	            | indent
+Shift + Tab	    | unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
 
 # 移動於 window 間 (move among windows)
 short cut       | function
@@ -146,7 +147,7 @@ dG          | 刪除至檔尾
 dgg         | 刪除至檔首
 D           | 刪除至行尾(含游標所在字元)
 d0          | 刪除至行首(不含游標所在字元)
-ctrl + h    | backspace
+ctrl + h    | backspace in insert mode
 ctrl + w    | delete word in insert mode
 c           | delete selected words and enter insert mode
 cc          | delete whole line and enter insert mode
@@ -371,9 +372,14 @@ ctrl + x    | 遞減游標所在數字
 <Ctrl-w> z  | close preview window (YCM hint will show in preview window)
 K           | lookup a API in manpage
 gd          | jump to the definition if function
-f           | show status
+:f          | show filename
+ctrl + g    | show status
+
 
 # Note
+- easiest way to delete swap file
+    - after recover from the swap file, save it and then :e and (D)elete 
+
 - ctags
     - 非vim插件
     - 需在專案資料夾最上層產生tag檔，否則只能看到本檔裡的東西
