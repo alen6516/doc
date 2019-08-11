@@ -1,20 +1,25 @@
 # src: http://ashkenazy.blogspot.tw/2013/06/shell-scripting.html
 
+
 # 建議開頭
 #!/bin/bash
+
 
 PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin
 export PATH
 export LANG="en_US.UTF-8"
 
+
 # 註解
 #user comment
+
 
 # 特殊變數
 $PS1        提示字元, which is defined in ~/.bashrc
 ${$}        shell 本身的 pid
 $?          上個 cmd 的回傳值
 $!          上個背景執行行程的 pid
+
 
 # wildcard
 *
@@ -70,13 +75,16 @@ $ USER=${USER:-root}
 VAR="hello world"
 echo $VAR
 
+
 printf "\33[1;31m"
 printf "Color Version: $VAR"
 printf "\33[0m\n"
 
+
 # $() 與 ${} 區別
 $(cmd) 相當於 `cmd`
 ${VAR} 是為了讓 bash 明白 VAR 是個變數
+
 
 # 變數與變數、數字相加
 let "sum=a+b"
@@ -84,17 +92,21 @@ let "sum=a+10"
 sum=$((a+b))
 sum=$((a+10))
 
+
 # random number
 * 取得 0~9 間的隨機數
 $ declare -i number=$RANDOM*10/32768; echo $number
     * $RANDOM 是介於 0~32767
 
+
 # 正常結束
 exit 0
+
 
 # data redirection
 * direct stdin and stdout to different file
 $ cmd > here.txt 2> there.txt
+
 
 * direct stdin and stdout to the same file
 $ cmd > file.txt 2>&1
@@ -102,14 +114,17 @@ $ cmd > file.txt 2>&1
     * 不能寫 $ cmd > file.txt 2> file.txt
         * 這樣資料會亂掉
 
+
 * here file
 $ cat < file.txt
+
 
 * here string
 $ cat << eof
 > content
 > of the data
 > eof
+
 
 * redirection and here string
 $ cat > dst_file.txt << eof
@@ -118,16 +133,20 @@ $ cat > dst_file.txt << eof
 > of file
 > eof
 
+
 # command execute flow
 $ condition || cmd1 && cmd2
     * if condition is true, then cmd1 will not be executed, and this $? will pass to cmd2, so cmd2 will be executed
     * if condition is false, then cmd1 will be executed, and if cmd1 return true, then cmd2 will not be executed
 
+
 $ condition && cmd1 || cmd2
     * if condition is false, cmd1 will not be executed, and this $? will pass to cmd2, so cms2 will be executed
 
+
 $ [ -d /tmp/dir ] || mkdir /tmp/dir && touch /tmp/dir/test
     * think it
+
 
 # Pipe
 * only pass stdout to cmd after pipe
@@ -142,11 +161,13 @@ else
   echo "wrong input"
 fi
 
+
 # 讀取argument
 if [ ! -z "$1" ]; then
   ARGS=$1
 fi
 echo $ARGS
+
 
 # 檢查執行者身份
 whoami_ret="$(whoami)"
@@ -155,11 +176,13 @@ if [ "$whoami_ret" != "root" ]; then
   exit
 fi
 
+
 # 使用者輸入
 read -p "Please input (Y/N), default is N:" ANSWER
 if [ "$ANSWER" == "Y" -o "$ANSWER" == "y" ]; then
   echo "result is Yes"
 fi
+
 
 # 執行指令的結果
 pyOpenSSL_ret="$(rpm -q python-openssl | grep install | wc -l)"
@@ -168,6 +191,7 @@ if [ "$pyOpenSSL_ret" == "1" ]; then
   exit
 fi  
 
+
 # 類似 traverse 陣列
 SERVER_LIST=(192.168.0.1 192.168.0.2 192.168.0.3)
 for IP in ${SERVER_LIST[@]}
@@ -175,7 +199,8 @@ do
   echo "IP address: $IP"
 done
 
-Switch case
+
+# Switch case
 case $CAR in
   AUDI | audi)
     echo "audi"
@@ -192,11 +217,13 @@ case $CAR in
   ;;
 esac
 
+
 # while Loop
 until [ "$ANSWER" == "yes" ]
 do
   read -p "Please input \"yes\":" ANSWER
 done
+
 
 # while loop
 i=0
@@ -206,11 +233,13 @@ do
   echo $i
 done
 
+
 # for loop
 for CAR in AUDI VOLVO BENZ
 do
  echo ${CAR}
 done
+
 
 # for loop
 for i in $(seq 1 10)
@@ -218,17 +247,20 @@ do
   echo ${i}
 done
 
+
 # for loop
 for (( i=1; i<=10; i=i+1 ))
 do
   echo $i
 done
 
+
 # for 迭代
 for i in $(ls)
 do
   echo $i
 done
+
 
 # 等候某個事件發生
 FILE_EXISTED=0;
@@ -240,11 +272,11 @@ do
   sleep 1;
 done
 
+
 # Function
 function PRINT_FUNCTION(){
   echo "args is $1"
 }
-
 PRINT_FUNCTION "first_args"
 
 
@@ -262,6 +294,7 @@ PRINT_FUNCTION "first_args"
 file1 -nt file2	  file1 較 file2 為新 ( 根據修改時間作比較 )。
 file1 -ot file2	  file1 較 file2 為舊 ( 根據修改時間作比較 )。
 
+
 # 數值比較
 n1 -eq n2	        n1 等於 n2。
 n1 -ne n2	        n1 不等於 n2。
@@ -270,6 +303,7 @@ n1 -ge n2	        n1 大於等於 n2。
 n1 -lt n2	        n1 小於 n2。
 n1 -le n2	        n1 小於等於 n2。
 
+
 # 字串比較
 str1 = str2	      str1 等於 str2 (=兩邊要空格)。
 str1 != str2	  str1 不等於 str2。
@@ -277,6 +311,7 @@ str1 > str2	      str1 大於 str2。
 str1 < str2	      str1 小於 str2。
 -z str	          str 為空字串。
 -n str	          str 為非空字串。
+
 
 # 將字串前面的0去掉
 echo "00005 00010 00601 00550" | awk '$0*=1'
