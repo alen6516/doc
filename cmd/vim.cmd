@@ -33,7 +33,7 @@ vim-easy-align			| 快速對齊
 ## 自動補齊
 plug name               | function
 ------------------------|:--------
-"neocomplete            | 自動補齊
+YouCompleteMe           | 自動補齊
 
 ## python 語言=====
 plug name               | function
@@ -51,6 +51,7 @@ short cut       | function
 <leaedr> + s	| src explore
 <leaedr> + t	| tagbar
 <leaedr> + u	| undo tree
+<leader> + i    | toggle indentLine
 \\w             | easy-motion
 \c<Space>       | commenter
 ga              | easy-align
@@ -60,19 +61,19 @@ Ctrl + n	    | multiple-cursor select
 short cut       | function
 ----------------|:--------
 qqq	            | q
-<leader> + l    | 行號開關
+<leader> + n    | 行號開關
 <leader> + y	| file 間複製
 <leader> + p	| file 間貼上
 <leader> + h    | :noh
+<leader> + v    | open my vim help
 Tab	            | indent
 Shift + Tab	    | unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
 
 # 移動於 window 間 (move among windows)
 short cut       | function
 ----------------|:--------
-Ctrl-w-w        | move between windows
-w + 上下左右    | Ctrl-w + 上下左右
-ww              | Ctrl-w + w
+<Ctrl-w> w      | move between windows
+<Ctrl-w> q      | close current window
 
 # 移動於 tab 間 (move among tabs)
 short cut           | function
@@ -246,6 +247,8 @@ qx          | 開始錄製巨集 (x 可用英文字母或數字)
 @x          | 在當前位置播放巨集
 
 usage of x  | function
+( Macro or  |
+marks )     |
 ------------|:--------
 小寫字母    | 只作用於單一檔案內
 大寫字母    | 可作用於編輯中之各檔案間
@@ -287,6 +290,7 @@ Ctrl + v    | 縱向標示
 short cut   | function
 ------------|:--------
 :sp 檔名    | 開新視窗編輯檔案
+:vs 檔名    | 開新視窗編輯檔案
 Ctrl-w n    | 同 :new ，開新視窗
 Ctrl-w s    | 以 :sp 將原檔再開一個新視窗
 Ctrl-w q    | 結束分割出來的視窗
