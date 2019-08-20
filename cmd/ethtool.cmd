@@ -19,6 +19,9 @@ show/modify configuration of NIC and NIC's driver
 -k NIC
     show information of NIC
 
+-S NIC
+    show counters of NIC
+
     
 # Example
 $ ethtool -k eth1

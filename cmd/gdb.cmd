@@ -41,12 +41,15 @@
         * $ p VAR
     * set
         * assign a value to a variable
-        * $ set VAR=100
+        * $ set var VAR=100
     * s (step)
         * when going to enter a function, use "$ s" to go into the function
 
     * bt (back trace)
         * check the call stack of function
+
+    * finish
+        * finish current function context and breakpoint at the caller (return address)
 
     * disassemble FUNCTION
         * disassemble the machone code of FUNCTION and show the assemble code

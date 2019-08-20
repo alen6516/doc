@@ -77,3 +77,4 @@
     * usually called ethernet tail
     * filled with CRC32 to detect bit error
     * processed by hardware
+    * can not be seen on wireshark
