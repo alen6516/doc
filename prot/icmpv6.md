@@ -13,6 +13,8 @@
     * IPv6 addr of the solicitation msg
         * src IP: sender's IP
         * dst IP: multicast addr or target's IP addr
+        * src mac: sender's mac
+        * dst mac: IPv6 muticast mac addr or 
 
 
 # Structure
