@@ -19,6 +19,24 @@ $PS1        提示字元, which is defined in ~/.bashrc
 ${$}        shell 本身的 pid
 $?          上個 cmd 的回傳值
 $!          上個背景執行行程的 pid
+$0          當前執行的函式或 process 名稱
+"$*"        傳入的所有參數組成的 list => "$1 $2 $3 ..."
+"$@"        與 $* 同 不過個參數是獨立的
+$#          傳入的參數個數
+$_          之前執行指令的最後一個參數
+$$          scipt 本身的 pid 常用來當作 unique 的臨時檔名
+
+
+# 特殊符號
+-
+    * only use with pipe in command line
+    * means stdout or stdin in the way of file
+    * ex: $ tar -cvf - /home | tar -xvf - -C /tmp/homeback
+        * first - means stdout (tar /home and pass to stdout)
+        * | means pass the content of sdtout to th next command as the stdin
+        * second - mean stdin (which is the conten of the stdout from the first command)
+        * in this case, we don't worried about what filename to use
+
 
 
 # wildcard
@@ -105,33 +123,37 @@ exit 0
 
 # data redirection
 * direct stdin and stdout to different file
-$ cmd > here.txt 2> there.txt
+    $ cmd > here.txt 2> there.txt
 
 
 * direct stdin and stdout to the same file
-$ cmd > file.txt 2>&1
-    * 或者 $ cmd &> file.txt
-    * 不能寫 $ cmd > file.txt 2> file.txt
-        * 這樣資料會亂掉
+    $ cmd > file.txt 2>&1
+        * 或者 $ cmd &> file.txt
+        * 不能寫 $ cmd > file.txt 2> file.txt
+            * 這樣資料會亂掉
 
 
 * here file
-$ cat < file.txt
+    $ cat < file.txt
 
 
 * here string
-$ cat << eof
-> content
-> of the data
-> eof
+    ```
+    $ cat << eof
+    > content
+    > of the data
+    > eof
+    ```
 
 
 * redirection and here string
-$ cat > dst_file.txt << eof
-> this is
-> the content
-> of file
-> eof
+    ```
+    $ cat > dst_file.txt << eof
+    > this is
+    > the content
+    > of file
+    > eof
+    ```
 
 
 # command execute flow
@@ -232,6 +254,10 @@ do
   i=$(($i+1))
   echo $i
 done
+
+
+# while true
+while :
 
 
 # for loop
