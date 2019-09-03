@@ -6,3 +6,8 @@
 # Options
     
 # Example
+$ ifconfig lo:10 87.87.87.87 netmask 255.255.255.0 up
+    * add a new loopback interface
+
+$ ifconfig lo:10 down
+    * remove the interface
