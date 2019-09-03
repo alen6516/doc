@@ -1,0 +1,27 @@
+## [::]
+[:alnum:]       | 0-9, A-Z, a-z
+[:alpha:]       | A-Z, a-z
+[:blank:]       | [space], [tab]
+[:upper:]       | A-Z
+[:lower:]       | a-z
+[:digit:]       | 0-9
+
+
+## []
+[abc]           | only 1 char inside the []
+[^g]            | not start with g
+[^a-z]          | not start with lower case
+[^[:lower:]]    | not start with lower case
+
+
+## ^
+^the            | only the line start with the
+^[a-z]          | line start with a-z
+^[:lower:]
+
+
+## $
+/.$             | end with . (need to escape for . first)
+^$              | empty line
+
+
