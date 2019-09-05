@@ -378,6 +378,7 @@ K           | lookup a API in manpage
 gd          | jump to the definition if function
 :f          | show filename
 ctrl + g    | show status
+viw         | select word under cursor
 
 
 # Note
