@@ -379,6 +379,7 @@ gd          | jump to the definition if function
 :f          | show filename
 ctrl + g    | show status
 viw         | select word under cursor
+yiw         | yank word under cursor
 
 
 # Note
