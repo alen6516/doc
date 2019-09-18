@@ -380,6 +380,8 @@ gd          | jump to the definition if function
 ctrl + g    | show status
 viw         | select word under cursor
 yiw         | yank word under cursor
+[m          | jump to previous {
+]m          | jump to next }
 
 
 # Note
