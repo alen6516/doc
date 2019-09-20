@@ -382,6 +382,8 @@ viw         | select word under cursor
 yiw         | yank word under cursor
 [m          | jump to previous {
 ]m          | jump to next }
+[[          | jump to previous start { of a function
+]]          | jump to next start { of a function
 
 
 # Note
