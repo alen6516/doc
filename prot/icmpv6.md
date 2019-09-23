@@ -22,9 +22,34 @@
     Type (1 octect)
 
     Code (1 octect)
+
+    Checksum (2 octects)
     
-    Reserved (4 octects)
+    Reserved | Flags  | Identifier (4 octects)
 
+    Target Address (16 octects, depends on Type 135 Neighbor Solicitation)
 
+    ICMPv6 Option (varied length, optional)
+        Type    (1 octect)
+        Length  (1 octect)
+        Data    (varied, depends on Length)
 
 ## Field description
+* Type
+    
+* Code
+
+* Checksum
+
+* Reserved | Flags  | Identifier | ...
+    * this field may be one of the followed
+    * Reserved
+        * all zero
+        * in Neighbor Solicitation
+    * Flags
+        * in Neighbor Advertisement
+    * Identifier
+        * in Echo request/reply
+
+* Target Address
+    * IPv6 addr of the target

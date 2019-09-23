@@ -3,7 +3,6 @@
 
 # Overview
 
-* DNS length is usually 
 
 * RFC 1034, RFC 1035
 
@@ -15,7 +14,7 @@
         * length = 12
             * max length of a FQDN is 253
         * 4 labels
-            * max number of label is ?
+            * max length of a label is 63
      * FQDN is case insensitive
 
 
@@ -24,7 +23,6 @@
     
     Header
         
-        ? Length        (2 octects)
         Transcation ID  (2 octects)
         Flags           (2 octects)
 
@@ -63,3 +61,16 @@
             4: Not implemented, the name server does not support the requested kind of query.
             5: Refused, the name server refused to perform the specified operation for policy reasons.
 
+        
+    * OpCode (comman values)
+        * 0. Query      : reqular query
+        * 4. Notify     
+        * 5. Update
+    
+    * RCODEs (common values)
+        * 0. NoError
+        * 1. FormErr    : Format Error
+        * 2. ServFail   : Server Failure
+        * 3. NXDomain   : Non-existent Domain
+        * 4. NotImp     : Not Implemented
+        * 5. Refused    : Query Refused
