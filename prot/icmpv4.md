@@ -54,8 +54,11 @@
             * 0:  TTL expire in transit
             * 1:  Fragment reassembly time exceeded
 
+* Checksum
+    * checksum of ICMP header
+
 * Rest of Header
-    * the structure varied depends on the Type of the ICMP msg
+    * the structure varied depending on the Type of the ICMP msg
     * some example element of this column
         * ID: identify this icmp session, echo requests/responses of the same session obtains the same ID.
         * Sequence: a number which is incremantal by 1 from 0, indicating the order of packet in the same icmp session

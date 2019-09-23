@@ -19,7 +19,7 @@
     - 使用 pipelining ，一次送好多個，以提升頻寬用率
 
 * RTO
-    * the interval for the client to retransmit a packet
+    * the interval for the sender to retransmit a packet
 
 # Structure
 
@@ -59,6 +59,7 @@
 * data offset
     * represent TCP header length
     * 32-bit word, so this val multiple 4 is the true val
+        * which also means TCP header length must be a multiple of 32 bits, when it is not, using Padding (NOP) to fill it
 
 * reserved
     * 4 bits, must be 0
@@ -67,7 +68,7 @@
     * C: 0x80 Congestion Window Reduced (CWR)
 
     * E: 0x40 ECN echo (ECE)
-        * during the routing of this packet, nodes can turn this bit to tell the receiver network is congested
+        * during the routing of this packet, nodes can turn on this bit to tell the receiver network is congested
 
     * U: 0x20 URG
         * tell the other side the urgent pointer of this packet is meaningful
@@ -83,7 +84,7 @@
 
     * S: 0x02 SYN
         * tell the other I am ready for transmission
-        * must not ON together with FIN
+        * must not be ON together with FIN
 
     * F: 0x01 FIN
         * tell the other side I have sent all data
@@ -95,7 +96,7 @@
     * max is 65535, but is usually not large enough for modern services, so it depends on optional column to support it
 
 * checksum
-    * calculate the checksum of pseudo header and the entire TCP packet
+    * calculate the checksum of pseudo header and the entire TCP segment
     
 * urgent pointer
     * if flag URG is on, then this column is meaningful, tell the other side the offset from the start of TCP body to the LAST byte of urgent data
@@ -109,18 +110,23 @@
         * value: depends
     
     * kind
-        * window scaling
-            * if this val =x, and windows val = N, then the true window size is N * (2^x) bytes
+        * 0: End of Options List
+        * 1: No Operation (NOP, Pad)
 
-        * MSS
+        * 2: MSS
 			* it's an end-to-end thing, which TCP layer tells the counterpart "I accept at most X bytes of data"
             * MTU test packet is layer 3 method to determine to proper MTU value
 			* it is not a negotiation, the 2 directions of the connection can use different mss
 			* according to RFC 879, the default mss is 536
 
-        * selective acknowledgement
+        * 3: window scaling
+            * if this val = x, and windows val = N, then the true window size is N * (2^x) bytes
+            * if one side doesn't use this option, then both sides don't use
 
-        * timestamp
+
+        * 4: selective acknowledgement
+
+        * 5: timestamp
 
 ## TCP action when receive different flag
 

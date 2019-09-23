@@ -7,7 +7,7 @@
 * RFC 768
 
 * no session, no state => connectionless
-    * each UDP segment is handled inidependently from another
+    * each UDP segment is handled independently from another
     * Datagram socket
 
 * udp payload max = 65535 - 20 (IP header len) - 8 (UDP header len) = 65507
