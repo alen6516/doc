@@ -243,7 +243,7 @@ mx          | mark 住游標所在位置 (x 可用英文字母或數字)
 # Macro (巨集)
 short cut   | function
 ------------|:--------
-qx          | 開始錄製巨集 (x 可用英文字母或數字)
+qx          | 開始錄製巨集 (x 可用英文字母或數字, 再按一次 q 結束)
 @x          | 在當前位置播放巨集
 
 usage of x  | function
