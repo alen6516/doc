@@ -12,3 +12,34 @@ long double 16 bytes
 
 # C11 recommends to use int8_t, int16_t, int32_t, int64_t
 # uint8_t, uint16_t, uint32_t, uint64_t to avoid dependence problem.
+
+
+# use 
+char const *arr[] = {"abc", "def", "ghi"};
+# rather than
+char *arr[] = {"abc", "def", "ghi"};
+
+
+
+# process
+## process exit
+exit(int status)
+    * all functions registered in atexit() and on_exit() are called
+    * return status to caller (command line) 
+
+_exit(int status)
+    * exit the process immediately
+    * close all file descriptors
+    * any children are inherited by process 1
+    * the process's parent is sent a SIGCHLD signal
+
+
+# pthread
+pthread_join()
+    * The pthread_join() subroutine blocks the calling thread until the specified threadid thread terminates.
+    * join, mutex and condition variable are 3 synchronization ways of pthread
+    * If a thread is created as detached.
+
+## pthread exit
+pthread_exit()
+    * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
