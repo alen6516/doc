@@ -11,6 +11,9 @@ $ tmux ls
 
 $ tmux at [ -t 0 ]
     * attach session [ 0 ]
+    * if there is such tmux process but can not be attahced
+        $ kill -s SIGUSR1 ${pidof_tmux} 
+        $ tmux at
 
 $ tmux kill-session -t 0
     * kill session 0
