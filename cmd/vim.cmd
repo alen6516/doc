@@ -245,6 +245,8 @@ short cut   | function
 ------------|:--------
 qx          | 開始錄製巨集 (x 可用英文字母或數字, 再按一次 q 結束)
 @x          | 在當前位置播放巨集
+@:          | 重複上個命令列指令(ex command), 並成為"上個巨集"
+@@          | 重複上個巨集
 
 usage of x  | function
 ( Macro or  |
