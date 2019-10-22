@@ -35,6 +35,7 @@ w            | choose window (window tree)
 &            | kill window                            
 f            | find window through name               
 :move-window -t 0       將當前 window 移至編號 0 (最前)
+:swap-window -s 4 -t 2  將編號 4 與 2 window 交換
 
 
 pane 相關    |                                        
