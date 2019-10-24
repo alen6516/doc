@@ -296,7 +296,7 @@ short cut   | function
 Ctrl-w n    | 同 :new ，開新視窗
 Ctrl-w s    | 以 :sp 將原檔再開一個新視窗
 Ctrl-w q    | 結束分割出來的視窗
-Ctrl-w o    | 同 :only! 使目前視窗成為唯一顯示的視窗，其他視窗會隱藏起來
+
 
 # Shell command
 short cut       | function
@@ -386,6 +386,7 @@ yiw         | yank word under cursor
 ]m          | jump to next }
 [[          | jump to previous start { of a function
 ]]          | jump to next start { of a function
+:setlocal display=uhex    display file in hex
 
 
 # Note
