@@ -377,7 +377,7 @@ ctrl + x    | 遞減游標所在數字
 :set ff=dos | change ff to dos system (no change in appearance), Unix's ff is /r, dos is /r/n
 <Ctrl-w> z  | close preview window (YCM hint will show in preview window)
 K           | lookup a API in manpage
-gd          | jump to the definition of function
+gD          | jump to the definition of function
 :f          | show filename
 ctrl + g    | show status
 viw         | select word under cursor
