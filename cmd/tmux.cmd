@@ -57,6 +57,7 @@ z            | zoom in/out the pane
 
 其他         |                                        
 ------------ | -------------------------------------- 
+?            | help
 b            | send prefix                            
 ?            | list keys                              
 d            | detach client                          

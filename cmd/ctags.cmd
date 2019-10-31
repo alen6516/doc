@@ -14,3 +14,8 @@ $ ctags -R -f ./.git/tags .
 
 $ ctags -R --languages=c,c++
     * c parses c function, c++ parses macros (preprocessor)
+
+# in Vim
+<Ctrl-]>        jump to the definition of tag
+<Ctrl-t>        jump back from definition
+g]              show the list of tags
