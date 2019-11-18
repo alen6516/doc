@@ -188,6 +188,9 @@ P           | 在游標前貼上
 # folding (折疊)
 short cut   | function
 ------------|:--------
+zf          | fold seleted text
+zo          | open fold
+zc          | close fold
 zR          | 打開所有折疊
 zM          | 關閉所有折疊
 za          | toggle 折疊
