@@ -17,8 +17,8 @@
 --enet-dmac=DST_MAC_A,DST_MAC_B
     rewrite dmac from DST_MAC_A to DST_MAC_B
 
--e IP_A:IP_B
-    rewrite ip from IP_A to IP_B
+-S IP_A:IP_B
+    rewrite src ip from IP_A to IP_B
 
 -D IP_A:IP_B
     rewrite dst ip from IP_A to IP_B
