@@ -354,6 +354,7 @@ sc          | 在狀態列顯示目前執行的指令
 smd         | 在狀態列顯示目前的模式
 vb          | 關閉 vim 的 beep 聲，以閃爍游標取代
 nu          | 顯示行號
+rnu         | 顯示相對行號
 list        | 將 tab 以 ^I 顯示，EOL 以 $ 顯示，以便辨別
 swf         | 是否需 swap 至磁碟。如果設為 noswf 的話，那將不會有 swapfile 產生，通通會載入在記憶體中。預設是要 swapfile。
 hi          | 記錄冒號命令的歷史記錄檔，預設 20 筆
@@ -391,6 +392,7 @@ yiw         | yank word under cursor
 ]]          | jump to next start { of a function
 :setlocal display=uhex      display file in hex
 :<,>!column -t              auto align selected text
+:set list lcs=tab:\|\ (there is a space)        show indentline when using Tab (not space)
 
 
 # Note
