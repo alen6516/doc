@@ -389,7 +389,8 @@ yiw         | yank word under cursor
 ]m          | jump to next }
 [[          | jump to previous start { of a function
 ]]          | jump to next start { of a function
-:setlocal display=uhex    display file in hex
+:setlocal display=uhex      display file in hex
+:<,>!column -t              auto align selected text
 
 
 # Note
