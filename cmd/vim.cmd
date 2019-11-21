@@ -393,6 +393,7 @@ yiw         | yank word under cursor
 :setlocal display=uhex      display file in hex
 :<,>!column -t              auto align selected text
 :set list lcs=tab:\|\ (there is a space)        show indentline when using Tab (not space)
+vim -d file_a file_b        use vim to check file diff
 
 
 # Note
