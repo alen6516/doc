@@ -25,6 +25,8 @@
     * b NN thread thread-ID
         * trace under certain thread NT
         * when stop, all threads are stop
+    * ignore 2 10
+        * ignore breakpoint 2 for 10 times
     * r (run)
     * info
         * $ info b
