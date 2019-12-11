@@ -19,6 +19,26 @@ char const *arr[] = {"abc", "def", "ghi"};
 # rather than
 char *arr[] = {"abc", "def", "ghi"};
 
+# date
+## format print
+include <time.h>
+time_t rawtime;   
+time(&rawtime);
+struct tm *timeinfo = localtime ( &rawtime );
+
+char buf[80];
+strftime (buffer,80,"Now it's %I:%M%p.",timeinfo);
+puts(buffer);
+
+## gettimeofday
+struct timeval   tv;
+struct timezone  tz;
+gettimeofday(&tv,&tz);	/* &tz could be NULL */
+
+printf("tv_sec:%d\n",tv.tv_sec);
+printf("tv_usec:%d\n",tv.tv_usec);
+printf("tz_minuteswest:%d\n",tz.tz_minuteswest);
+printf("tz_dsttime:%d\n",tz.tz_dsttime);
 
 
 # process
