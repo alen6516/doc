@@ -7,7 +7,7 @@
     
 # Example
 $ nc -u 127.0.0.1 8787
-    * Open a TCP port and print the received data to terminal
+    * Open a UDP port (default is TCP) and print the received data to terminal
 
 $ nc -v 127.0.0.1 8787
     * Test TCP port is open or not
