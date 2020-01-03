@@ -31,6 +31,7 @@ strftime (buffer,80,"Now it's %I:%M%p.",timeinfo);
 puts(buffer);
 
 ## gettimeofday
+include <time.h>
 struct timeval   tv;
 struct timezone  tz;
 gettimeofday(&tv,&tz);	/* &tz could be NULL */
