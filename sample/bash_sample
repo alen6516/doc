@@ -191,6 +191,10 @@ fi
 echo $ARGS
 
 
+# Press any key to continue (without Enter)
+read -n 1 -s -r -p "Press any key to continue"
+
+
 # 檢查執行者身份
 whoami_ret="$(whoami)"
 if [ "$whoami_ret" != "root" ]; then
@@ -331,12 +335,10 @@ n1 -le n2	        n1 小於等於 n2。
 
 
 # 字串比較
-str1 = str2	      str1 等於 str2 (=兩邊要空格)。
-str1 != str2	  str1 不等於 str2。
-str1 > str2	      str1 大於 str2。
-str1 < str2	      str1 小於 str2。
--z str	          str 為空字串。
--n str	          str 為非空字串。
+"$str1" == "$str2"	    str1 等於 str2 (=兩邊要空格)。
+"$str1" != "$str2"      str1 不等於 str2。
+-z "$str"               str 為空字串。
+-n "$str"	            str 為非空字串。
 
 
 # 將字串前面的0去掉

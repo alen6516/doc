@@ -51,6 +51,13 @@ end_t = clock();
 total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
 printf("Total time taken by CPU: %f sec", total_t);
 
+# random number
+include <stdlib.h>
+include <time.h>
+srand(time(NULL));
+/* if don't use srand(time(NULL)), the result of rand() will be the same */
+int a = (rand() % 100)+1;
+
 # process
 ## process exit
 exit(int status)
