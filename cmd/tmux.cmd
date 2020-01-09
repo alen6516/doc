@@ -53,7 +53,7 @@ z            | zoom in/out the pane
 <            | pane 邊界左移5單位                      
 +            | pane 邊界上移5單位                      
 -            | pane 邊界下移5單位                      
-:setw synchronize-panes on/off     同步/解除同步 pane
+:setw synchronize-panes on/off     同步/解除同步 pane (also can use for sending command to all pane)
 
 其他         |                                        
 ------------ | -------------------------------------- 
