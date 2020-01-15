@@ -104,11 +104,12 @@ $(cmd) 相當於 `cmd`
 ${VAR} 是為了讓 bash 明白 VAR 是個變數
 
 
-# 變數與變數、數字相加
+# arithmetic evaluation
 let "sum=a+b"
 let "sum=a+10"
 sum=$((a+b))
 sum=$((a+10))
+echo $(( 87 % 2 ))
 
 
 # random number
@@ -175,9 +176,9 @@ $ [ -d /tmp/dir ] || mkdir /tmp/dir && touch /tmp/dir/test
 
 
 # if-else判斷式
-if [ -n "$INPUT" ] && ["$INPUT" == "Yes" ]; then
+if [[ -n "$INPUT" ]] && [[ "$INPUT" == "Yes" ]]; then
   echo "result is Yes"
-elif [ -n "$INPUT" ] && [ "$INPUT" == "No" ]; then
+elif [[ -n "$INPUT" ]] && [[ "$INPUT" == "No" ]]; then
   echo "result is No"
 else
   echo "wrong input"
@@ -185,7 +186,7 @@ fi
 
 
 # 讀取argument
-if [ ! -z "$1" ]; then
+if [[ ! -z "$1" ]]; then
   ARGS=$1
 fi
 echo $ARGS
@@ -197,7 +198,7 @@ read -n 1 -s -r -p "Press any key to continue"
 
 # 檢查執行者身份
 whoami_ret="$(whoami)"
-if [ "$whoami_ret" != "root" ]; then
+if [[ "$whoami_ret" != "root" ]]; then
   echo "This script must be run as root"
   exit
 fi
@@ -212,7 +213,7 @@ fi
 
 # 執行指令的結果
 pyOpenSSL_ret="$(rpm -q python-openssl | grep install | wc -l)"
-if [ "$pyOpenSSL_ret" == "1" ]; then
+if [[ "$pyOpenSSL_ret" == "1" ]]; then
   echo "python-openssl is not installed, please install python-openssl"
   exit
 fi  
@@ -308,6 +309,10 @@ function PRINT_FUNCTION(){
   echo "args is $1"
 }
 PRINT_FUNCTION "first_args"
+
+foo() {
+    echo ${FUNCNAME[0]}     # print function name
+}
 
 
 # 檔案比較
