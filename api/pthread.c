@@ -1,7 +1,7 @@
 #include <pthread.h>
 
 // shold be a function pointer
-void* child_function() {
+void* child_function(void* arg) {
 
     // exit with a return val to father
     pthread_exit(0);
@@ -14,5 +14,5 @@ int main() {
     pthread_create(&child, NULL, child_function, NULL);
 
     // wait util child exist, then I can exit
-    pthread_join();
+    pthread_join(child, NULL);
 }
