@@ -11,7 +11,7 @@
 # Example
 * use as exp file
 	* $ expect file.exp 192.168.1.1
-```
+```tcl
 # file.exp
 #!/usr/bin/expect
 set TARGET    [ lindex $argv 0]

@@ -1,0 +1,25 @@
+# file path: /etc/netplan/50-cloud-init.yaml
+```
+network:
+    version: 2
+    ethernets:
+        ens18:
+            dhcp4: no
+            addresses:
+                - 192.168.93.161/24
+            gateway4: 192.168.93.1
+            nameservers:
+                addresses: [8.8.8.8]
+        ens19:
+            dhcp4: no
+            dhcp6: no
+            addresses:
+                - 20.20.20.161/24
+                - "2001:1::161/32"
+            routes:
+                - to: 20.20.101.0/24
+                   via: 20.20.20.160
+                - to: "2001:2::/32"
+                   via: "2001:1::160"
+```
+# apply by using: $ netplan apply
