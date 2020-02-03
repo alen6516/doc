@@ -6,4 +6,8 @@
 # Options
     
 # Example
+$ apt-cache search PACKAGE
+    * search package by name, support regex
 
+$ apt-cache show PACKAGE
+    * show information of package
