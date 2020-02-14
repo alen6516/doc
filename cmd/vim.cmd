@@ -390,10 +390,12 @@ yiw         | yank word under cursor
 ]m          | jump to next }
 [[          | jump to previous start { of a function
 ]]          | jump to next start { of a function
-:setlocal display=uhex      display file in hex
-:<,>!column -t              auto align selected text
-:set list lcs=tab:\|\ (there is a space)        show indentline when using Tab (not space)
-vim -d file_a file_b        use vim to check file diff
+:%! xxd     | view binary in hex with the aid of xxd
+:%! xxd -r  | convert hex back
+:setlocal display=uhex      | display file in hex
+:<,>!column -t              | auto align selected text
+:set list lcs=tab:\|\ (there is a space)        | show indentline when using Tab (not space)
+vim -d file_a file_b        | use vim to check file diff
 
 
 # Note
