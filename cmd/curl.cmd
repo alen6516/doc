@@ -41,3 +41,6 @@ $ curl -H @file 127.0.0.1
         IF-None-Match: "c-594671ba63449"
         Cache-Control: max-age=0
         ```
+$ curl -s -o /dev/null -I -w "{%http_code}" https://www.example.com
+    * print out just http status code
+    * -I sends HEAD request to prevent the loading of http body
