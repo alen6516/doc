@@ -94,3 +94,5 @@
 # Example
 $ gdb --tui ./a.out
 
+$ gdb ./a.out core
+    * using gdb to debug coredump
