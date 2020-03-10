@@ -24,6 +24,7 @@ session 相關 |
 ------------ | -------------------------------------- 
 $            | rename session                         
 s            | choose tree (session tree)             
+new          | create new session
 
 
 window 相關  |                                        
@@ -62,4 +63,7 @@ b            | send prefix
 ?            | list keys                              
 d            | detach client                          
 [            | 游標可以移動                               
+<SPACE>      | start copy
+<ENTER>      | copy text
+]            | paste text
 :set -g mouse on/off        允許滑鼠select window, select pane, resize pane
