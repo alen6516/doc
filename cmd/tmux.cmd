@@ -37,8 +37,8 @@ w            | choose window (window tree)
 f            | find window through name               
 :move-window -t 0       將當前 window 移至編號 0 (最前)
 :swap-window -s 4 -t 2  將編號 4 與 2 window 交換
-:swao-window -t -1      move the window leftward by 1
-:swao-window -t +1      move the window rightward by 1
+:swap-window -t -1      move the window leftward by 1
+:swap-window -t +1      move the window rightward by 1
 
 
 pane 相關    |                                        
@@ -51,7 +51,7 @@ o            | 切換到下個pane
 ;            | last pane                              
 x            | kill pane                              
 z            | zoom in/out the pane                   
-!            | 把當前的 pane 用一個新的 window 開啟   
+:break-pane  | 把當前的 pane 用一個新的 window 開啟   
 >            | pane 邊界右移5單位                      
 <            | pane 邊界左移5單位                      
 +            | pane 邊界上移5單位                      
