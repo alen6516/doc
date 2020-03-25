@@ -11,6 +11,9 @@ List files open by each process
     * list files opened by program PROGRAM
     
 # Example
+$ lsof .file.txt.swp
+    * list processes who opened file.txt
+
 $ lsof -i
     * list all network connection
 
@@ -31,3 +34,13 @@ $ lsof -i TCP -s TCP:ESTABLISHED
     
 $ lsof -u root
     * list files opened by user root
+
+$ lsof -u ^root
+    * list files not opened by user root
+
+$ lsof -u root -c java
+    * list files opened by user root "or" opened by program java
+
+$ lsof -a -u root -c java
+    * list files opened by user root "and" opened by program java
+    
