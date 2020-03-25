@@ -24,4 +24,5 @@
 /.$             | end with . (need to escape for . first)
 ^$              | empty line
 
-
+## |
+ab\|cd          | contain "ab" or "cd"
