@@ -8,8 +8,14 @@ grep [options] PATTERN [FILE...]
 -V, --version
     Show version information.
 
+-v
+    select the non-matching lines
+
 -r
     Recursively search in each directory.
+
+--include="*.conf"
+    search specific file
 
 -i 
     ignore case
