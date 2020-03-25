@@ -14,6 +14,12 @@ $ apt-cache search PACKAGE
 $ apt-cache show PACKAGE
     * show information of package
 
+$ apt-get source PACKAGE
+    * get the source code of package
+
+$ apt-file search SUBSTRING-OF-PATH
+    * search packages with target path
+
 $ apt build-dep global
     * build the environment for the  compilation of package "global"
     * if fail, make sure you have uncomment lines starting with deb-src in source.list, and do apt update
