@@ -17,6 +17,24 @@ $ apt-cache show PACKAGE
 $ apt-get source PACKAGE
     * get the source code of package
 
+$ apt-get remove PACKAGE
+    * remove a package
+
+$ apt-get autoremove
+    * after remove a package, its depencies may still remain, so use this command to clean
+    * or add parameter in remove command
+        $ apt-get remove PACKAGE --auto-remove
+
+$ apt-get purge PACKAGE
+    * even remove the depencies, the configuration file of PACKAGE may still here, so use this command to remove the config
+    * or add parameter in autoremove command
+        $ apt-get autoremove --purge
+    * for packages that has been remove or autoremove but not been purse, one can use the following command to check
+        $ dpkg -l | grep ^rc
+        $ dpkg -l | grep ^rc | awk '{print $2}'
+        * and one can purge them by the following command
+                $ apt-get purge `dpkg -l | grep ^rc | awk '{ print $2 }'`
+
 $ apt-file search SUBSTRING-OF-PATH
     * search packages with target path
 
