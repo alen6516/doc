@@ -193,6 +193,9 @@ $ [ -d /tmp/dir ] || mkdir /tmp/dir && touch /tmp/dir/test
     * 將 command1 的結果作為 command2 的 stdin 輸入
     * command2 是在 subshell 執行，所以 `$ echo "hello" | read var` 本來會將 hello 紀錄在 $var 裡，但指令結束時退出 subshell，在當前 shell 的 $var 仍是空的
         * 若要解決，改用 `$ read var <<< "hello"`
+* If |& is used, command's standard error, in addition to its standard output, is connected to command2's standard input through the pipe
+    * So it is just like pipe operator |, but piping both stdout and stderr.
+    * echo "aaa" |& cat
 
 
 # if-else判斷式

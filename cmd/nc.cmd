@@ -3,7 +3,11 @@
 # Overview
 
 # Options
+-u 
+    use UDP
 
+-6
+    use ipv6
     
 # Example
 $ nc -v 127.0.0.1 8787
@@ -35,3 +39,12 @@ $ echo -n "foo" | nc -u -w1 127.0.0.1 5000
         $ socat ssl:imap.gmail.com:993 readline
         $ ncat --ssl imap.gmail.com 993
         $ telnet-ssl -z ssl imap.gmail.com 993
+
+* chat room
+    * server
+        $ nc -v -l 127.0.0.1 6000
+    * client
+        $ nc -v -p 5000 localhost 6000
+
+* port scan
+    $ nc -vz 192.168.0.117 1-100

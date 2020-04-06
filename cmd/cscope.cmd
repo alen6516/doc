@@ -1,6 +1,9 @@
 # Description
 
 # Overview
+* escape special char in "Find egrep pattern" (cscope's egrep is different from Linux egrep)
+    * use [] to cover specical chars, like baseline_samples[++]
+
 
 # Options
 
