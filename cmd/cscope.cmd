@@ -6,6 +6,10 @@
 
 
 # Options
+-b
+    * conn_accounted when generating cscope database
+-q
+    * Enable fast symbol lookup via an inverted index when generating cscope database
 
     
 # Example
