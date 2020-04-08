@@ -14,3 +14,6 @@ list symbols from object files
 # Example
 $ nm -Du /bin/ls
     * display undefined symbols needed to be provided by shared lib
+
+$ nm -f sysv a.o
+    * see variable belong to which memory segment
