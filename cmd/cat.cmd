@@ -8,4 +8,8 @@
     * use ^I to represent Tab in FILE
     
 # Example
+$ cat /proc/cpuinfo
+    * show cpu info
 
+$ cat /proc/meminfo
+    * show mem info

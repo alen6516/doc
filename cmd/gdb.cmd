@@ -18,6 +18,8 @@
         
     * l (list)
         * $ l FUNCTION_A
+    * where
+        * show where are we
     * b (breakpoint)
     * b NN if VAR > 10
         * condition break point
