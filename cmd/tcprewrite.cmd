@@ -5,6 +5,8 @@
     use -h to see help information
 
 # Options
+-b
+    skip rewriting broadcast/multicast IPv4/IPv6 pkt
 -i
     input file
 
