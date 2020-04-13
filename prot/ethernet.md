@@ -34,7 +34,7 @@
 
     (Optional): 802.1Q tag (4 octets) 
 
-    (Show): Type or Length (2 octets)
+    (Show): ethertype or Length (2 octets)
 
     Payload
 
