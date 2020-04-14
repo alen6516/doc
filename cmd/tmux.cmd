@@ -1,6 +1,9 @@
 # Description
 
 # Overview
+* all tmux command can be:
+    * <prefix>:$command
+    * or in tmux, at shell's prompt enter "tmux $command"
 
 # Options
     
@@ -51,12 +54,14 @@ o            | 切換到下個pane
 ;            | last pane                              
 x            | kill pane                              
 z            | zoom in/out the pane                   
-:break-pane  | 把當前的 pane 用一個新的 window 開啟   
 >            | pane 邊界右移5單位                      
 <            | pane 邊界左移5單位                      
 +            | pane 邊界上移5單位                      
 -            | pane 邊界下移5單位                      
-:setw synchronize-panes on/off     同步/解除同步 pane (also can use for sending command to all pane)
+:break-pane  | 把當前的 pane 用一個新的 window 開啟   
+:setw synchronize-panes on/off      | 同步/解除同步 pane (also can use for sending command to all pane)
+:join-pain -s                       | join pane from certain window
+:join-pain -t                       | join pane to certain window
 
 其他         |                                        
 ------------ | -------------------------------------- 
