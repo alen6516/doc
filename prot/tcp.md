@@ -21,6 +21,8 @@
 * RTO
     * the interval for the sender to retransmit a packet
 
+* when sending tcp packet, usually use send()
+
 # Structure
 
     src port (2 octets)

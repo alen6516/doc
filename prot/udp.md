@@ -12,6 +12,9 @@
 
 * udp payload max = 65535 - 20 (IP header len) - 8 (UDP header len) = 65507
 
+* when sending udp pakcet, usually use sendto()
+    * specify dst socket every time
+
 # Structure
 
     Source port (2 octets)
