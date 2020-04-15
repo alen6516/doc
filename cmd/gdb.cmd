@@ -42,6 +42,8 @@
             * see informatin of breakpoint
         * $ info threads
             * see information of threads
+        * $ info sharedlibrary
+            * see at which addr each library is loaded
 
     * disable
         * $ disable NUM
@@ -97,6 +99,9 @@
 
     * down
         * goto under stack
+
+    * add-symbol-file FILE ADDR
+        * add a symbol file to certain address
 
 * parameter
     * usage
