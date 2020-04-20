@@ -10,8 +10,28 @@ list symbols from object files
 -u
     display only undefined symbols
 
+--defined-only
+    display only defined symbols
+
+-g 
+    display only external symbols
+
+-a
+    display debugger symbol as well
+
+-C
+    force nm to decode low-level symbol names into user-level names
+
+-n
+    sort all symbols by its address, not alphabetically
     
 # Example
+$ nm obj_file
+    * display symbol value, symbol type, synbol name
+
+$ nm -A obj_file
+    * add file name in front of each symbol output line
+
 $ nm -Du /bin/ls
     * display undefined symbols needed to be provided by shared lib
 
