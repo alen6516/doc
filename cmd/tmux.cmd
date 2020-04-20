@@ -74,3 +74,20 @@ d            | detach client
 <ENTER>      | copy text
 ]            | paste text
 :set -g mouse on/off        允許滑鼠select window, select pane, resize pane
+
+script for launch
+    ```
+    #!/bin/bash
+
+    echo -n "Enter session name: "
+    read sess_name
+
+    tmux new-session -d -s $sess_name
+
+    #tmux new-window -t $sess_name:1 -n "$sess_name"
+    tmux new-window -t $sess_name:2 -n 'gdb'
+    tmux new-window -t $sess_name:3 -n 'diff'
+
+    tmux select-window -t $sess_name:1
+    tmux -2 attach-session -t $sess_name
+    ```
