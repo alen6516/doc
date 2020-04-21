@@ -1,0 +1,36 @@
+## elf related tool
+    * nm
+	* list symbols from obj files
+    * objdump
+	* display information from obj files
+    * readelf
+	* display information about ELF files
+    * ldd
+	* print shared obj dependencies
+
+## network related tool
+    * < web perf tool >
+        * siege
+            * web perf tool, like ab
+        * ab
+
+    * < traffic tool >
+        * hping3
+        * curl
+        * scapy
+ 
+    * < sniffer >
+        * ngrep
+            * search and filter network packets
+        * tcpdump
+        * tcprewrite
+        * tcpreplay
+        * editcap
+            * Edit and/or translate the format of capture files
+
+    * < config >
+        * ethtool
+
+    * < display >
+        * lsof
+        * netstat

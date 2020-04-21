@@ -1,9 +1,13 @@
 # Description
+Edit a pcap file
 
 # Overview
 
 # Options
-
     
+
+
 # Example
-$ editcap -r <big_pcap_file> <new_pcap_file> 5000000-5000020
+$ editcap -r INPUT_CAP_FILE OUTPUT_CAP_FILE 5000 5010
+   * export packets from number 5000 to 5010 to the ouput pcap file.
+
