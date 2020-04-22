@@ -11,6 +11,8 @@
     * (gdb) detach
         * let the process keep running
 
+* the return value of the last function will be stored in $eax
+    * (gdb) p $eax
 
 * command
     * adv LINE
