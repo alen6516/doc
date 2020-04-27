@@ -28,6 +28,7 @@ session 相關 |
 $            | rename session                         
 s            | choose tree (session tree)             
 new          | create new session
+L            | switch back to the previous used session
 
 
 window 相關  |                                        

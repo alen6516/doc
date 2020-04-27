@@ -23,6 +23,7 @@
         * ngrep
             * search and filter network packets
         * tcpdump
+        * tshark
         * tcprewrite
         * tcpreplay
         * editcap
@@ -34,3 +35,11 @@
     * < display >
         * lsof
         * netstat
+        * ss
+            * display sockets' status
+        * mtr
+            * replace ping and traceroute
+        * iftop
+            * see network traffic
+        * iptraf
+            * see network traffic

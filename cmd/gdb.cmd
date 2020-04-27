@@ -129,9 +129,13 @@
             * to detach the debug, use "detach"
 
 # Options
+-ex "command"
+	* execute command after start gdb
     
 # Example
 $ gdb --tui ./a.out
+
+$ gdb ./a.out -ex "show configuration"
 
 $ gdb ./a.out core
     * using gdb to debug coredump
@@ -154,3 +158,5 @@ $ gdb ./a.out core
         End of assembler dump.
         (gdb)
         ```
+* disassemble a function called foo
+	$ gdb ./a.out -batch -ex 'disassemble foo'
