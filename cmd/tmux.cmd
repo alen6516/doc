@@ -63,6 +63,7 @@ z            | zoom in/out the pane
 :setw synchronize-panes on/off      | 同步/解除同步 pane (also can use for sending command to all pane)
 :join-pain -s                       | join pane from certain window
 :join-pain -t                       | join pane to certain window
+:move-pane -t <sess name>:<wdw num> | move one pane to another session's window
 
 其他         |                                        
 ------------ | -------------------------------------- 
