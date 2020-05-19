@@ -91,6 +91,11 @@
 
     * watch VAR
         * when VAR is written, set a breakpoint
+		* watch on an address
+			* watch *0x10793ad0
+		* watch a variable outside the local scope
+			* watch -l localptr->member
+			
 
     * thread THREAD_ID
         * switch to specific thread, debugging on this thread
