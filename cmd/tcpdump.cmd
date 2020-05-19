@@ -27,6 +27,12 @@
 -vv
     show more more detail information
 
+-G SEC
+    rotate dump files every SEC seconds
+
+-W COUNT
+    limit number of dump files
+
 
 # Example
 $ tcpdump -i ens33 -w icmp.pcap
@@ -37,6 +43,9 @@ $ tcpdump -i ens33 dst host 192.168.87.87
 
 $ tcpdump -i ens33 -vv | tee file
     * print output to screen and file simultaniously
+
+$ tcpdump -i ens19 -w my.pcap -G 100m -W 1
+    * schedule tcpdump to run for a specific period of time
 
 ## BPF example
 $ dst host HOST
