@@ -14,4 +14,5 @@
 
     
 # Example
-
+$ gcc -E -dD a.c
+    * show Macro Define
