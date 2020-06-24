@@ -49,3 +49,10 @@ $ pkt.haslayer(UDP)
 
 $ pkt.getlayer(UDP)
     * get UDP header from pkt
+
+* script to send ipv6 with different src ip:
+	pkts = []
+	for i in range(20):
+		p = Ether()/IPv6(src="2001:1::"+str(i), dst="2001:2::162")/UDP(sport=9487, dport=9000)
+		pkts.append(p)
+	sendp(pkts, iface="ens19", loop=1000, verbose=False)
