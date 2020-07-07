@@ -29,3 +29,6 @@ grep [options] PATTERN [FILE...]
 -C NUM
     get surrounding line (both before and after the keyword)
     
+# Example
+$ grep -i -r --include=\*.c "pthread" ./
+    * resursively search pattern in specific file name extension
