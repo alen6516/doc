@@ -20,6 +20,8 @@
 
     * tui
         * view code and command line
+		* using ^x ^a to toggle TUI
+		* in TUI mode, up/down arrow-key will apply on the upper window, one can use ^p ^n for prev/next command in lower window
         
     * l (list)
         * $ l FUNCTION_A
