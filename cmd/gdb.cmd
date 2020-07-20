@@ -84,6 +84,9 @@
 
     * disassemble FUNCTION
         * disassemble the machone code of FUNCTION and show the assemble code
+
+	* disassemble/m FUNCTION
+		* show the assemble code and source code together
     
     * disc (disconnect)
         * like detach from remote debug
