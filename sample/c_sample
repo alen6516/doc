@@ -13,11 +13,29 @@ long double 16 bytes
 # C11 recommends to use int8_t, int16_t, int32_t, int64_t
 # uint8_t, uint16_t, uint32_t, uint64_t to avoid dependence problem.
 
-
 # use 
 char const *arr[] = {"abc", "def", "ghi"};
 # rather than
 char *arr[] = {"abc", "def", "ghi"};
+
+# state
+## switch case
+switch(n) {
+	/* 
+	 * If want to declare variable in case
+	 * need to use {} to pack 
+	 */
+	case 1: {
+		int x;
+		foo(x);
+		return x;
+	}
+	case 2: {
+		int x;
+		bar(x);
+		return x;
+	}
+}
 
 # date
 ## format print
@@ -80,3 +98,7 @@ pthread_join()
 ## pthread exit
 pthread_exit()
     * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
+
+# Misc
+## How to define 32-bit long 0xFFFFFFFF ?
+u32 = ~(u32)0;
