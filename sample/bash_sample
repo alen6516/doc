@@ -199,17 +199,20 @@ $ [ -d /tmp/dir ] || mkdir /tmp/dir && touch /tmp/dir/test
 
 
 # if-else判斷式
-if [[ -n "$INPUT" ]] && [[ "$INPUT" == "Yes" ]]; then
+if [ -n "$INPUT" ] && [ "$INPUT" == "Yes" ]; then
   echo "result is Yes"
-elif [[ -n "$INPUT" ]] && [[ "$INPUT" == "No" ]]; then
+elif [ -n "$INPUT" ] && [ "$INPUT" == "No" ]; then
   echo "result is No"
 else
   echo "wrong input"
 fi
 
+if [ "$1" = "1" ]; then
+    ...
+done
 
 # 讀取argument
-if [[ ! -z "$1" ]]; then
+if [ ! -z "$1" ]; then
   ARGS=$1
 fi
 echo $ARGS
@@ -221,7 +224,7 @@ read -n 1 -s -r -p "Press any key to continue"
 
 # 檢查執行者身份
 whoami_ret="$(whoami)"
-if [[ "$whoami_ret" != "root" ]]; then
+if [ "$whoami_ret" != "root" ]; then
   echo "This script must be run as root"
   exit
 fi
@@ -236,7 +239,7 @@ fi
 
 # 執行指令的結果
 pyOpenSSL_ret="$(rpm -q python-openssl | grep install | wc -l)"
-if [[ "$pyOpenSSL_ret" == "1" ]]; then
+if [ "$pyOpenSSL_ret" == "1" ]; then
   echo "python-openssl is not installed, please install python-openssl"
   exit
 fi  
@@ -247,6 +250,15 @@ SERVER_LIST=(192.168.0.1 192.168.0.2 192.168.0.3)
 for IP in ${SERVER_LIST[@]}
 do
   echo "IP address: $IP"
+done
+
+
+# array
+IP=(10.10.10.10 20.20.20.20)
+length=${#IP[@]}
+for ((i=0; i<length; i++))
+do
+    echo ${IP[$i]}
 done
 
 
@@ -303,7 +315,7 @@ done
 
 
 # for loop
-for (( i=1; i<=10; i=i+1 ))
+for ((i=1; i<=10; i=i+1))
 do
   echo $i
 done
