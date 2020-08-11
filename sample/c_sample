@@ -102,3 +102,9 @@ pthread_exit()
 # Misc
 ## How to define 32-bit long 0xFFFFFFFF ?
 u32 = ~(u32)0;
+
+## __VA_ARGS__
+#define my_printf(...) 			printf(__VA_ARGS__)
+#define my_printf(format, ...) 	printf(format, ##__VA_ARGS__)
+	* when user call my_printf("without arg\n"), if we don't use ##
+	* result will be printf(format, ) => one comma left

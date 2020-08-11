@@ -64,9 +64,10 @@
     * bit 0: Reserved; must be zero
     * bit 1: Don't fragment (DF)
     * bit 2: More Fragments (MF)
+    * (bit 3~15 are Fragment Offset bits)
 
 * Fragment Offset
-    * Fragment offset from the start of IP datagram. Measure in 8 bytes increments. If IP datagram is fragmented, fragment;s total length must be a multiple of 8 bytes.
+    * Fragment offset from the start of IP datagram. Measure in 8 bytes increments. If IP datagram is fragmented, fragment's total length must be a multiple of 8 bytes.
 
 * Time To Live
 
