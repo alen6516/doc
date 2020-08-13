@@ -9,6 +9,9 @@
 -u
     show UDP connections
 
+-l
+    show only listening sockets
+
 -s
     * show statistics for each protocol (IP, TCP, UDP, ICMP)
     * -st: display the statistics for only TCP ports
