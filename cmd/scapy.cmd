@@ -65,3 +65,21 @@ $ pkt.getlayer(UDP)
 		p = Ether()/IPv6(src="2001:1::"+str(i), dst="2001:2::162")/UDP(sport=9487, dport=9000)
 		pkts.append(p)
 	sendp(pkts, iface="ens19", loop=1000, verbose=False)
+
+* make a fragmented udp packet (3 packets)
+	pl = []	
+	ip = IP()
+	ip.frag = 0
+	ip.flags = 1 # MF
+	udp = UDP()
+	udp.sport = 9487
+	udp.dport = 9000
+	p = ip/udp/("data"*20)
+	pl.append(p)
+	ip.frag = 10
+	p = ip/("data"*20)
+	pl.append(p)
+	ip.frag=20
+	ip.flags = 0
+	p = ip/("finish")
+	pl.append(p) 
