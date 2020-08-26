@@ -40,6 +40,8 @@
         * ignore breakpoint 2 for 10 times
 
     * r (run)
+		* $ r arg1 arg2 arg3
+			* run with arguments	
 
     * info
         * $ info b

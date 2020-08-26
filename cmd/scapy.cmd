@@ -77,6 +77,7 @@ $ pkt.getlayer(UDP)
 	p = ip/udp/("data"*20)
 	pl.append(p)
 	ip.frag = 10
+	ip.proto = 17 # UDP
 	p = ip/("data"*20)
 	pl.append(p)
 	ip.frag=20
