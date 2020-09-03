@@ -37,3 +37,9 @@ $ iptables -nvL
 
 $ iptables -A INPUT -p tcp --dport ssh -s 1.2.3.4/24 -j DROP
     * drop the input pkts of tcp dst port 22 from 1.2.3.4/24
+
+$ iptables -D INPUT 1
+    * delete the 1st rule from INPUT chain
+
+$ iptables -I OUTPUT -p icmp --icmp-type destination-unreachable -j DROP
+    * prevent ICMP port unreachable being sent by dropping  them using iptables

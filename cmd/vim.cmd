@@ -385,7 +385,8 @@ ctrl + x    | 遞減游標所在數字
 K           | lookup a API in manpage
 gD          | jump to the definition of function
 :f          | show filename
-ctrl + g    | show status
+ctrl + g    | show filename, same as :f
+1 ctrl + g  | show full path of current file
 viw         | select word under cursor
 yiw         | yank word under cursor
 [m          | jump to previous {
