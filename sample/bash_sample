@@ -110,6 +110,21 @@ declare -A FILE=(                           \
     [".cscope_maps.vim"]=".cscope_maps.vim" \
 )
 
+## set value
+FILE['key']='value'
+
+## expand the values
+"${FILE[@]}"
+
+## expand the keys
+"${!FILE[@]}"
+
+## example
+for sound in "${!animals[@]}";
+do
+    echo "$sound - ${animals[$sound]}"; 
+done
+
 # $() 與 ${} 區別
 $(cmd) 相當於 `cmd`
 ${VAR} 是為了讓 bash 明白 VAR 是個變數
