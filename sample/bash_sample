@@ -98,6 +98,17 @@ printf "\33[1;31m"
 printf "Color Version: $VAR"
 printf "\33[0m\n"
 
+# Declare array
+declare -A FILE=(                           \
+    [".vim"]=".vim"                         \
+    [".vimrc"]=".vimrc"                     \
+    [".vim_plug"]=".vim_plug"               \
+    [".bashrc"]=".bashrc"                   \
+    [".bash_aliases"]=".bash_aliases"       \
+    [".tmux.conf"]=".tmux.conf"             \
+    [".ctags"]=".ctags"                     \
+    [".cscope_maps.vim"]=".cscope_maps.vim" \
+)
 
 # $() 與 ${} 區別
 $(cmd) 相當於 `cmd`
