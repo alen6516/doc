@@ -1,12 +1,12 @@
 ## elf related tool
     * nm
-	* list symbols from obj files
+        * list symbols from obj files
     * objdump
-	* display information from obj files
+        * display information from obj files
     * readelf
-	* display information about ELF files
+        * display information about ELF files
     * ldd
-	* print shared obj dependencies
+        * print shared obj dependencies
 
 ## network related tool
     * < web perf tool >
