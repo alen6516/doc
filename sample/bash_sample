@@ -98,6 +98,32 @@ printf "\33[1;31m"
 printf "Color Version: $VAR"
 printf "\33[0m\n"
 
+# Declare array
+declare -A FILE=(                           \
+    [".vim"]=".vim"                         \
+    [".vimrc"]=".vimrc"                     \
+    [".vim_plug"]=".vim_plug"               \
+    [".bashrc"]=".bashrc"                   \
+    [".bash_aliases"]=".bash_aliases"       \
+    [".tmux.conf"]=".tmux.conf"             \
+    [".ctags"]=".ctags"                     \
+    [".cscope_maps.vim"]=".cscope_maps.vim" \
+)
+
+## set value
+FILE['key']='value'
+
+## expand the values
+"${FILE[@]}"
+
+## expand the keys
+"${!FILE[@]}"
+
+## example
+for sound in "${!animals[@]}";
+do
+    echo "$sound - ${animals[$sound]}"; 
+done
 
 # $() 與 ${} 區別
 $(cmd) 相當於 `cmd`
