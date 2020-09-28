@@ -24,6 +24,12 @@ list symbols from object files
 
 -n
     sort all symbols by its address, not alphabetically
+# Symbol type
+T
+    * the symbol is in text (code) section, and it is global
+    * linker will fail if it detects global symbol redefination
+t
+    * the symbol is in text (code) section, and it is local
     
 # Example
 $ nm obj_file
