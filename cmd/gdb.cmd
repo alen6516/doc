@@ -36,8 +36,19 @@
         * trace under certain thread NT
         * when stop, all threads are stop
 
+	* condition 2 if a==b
+		* add condition to a existing breakpoint
+
     * ignore 2 10
         * ignore breakpoint 2 for 10 times
+
+	* commands
+	  (gdb) break func
+	  (gdb) commands
+	  >   watch var
+	  >   continue
+	  > end
+		* auto add watchpoint to a local var once enter this function
 
     * r (run)
 		* $ r arg1 arg2 arg3
@@ -74,6 +85,17 @@
         * when tracing a multi-thread program, after a threat trigger the breakpoint, if not set scheduler lock on, when another thread trigger a breakpoint, gdb will transfer to this thread
         * when finish the trace under a thread, remember to set scheduler lock off, then the other thread can trigger a breakpoint 
 
+	- set print elements 0
+		* when printing a long string or array, by default it can not print whole variable, set this to enable
+
+	- set print repeats 0
+		* gdb will omit repeated elements, set this to avoid
+
+	- set history save on
+	- set history size 4096
+	- set history filename ~/.gdb_history
+		* save gdb history to file
+
     * s (step)
         * when going to enter a function, use "$ s" to go into the function
 
@@ -90,8 +112,11 @@
 	* disassemble/m FUNCTION
 		* show the assemble code and source code together
     
+	* detach
+		* detach the current process that is being debugged
+
     * disc (disconnect)
-        * like detach from remote debug
+        * detach from remote debug
 
     * ptype STRUCT
         * see a struct's construction
@@ -102,6 +127,9 @@
 			* watch *0x10793ad0
 		* watch a variable outside the local scope
 			* watch -l localptr->member
+				* localptr is a local variable, it will disappear after gdb leave the frame, but localptr->member is a varible that still exists, so use -l to continue the watch.
+			* another way
+				watch *(type*) &localptr->member
 			
 
     * thread THREAD_ID
@@ -113,6 +141,9 @@
 
     * down
         * goto under stack
+
+	* frame N
+		* goto frame N
 
     * add-symbol-file FILE ADDR
         * add a symbol file to certain address
@@ -132,13 +163,13 @@
     * when need it?
         * customer(target machine) only has ELF file, source code on the host machine
             * ELF file may still contain symbol table, so still can be debug, but cannot see every line
+		* when do remote debug, symbol is loaded from local (dev machine), so one can set break point before it connect to remote target
     * config gdbserver and gdbclient
         * source code is in client, server only has executable file
         * step
             * on server, execute the file
             * on server, execute "$ gdbserver :PORT --attach `pidof PROCESS`"
             * on client, enter gdb, execute "$ target remote SERVER_IP:PORT"
-            * to detach the debug, use "detach"
 
 # Options
 -ex "command"
@@ -172,3 +203,4 @@ $ gdb ./a.out core
         ```
 * disassemble a function called foo
 	$ gdb ./a.out -batch -ex 'disassemble foo'
+
