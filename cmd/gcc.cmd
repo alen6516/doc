@@ -4,7 +4,11 @@
 
 # Options
 -c
-    * only compile, but not link (.c -> .o)
+    * only compile, but not link
+    * .c -> .o
+
+-E
+    * only do preprocess, will print output to std
 
 -o
     * link file (.o -> .out)
