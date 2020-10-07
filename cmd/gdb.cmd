@@ -106,6 +106,9 @@
         * execute to the return of the caller of current function
         *  the return val will be stored in %rax
 
+	* return VAL
+		* discard current stack and return VAL
+
     * disassemble FUNCTION
         * disassemble the machone code of FUNCTION and show the assemble code
 
@@ -135,6 +138,9 @@
     * thread THREAD_ID
         * switch to specific thread, debugging on this thread
         * when this thread encounter a breakpoint, other threads still run
+
+	* thread apply all bt
+		* print all thread's bt
 
     * up
         * goto upper stack
