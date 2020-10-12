@@ -39,7 +39,7 @@
 
 ## Field description
 * Length
-    * not every DNS packet carries carry this column, need more investigation
+    * not every DNS packet carries this column, need more investigation
 
 * Transcation ID
     * a ID for matching a query with its corresponding response
