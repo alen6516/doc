@@ -125,7 +125,7 @@
         * see a struct's construction
 
     * watch VAR
-        * when VAR is written, set a breakpoint
+        * only break on write
 		* watch on an address
 			* watch *0x10793ad0
 		* watch a variable outside the local scope
@@ -134,6 +134,13 @@
 			* another way
 				watch *(type*) &localptr->member
 			
+	* rwatch VAR
+		* only break on read (access the memory)
+		* cannot rwatch gdb variables, need to find their addr
+
+	* awatch VAR
+		* break on both read/write
+		* cannot awatch gdb variables, nedd to find their addr
 
     * thread THREAD_ID
         * switch to specific thread, debugging on this thread
