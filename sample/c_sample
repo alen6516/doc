@@ -13,10 +13,23 @@ long double 16 bytes
 # C11 recommends to use int8_t, int16_t, int32_t, int64_t
 # uint8_t, uint16_t, uint32_t, uint64_t to avoid dependence problem.
 
-# use 
+# Array
+
+## use 
 char const *arr[] = {"abc", "def", "ghi"};
-# rather than
+## rather than
 char *arr[] = {"abc", "def", "ghi"};
+
+## designated initializers
+int a[6] = { [4] = 29, [2] = 15 }; # this is ISO C99 standard, also supported in gcc gnu89 as ab extension
+								   # is equivalent to int a[6] = { 0, 0, 15, 0, 0, 29, 0 }
+
+int widths[] = { [0 ... 9] = 1, [10 ... 99] = 2, [100] = 3 }; # this is gcc extension
+														      # the length of the array will the highest value specified plus one.
+ 
+int whitespace[256]
+       = { [' '] = 1, ['\t'] = 1, ['\h'] = 1,
+           ['\f'] = 1, ['\n'] = 1, ['\r'] = 1 };
 
 # state
 ## switch case

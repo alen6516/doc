@@ -27,3 +27,6 @@ show/modify configuration of NIC and NIC's driver
 $ ethtool -k eth1
     * show information of eth1
 
+$ ethtool -K eth0 tx off rx off
+    * disable TCP checksum offload
+        * Linux may offload tcp checksum and let NIC to calc and fill it, one can use this command to disable linux to do so
