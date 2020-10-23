@@ -85,6 +85,12 @@
         * when tracing a multi-thread program, after a threat trigger the breakpoint, if not set scheduler lock on, when another thread trigger a breakpoint, gdb will transfer to this thread
         * when finish the trace under a thread, remember to set scheduler lock off, then the other thread can trigger a breakpoint 
 
+	- set disassemble-next-line on/off
+		* let gdb show the x86 instruction of next line
+
+	- set disassembly-flavor att/intel
+   		* set x86 instruction syntax format 
+
 	- set print elements 0
 		* when printing a long string or array, by default it can not print whole variable, set this to enable
 
@@ -167,9 +173,10 @@
     * help
         * $ help set ?
     * list of parameter
-        * listsize
+        * $ show listsize
             * how many lines a list will show
-
+	* execute shell commnad
+		* $ shell
 
 
 * remote debug
