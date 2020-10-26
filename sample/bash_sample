@@ -149,6 +149,31 @@ exit 0
 
 
 # data redirection
+file descriptor 0 means input from keyboard
+file descriptor 1 means std out
+file descriptor 2 means err out
+
+## ls 1>a.txt 2>&1
+在對 stdout 做導向時，系統所做的事大約會是這樣:
+close(1);
+fd=open("a.txt", O_WRONLY, 0);
+
+系統必需先把原本已經打開的 fd=1 關閉，然後再將要導入的檔案開啟，新開啟的檔案就會被指定為 fd=1。
+這時候再遇到後面 stderr 的導向時，系統會這麼做:
+close(2);
+fd=dup(1);
+
+一樣是先把 fd=2 關閉，但是這時候要導向的是另一個 fd，所以基本上系統做的事情只是把 stdout 的 fd 複製一份給 stderr。
+由於 fd 是指向相同的地方，所以這時任何寫入 stderr 的資料當然也會進入已經開啟的 dirlist 裡。
+
+## ls 2>&1 >a.txt
+倒過來的話我們會先把 stderr 指向 stdout，但是當 stdout 被導向 a.txt 時會捨棄舊的 fd=1，開啟 a.txt 為新的 fd。
+這時 stderr 指向的卻還是舊的 stdout 的 fd，因此並不會寫入 a.txt。
+
+## target information is in err out
+    $ cmd 2>&1 1>/dev/null | grep PATTERN
+        * 
+
 ## direct stdin and stdout to different file
     $ cmd > here.txt 2> there.txt
 

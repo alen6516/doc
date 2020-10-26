@@ -223,6 +223,7 @@ N           | 尋找上一個
 #           | 同上，不過是向上找
 g*          | 同 * ，但部分符合即可
 g#          | 同 # ，但部份符合即可
+/\<aa\>     | match exactly the string
 
 # substitute (替換)
 :[range]s/pattern/string/[c,e,g,i]
@@ -394,7 +395,7 @@ yiw         | yank word under cursor
 [[          | jump to previous start { of a function
 ]]          | jump to next start { of a function
 :%! xxd     | view binary in hex with the aid of xxd
-:%! xxd -r  | convert hex back
+:%! xxd -r  | convert hex back (but actually the file will be different from the original one, use cksum to check it)
 :setlocal display=uhex      | display file in hex
 :<,>!column -t              | auto align selected text
 :set list lcs=tab:\|\ (there is a space)        | show indentline when using Tab (not space)

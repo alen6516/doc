@@ -13,10 +13,23 @@ long double 16 bytes
 # C11 recommends to use int8_t, int16_t, int32_t, int64_t
 # uint8_t, uint16_t, uint32_t, uint64_t to avoid dependence problem.
 
-# use 
+# Array
+
+## use 
 char const *arr[] = {"abc", "def", "ghi"};
-# rather than
+## rather than
 char *arr[] = {"abc", "def", "ghi"};
+
+## designated initializers
+int a[6] = { [4] = 29, [2] = 15 }; # this is ISO C99 standard, also supported in gcc gnu89 as ab extension
+								   # is equivalent to int a[6] = { 0, 0, 15, 0, 0, 29, 0 }
+
+int widths[] = { [0 ... 9] = 1, [10 ... 99] = 2, [100] = 3 }; # this is gcc extension
+														      # the length of the array will the highest value specified plus one.
+ 
+int whitespace[256]
+       = { [' '] = 1, ['\t'] = 1, ['\h'] = 1,
+           ['\f'] = 1, ['\n'] = 1, ['\r'] = 1 };
 
 # state
 ## switch case
@@ -108,3 +121,11 @@ u32 = ~(u32)0;
 #define my_printf(format, ...) 	printf(format, ##__VA_ARGS__)
 	* when user call my_printf("without arg\n"), if we don't use ##
 	* result will be printf(format, ) => one comma left
+
+## array type cast
+int arr[3] = {1, 2, 3};
+int a[4] = (int[4]*) arr;
+
+## const* int vs int const*
+const *int p = &a; 	// write to *p is illegal
+int *const p = &a;  // write to p is illegal
