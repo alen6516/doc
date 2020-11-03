@@ -48,6 +48,9 @@ packet maker
     * fragment the data into multiple packets, default MTU is 16 bytes
 
 ## TCP/UDP
+-s PORT
+    src port
+
 -p PORT
     dst port
 
