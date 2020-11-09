@@ -21,8 +21,28 @@
     * tui
         * view code and command line
         * using ^x ^a to toggle TUI
-        * in TUI mode, up/down arrow-key will apply on the upper window, one can use ^p ^n for prev/next command in lower window
-        
+        * in TUI mode, up/down arrow-key will apply on the upper window, one can use 
+            * ^p ^n for prev/next command in lower window
+            * ^b ^f to move curser back or forward
+    
+    * display
+        * $ display/Ni $pc
+            * show the next N asm instructions, N will be 1 if it is not defined
+            * one can use this instruction with tui mode to check current src code with asm instruction
+            * $ info display
+                * show display config
+            * $ disable display 1
+                * disable a display
+
+    * layout
+        * $ layout asm
+            * display asm in tui mode
+        * $ layout src
+            * display src code in tui mode
+        * $ layout split
+            * split gdb tui mode into 3 windows to show src, asm and commandline
+            * can also be triggered by `^x 2`
+                
     * l (list)
         * $ l FUNCTION_A
     * where
@@ -75,6 +95,12 @@
 
     * c (continue)
     * n (next)
+        * execute util the next line in src code, note one line of src code maybe consist of several instructions
+        * if we want to step 1 instruction by 1 instruction, we should use $ ni
+
+    * ni
+        * execute next asm instruction
+
     * p (print)
         * print variable value
         * $ p VAR
