@@ -24,3 +24,5 @@ $ systemctl start/stop/restart/status/kill/reload sshd.service
     * kill: kill sshd and all its child processes
     * reload: reload the configuration of sshd
 
+$ sudo systemd-resolve --flush-caches
+    * clear dns cache in the system
