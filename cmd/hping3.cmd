@@ -54,6 +54,9 @@ packet maker
 -p PORT
     dst port
 
+-w SIZE
+    tcp window size
+
 -k
     don't vary src port
 
