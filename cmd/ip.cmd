@@ -50,6 +50,28 @@
                 * 192.168.2.1 就是 next hop, 這個 IP address 必須位於 routing table 裡 eth0 直接相接的網段
         * 刪除路由
             * $ ip route del 192.168.1.0/24 dev eth0
+
+    * IPv4 source route
+        * there are 3 routing table: default, main, local
+            * to route a pkt, by default the main table will be lookup
+
+        * we can add a new table and specify traffic with certain ip lokup the new table
+
+        1. create a new routing table
+            $ echo 200 my_table >> /etc/iproute2/rt_tables
+        
+        2. add route to the new table
+            $ ip route add default via 192.168.1.1 dev eth0 table my_table
+
+        3. config to let specific src ip traffic lookup the new table
+            $ ip rule add from 10.10.10.10 lookup my_table
+
+        * check the route in the new table
+            $ ip route show table my_table
+
+        * check the rule
+            $ ip rule list
+            
     * IPv6 
         * 上述 IPv4 指令之 ip 換成 ip -6 即可
-	* 有 IPv4 addr 的網卡要再設 IPv6 addr 時，習慣 20:20:20:161/24 => 2001:20:20:20::161/64
+        * 有 IPv4 addr 的網卡要再設 IPv6 addr 時，習慣 20:20:20:161/24 => 2001:20:20:20::161/64
