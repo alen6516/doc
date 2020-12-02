@@ -53,7 +53,8 @@
 
     * IPv4 source route
         * there are 3 routing table: default, main, local
-            * to route a pkt, by default the main table will be lookup
+            * local table can not be modified
+            * new route will be added to main table by default
 
         * we can add a new table and specify traffic with certain ip lokup the new table
 
@@ -62,9 +63,13 @@
         
         2. add route to the new table
             $ ip route add default via 192.168.1.1 dev eth0 table my_table
+            * to apply it after reboot, write the following to /etc/network/interfaces
+                $ post-up ip route add default via 192.168.1.1 dev eth0 table my_table
 
         3. config to let specific src ip traffic lookup the new table
             $ ip rule add from 10.10.10.10 lookup my_table
+            * to apply it after reboot, write the following to /etc/network/interfaces
+                $ post-up ip rule add from 10.10.10.10 lookup my_table
 
         * check the route in the new table
             $ ip route show table my_table
