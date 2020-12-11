@@ -350,6 +350,8 @@ done
 # while true
 while :
 
+# while loop in one line
+while sleep 2; do echo thinking; done
 
 # for loop
 for CAR in AUDI VOLVO BENZ

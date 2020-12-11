@@ -56,7 +56,7 @@
             * local table can not be modified
             * new route will be added to main table by default
 
-        * we can add a new table and specify traffic with certain ip lokup the new table
+        * we can add a new table and specify traffic with certain src ip lookup the new table
 
         1. create a new routing table
             $ echo 200 my_table >> /etc/iproute2/rt_tables

@@ -7,14 +7,24 @@
 
 
 /** My function doing something...
-    @param param1 first parameter
-    @param param2 second parameter
+    @param in param1 first parameter
+    @param out param2 second parameter
     @return value return value
 */
 float myFunction(float param1, float param2){
 ....
 }
 
+
+/**
+ * This function is used to parse MPLS headers and Pseudowire.
+ * So far we support EoMPLS only.
+ *
+ * @param in eth           - the outter L2 header
+ * @param in local_pkt_len - the total packet length
+ * @param out sptr_ip      - return the correct starting address of L3 header
+ * @return the number of MPLS header and pseudowire headers (include PWMCW and L2 headers)
+ */
 
 int var; /**< Detailed description after the member */
 

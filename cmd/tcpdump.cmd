@@ -48,6 +48,7 @@ $ tcpdump -i ens19 -w my.pcap -G 100m -W 1
     * schedule tcpdump to run for a specific period of time
 
 ## BPF example
+* use "and" to combind multiple condition
 $ dst host HOST
 $ src host HOST
 $ host HOST
