@@ -18,6 +18,11 @@
     * adv LINE
         * execute until LINE
 
+    * alias ir = info registers
+        * set ir as alias to "info registers"
+        * unlike bash, gdb alias can not involve arguments, eg: alias ir = info registers eax
+            * use "ir eax"
+
     * tui
         * view code and command line
         * using ^x ^a to toggle TUI
