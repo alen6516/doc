@@ -66,9 +66,11 @@ $ pkt.getlayer(UDP)
 		pkts.append(p)
 	sendp(pkts, iface="ens19", loop=1000, verbose=False)
 
-* make a fragmented udp packet (3 packets)
+* make a fragmented udp packet (3 packets) (deprecated)
 	pl = []	
 	ip = IP()
+	ip.src="20.20.20.161"
+	ip.dst="20.20.101.162"
 	ip.frag = 0
 	ip.flags = 1 # MF
 	udp = UDP()
@@ -84,3 +86,35 @@ $ pkt.getlayer(UDP)
 	ip.flags = 0
 	p = ip/("finish")
 	pl.append(p) 
+
+* make a fragmented udp packet (3 packets)
+	#!/usr/bin/python3
+	from scapy.all import *
+	ip=IP()
+	ip.src="20.20.20.161"
+	ip.dst="20.20.101.162"
+	udp=UDP()
+	udp.sport=9487
+	udp.dport=9000
+	payload="data"*40+"finish"
+	p = ip/udp/payload
+	frags=fragment(p,fragsize=80)
+	print(p.show())
+	send(frags)
+
+* make a fragmented tcp packet (3 packets)
+	#!/usr/bin/python3
+	from scapy.all import *
+	tcp=TCP()
+	tcp.sport = 9487
+	tcp.dport = 8000
+	tcp.flags = 'A'
+	ip=IP()
+	ip.src="20.20.20.161"
+	ip.dst="20.20.101.162"
+	payload="data"*40+"finish"
+	p = ip/tcp/payload
+	frags=fragment(p,fragsize=80)
+	print(p.show())
+	send(frags)
+
