@@ -1,4 +1,37 @@
-# difference between AT&T syntax and Intel syntax
+# Register
+## General Register
++--------------------------------+
+| RAX           | EAX  | AH | AL | 	(AX = AH + AL)
+| RBX           |      |    |    |
+| RCX           |      |    |    |
+| RDX           |      |    |    |
+| RBP           |      |    |    |
+| RSI           |      |    |    |
+| RDI           |      |    |    |
+| RSP           |      |    |    |
++--------------------------------+
+<-64------------<-32---<-16-bits->
+
+* RAX (Accumulator)
+* RBX (Base address)
+* RCX (Counter)
+* RDX (Data)
+* RBP (Base pointer)
+* RDI (dst address)
+* RSI (src address)
+
+## Addressing
+* absolute/direct addressing
+    * mov [0x9487], %AX
+
+* immediate addressing
+    * mov 0x9487, %AX
+
+* indirect addressing
+    * mov -0x14[%rbp], %EAX
+
+
+# Difference between AT&T syntax and Intel syntax
 ## order
 Intel Syntax             | AT&T Syntax
 -------------------------|----------------------
@@ -33,12 +66,12 @@ b : byte
 w : word
 l : long
 
-Intel Syntax                            AT&T Syntax
-
-mov     al,bl                           movb    %bl,%al
-mov     ax,bx                           movw    %bx,%ax
-mov     eax,ebx                         movl    %ebx,%eax
-mov     eax, dword ptr [ebx]            movl    (%ebx),%eax
+Intel Syntax                          | AT&T Syntax
+--------------------------------------|---------------------
+mov     al,bl                         | movb    %bl,%al
+mov     ax,bx                         | movw    %bx,%ax
+mov     eax,ebx                       | movl    %ebx,%eax
+mov     eax, dword ptr [ebx]          | movl    (%ebx),%eax
 
 ## type casting
 s  (signed)
