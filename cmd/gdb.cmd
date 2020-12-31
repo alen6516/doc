@@ -115,6 +115,9 @@
         * $ x /200b VAR
             * 200 means print 200 bytes, b means separate each byte
 
+        * x/10i $rip-20
+            * print 10 instructions from address of $rip-20
+
     * set
         * assign a value to a program variable
             * $ set VAR=100
@@ -136,7 +139,7 @@
     - set print elements 0
         * when printing a long string or array, by default it can not print whole variable, set this to enable
 
-    - set set pagination off
+    - set pagination off
         * disable gdb to ask "Type <return> to continue, or q <return> to quit"
 
     - set print repeats 0

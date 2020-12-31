@@ -1,4 +1,5 @@
 # Register
+* IA-32 structure provide for general system: general-purpose registers, segment registers, EFLAGS and EIP
 ## General Register
 +--------------------------------+
 | RAX           | EAX  | AH | AL | 	(AX = AH + AL)
@@ -19,6 +20,28 @@
 * RBP (Base pointer)
 * RDI (dst address)
 * RSI (src address)
+
+## Segment Register
+* CS
+* DS
+* ES
+* SS
+* GS	
+* RSP (Stack pointer)
+
+## EFLAGS
+* EFLAGS register indicates the result of an arithmetic instruction (ADD, SUB, MUL, DIV) 
+* CF (bit 0) (Carry flag)
+	* set to 1 if there is a carry or a borrow happens to the most-significant bit of the result.
+	* This bit indicates the overflow status of a unsigned integer.
+* PF (bit 2) (Parity flag)
+* AF (bit 4) (Adjust flag): 
+* ZF (bit 6) (Zero flag)
+	* set it to 0 if result is 1, else set it to 0
+* SF (bit 7) (Sign flag)
+	* the highest bit of a signed integer, 0 means positive, 1 means negative
+* OF (bit 11) (Overflow flag)
+	* Indicate whether an signed integer overflows
 
 ## Addressing
 * absolute/direct addressing

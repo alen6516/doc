@@ -18,5 +18,5 @@
 $ objdump --debugging my_bin
     * show debugging symbols of a binary file
 
-$ objdumo -M intel -S main.o
-    * use intel syntax, and display source code 
+$ objdump -M intel -S main.o
+    * use intel syntax, and display source code (need first compile with -g)
