@@ -116,3 +116,11 @@ jmp far  INITSEG:GO                     ljmp $INITSEG, $GO
 call far INITSEG:GO                     lcall $INITSEG, $GO
 ret far	 STACK_ADJUS                    lret $STACK_ADJUST
 ```
+
+# Instructions
+
+* push EAX
+    * current RSP decrement by sizeof EAX (8 bytes)
+    * store EAX's value to the address pointed by RSP
+* pop EAX
+    * read value pointed by RSP and store to EAX
