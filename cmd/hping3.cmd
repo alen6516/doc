@@ -60,6 +60,9 @@ packet maker
 -k
     don't vary src port
 
+-L ACK_NUM
+    specify the ack number
+
 ## APP Layer
 -d LEN
     * specify data length

@@ -244,6 +244,17 @@ mx          | mark 住游標所在位置 (x 可用英文字母或數字)
 `x          | 回到書籤位置
 'x          | 回到書籤設定行首行
 :marks      | 書籤列表
+'.          | jump to the last modification place
+''          | jump back
+delmarks a  | delete mark a
+delmarks!   | delelte all lowercase marks
+
+# jumps
+short cut   | function
+------------|:--------
+jumps       | show jump list
+Ctrl + o    | go to older jumps
+Ctrl + i    | go to newer jumps
 
 # Macro (巨集)
 short cut   | function
