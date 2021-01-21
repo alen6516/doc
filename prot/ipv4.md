@@ -72,7 +72,7 @@
 * Time To Live
 
 * Protocol
-    * upper layer portocol, 0x06 for TCP, 0x11 for UDP
+    * upper layer portocol, 0x01 for ICMP, 0x04 for IPv4, 0x06 for TCP, 0x11 for UDP
 
 * Header Checksum
     * Checksum of entire IP header

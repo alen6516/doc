@@ -109,6 +109,10 @@
     * p (print)
         * print variable value
         * $ p VAR
+        * $ p /x VAR
+            * print variable in hex
+        * $ p /t VAR
+            * print variable in binary
 
     * x
         * print variable in hex
@@ -138,6 +142,9 @@
 
     - set print elements 0
         * when printing a long string or array, by default it can not print whole variable, set this to enable
+
+    - set print pretty
+        * print a data member line by line when print a object
 
     - set pagination off
         * disable gdb to ask "Type <return> to continue, or q <return> to quit"
@@ -195,6 +202,14 @@
     * awatch VAR
         * break on both read/write
         * cannot awatch gdb variables, nedd to find their addr
+
+    * catch EVENT
+        * set catchpoint to catch events like syscall, assert, exception, exec, fork, handlers, signal, ...
+        * $ catch syscall 
+            * break when catching system call
+
+    * tcatch EVENT
+        * Set a catchpoint that is enabled only for one stop. The catchpoint is automatically deleted after the first time the event is caught.
 
     * thread THREAD_ID
         * switch to specific thread, debugging on this thread

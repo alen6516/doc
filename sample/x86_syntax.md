@@ -124,3 +124,4 @@ ret far	 STACK_ADJUS                    lret $STACK_ADJUST
     * store EAX's value to the address pointed by RSP
 * pop EAX
     * read value pointed by RSP and store to EAX
+	* increment RSP by sizeof EAX (8 bytes)
