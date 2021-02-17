@@ -34,3 +34,27 @@ int var; /**< Detailed description after the member */
 * use // to hide some unwanted code
 * use //TODO: for something that is not imeplemented
 * use //FIXME: for something that is implemented but we want to improve
+
+## code flow inside a large function
+```
+function {
+{
+	if (...) {
+		goto result 1;
+	} else if (...) {
+		goto result 2;
+	} else {
+		goto result 3;
+	}
+
+result 1:
+	...
+	return;
+result 2:
+	...
+	return;
+result 3:
+	...
+	return;
+}
+```
