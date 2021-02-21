@@ -2,10 +2,27 @@
 
 # Overview
 
-3 chains:
-    * INPUT:   pkts sent to this host
-    * FORWARD: pkts that sent to remote host and go through this host (usually when this host is a router or NAT)
-    * OUTPUT:  pkts sent from this host
+4 tables:
+    * filter
+        * default table
+        * provide general filter functionality
+    * nat
+        * provide nat function like port/addr translation
+    * mangle
+        * used to modify specific packet
+    * raw
+        * with the highest priority
+        * only used in PREROUTING and OUTPUT chain
+        * usually it is set to get rid of the iptables tracking to a packet, on order to enhance the performance
+
+* priority of the tables: raw > mangle > nat > filter
+
+5 chains:
+    * PREROUTING:   pkts before entering a routing table
+    * INPUT:        pkts sent to this host
+    * FORWARD:      pkts that sent to remote host and go through this host (usually when this host is a router or NAT)
+    * OUTPUT:       pkts generated and sent from this host
+    * POSTROUTING:  pkts before being sent out to NIC
 
 3 actions:
     * ACCEPT

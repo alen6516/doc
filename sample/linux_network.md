@@ -1,6 +1,6 @@
 ## 靜態檔
 * $ vim /etc/network/interfaces
-    * 改完需要重啟網路服務殘會生效，只重啟網卡似乎不會
+    * 改完需要重啟網路服務才會生效，只重啟網卡似乎不會
 ```bash
 auto eth0
 

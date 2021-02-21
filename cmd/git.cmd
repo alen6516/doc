@@ -47,6 +47,9 @@
 
 
 ## Show
+* show diff between 2 commit
+    $ git diff k73ud..dj374
+
 * show branch
     $ git show-branch
 

@@ -4,6 +4,7 @@
 * escape special char in "Find egrep pattern" (cscope's egrep is different from Linux egrep)
     * use [] to cover specical chars, like baseline_samples[++]
 
+* there may be a lot of result after searching, use +/- to page up/down
 
 # Options
 -b
