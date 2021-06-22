@@ -35,6 +35,20 @@ int var; /**< Detailed description after the member */
 * use //TODO: for something that is not imeplemented
 * use //FIXME: for something that is implemented but we want to improve
 
+## for a header file
+* structrue
+	* prologue: including the Author, Version, Reference
+	* include file: system include file(stdio.h), user include file (with its reason)
+	* definition and typedef: constant macro, functional macro, typedef and enum
+	* data declaration: extern, non-static global, static global
+	* function: function1 and its related functions, function2 and its related functions
+
+* Header files that declare functions or external variables should be included in the file that defines the function or variable.
+* it's not a good idea to define a variable in a header file
+* README file is used to record whole status of the project, like each compile flag and its meaning, other doc
+* comment
+  	* comment a code block rather than comment a line of code
+
 ## code flow inside a large function
 ```
 function {
