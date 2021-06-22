@@ -36,6 +36,10 @@ packet maker
 --rand-source
     * random the src IP
 
+--rand-dest
+    * --rand-dest 10.0.0.x, x will range from 0 to 255
+    * if use x.x.x.x, better use --interface to make sure packet goes out from the desiring interface
+
 -t TTL
     * specify TTL
 

@@ -28,6 +28,8 @@ session 相關 |
 $            | rename session                         
 s            | choose tree (session tree)             
 new          | create new session
+(            | switch back to the next session
+)            | switch back to the previous session
 L            | switch back to the previous used session
 
 

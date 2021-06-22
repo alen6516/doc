@@ -221,6 +221,11 @@
     * util
         * continue execution util the next start of loop
 
+    * jump
+        * jump LINENUM
+        * jump *ADDR
+        * jump +1
+
     * up
         * goto upper stack
 
