@@ -25,6 +25,7 @@ $0          當前執行的函式或 process 名稱
 $#          傳入的參數個數
 $_          之前執行指令的最後一個參數
 $$          scipt 本身的 pid 常用來當作 unique 的臨時檔名
+$RANDOM     get a random integer
 
 
 # 特殊符號
