@@ -101,7 +101,7 @@
     * calculate the checksum of pseudo header and the entire TCP segment
     
 * urgent pointer
-    * if flag URG is on, then this column is meaningful, tell the other side the offset from the start of TCP body to the LAST byte of urgent data
+    * if flag URG is on, then this field is meaningful, telling the other side the offset from the start of TCP body to the LAST byte of urgent data
         * so if urgent pointer is 3, then the urgent data is from the 0 to 3 bytes of data
 
 
@@ -130,7 +130,7 @@
 
         * 5: timestamp
 
-## TCP action when receive different flag
+## TCP action when receive different flag (Note they may be different on different OS)
 
 * SYN (seq=x, ack=0)
     * port open

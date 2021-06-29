@@ -27,7 +27,10 @@
 
 -r PORT_A:PORT_B
     rewrite TCP/UDP port from PORT_A to PORT_B
-    
-# Example
+
+-C
+    Force recalculation of IPv4/TCP/UDP header checksums
+
+#eExample
 $ tcprewrite -i result.pcap -o result.pcap --enet-dmac=00:0c:29:e6:18:0b
     * rewrite dmac to 00:0c:29:e6:18:0b

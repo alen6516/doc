@@ -20,11 +20,12 @@ CC = gcc
 CFLAGS = -Wall -ansi -g
 SRC = main.c a.c b.c
 OBJS = $(SRC:.c=.o) # equals to main.o a.o b.o
+EXE = myapp
 INSTALL_PATH = /usr/local/myapp/
 
-all: myapp # define the final target
+all: $(EXE) # define the final target
 
-myapp: $(OBJS)
+$(EXE): $(OBJS)
 	$(CC) $(OBJS) -o $@
 
 main.o: main.c a.h
@@ -39,9 +40,12 @@ b.o: b.c b.h
 install: myapp
     cp myapp app.doc $(INSTALL_PATH)
 
+clean:
+	rm -f $(EXE)
+	rm -f $(OBJS)
 
 # $? : 
 # $@ : the target
-# $* : targets without extension filename
-# $< : first dependency
+# $* : current dependent object without extension filename
+# $< : current dependent object
 

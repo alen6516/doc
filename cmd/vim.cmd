@@ -244,6 +244,17 @@ mx          | mark 住游標所在位置 (x 可用英文字母或數字)
 `x          | 回到書籤位置
 'x          | 回到書籤設定行首行
 :marks      | 書籤列表
+'.          | jump to the last modification place
+''          | jump back
+delmarks a  | delete mark a
+delmarks!   | delelte all lowercase marks
+
+# jumps
+short cut   | function
+------------|:--------
+jumps       | show jump list
+Ctrl + o    | go to older jumps
+Ctrl + i    | go to newer jumps
 
 # Macro (巨集)
 short cut   | function
@@ -369,10 +380,9 @@ linebreak   | 螢幕折行 (假折行)，但會在標點符號處折，中文判
 short cut   | function
 ------------|:--------
 :h f        | 查詢按鍵用途
-:f          | 顯示目前編輯的檔名、是否經過修改及目前游標所在之位置
-Ctrl + g    | 同上
 :f 檔名     | 改變編輯中的檔案檔名
 :x          | 離開 vim，若檔案有變動則存檔後離開，若無則直接離開，不再存檔
+ctrl + z    | return to terminal and let vim work in background
 :map        | 查詢快捷鍵
 gg=G        | 修正整個檔案的縮排
 =           | 修正反白部份的縮排 

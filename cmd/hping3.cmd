@@ -36,6 +36,10 @@ packet maker
 --rand-source
     * random the src IP
 
+--rand-dest
+    * --rand-dest 10.0.0.x, x will range from 0 to 255
+    * if use x.x.x.x, better use --interface to make sure packet goes out from the desiring interface
+
 -t TTL
     * specify TTL
 
@@ -48,11 +52,20 @@ packet maker
     * fragment the data into multiple packets, default MTU is 16 bytes
 
 ## TCP/UDP
+-s PORT
+    src port
+
 -p PORT
     dst port
 
+-w SIZE
+    tcp window size
+
 -k
     don't vary src port
+
+-L ACK_NUM
+    specify the ack number
 
 ## APP Layer
 -d LEN

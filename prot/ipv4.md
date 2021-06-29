@@ -53,7 +53,7 @@
     * need support of the underlay network, when router routing this packet, it can mark on ECN to notify the ends if there is a congestion.
     
 * Total length
-    * Total length of IP datagram, or IP framgment if fragmented. Measured in bytes.
+    * Total length of this IP datagram, or this IP framgment if fragmented. Measured in bytes.
 
 * Identification (ID)
     * fragments from the same IP packet obtain the same ID value
@@ -72,7 +72,7 @@
 * Time To Live
 
 * Protocol
-    * upper layer portocol, 0x06 for TCP, 0x11 for UDP
+    * upper layer portocol, 0x01 for ICMP, 0x04 for IPv4, 0x06 for TCP, 0x11 for UDP
 
 * Header Checksum
     * Checksum of entire IP header

@@ -18,11 +18,36 @@
     * adv LINE
         * execute until LINE
 
+    * alias ir = info registers
+        * set ir as alias to "info registers"
+        * unlike bash, gdb alias can not involve arguments, eg: alias ir = info registers eax
+            * use "ir eax"
+
     * tui
         * view code and command line
-		* using ^x ^a to toggle TUI
-		* in TUI mode, up/down arrow-key will apply on the upper window, one can use ^p ^n for prev/next command in lower window
-        
+        * using ^x ^a to toggle TUI
+        * in TUI mode, up/down arrow-key will apply on the upper window, one can use 
+            * ^p ^n for prev/next command in lower window
+            * ^b ^f to move curser back or forward
+    
+    * display
+        * $ display/Ni $pc
+            * show the next N asm instructions, N will be 1 if it is not defined
+            * one can use this instruction with tui mode to check current src code with asm instruction
+            * $ info display
+                * show display config
+            * $ disable display 1
+                * disable a display
+
+    * layout
+        * $ layout asm
+            * display asm in tui mode
+        * $ layout src
+            * display src code in tui mode
+        * $ layout split
+            * split gdb tui mode into 3 windows to show src, asm and commandline
+            * can also be triggered by `^x 2`
+                
     * l (list)
         * $ l FUNCTION_A
     * where
@@ -36,23 +61,24 @@
         * trace under certain thread NT
         * when stop, all threads are stop
 
-	* condition 2 if a==b
-		* add condition to a existing breakpoint
+    * condition 2 if a==b
+        * add condition to a existing breakpoint
 
     * ignore 2 10
         * ignore breakpoint 2 for 10 times
 
-	* commands
-	  (gdb) break func
-	  (gdb) commands
-	  >   watch var
-	  >   continue
-	  > end
-		* auto add watchpoint to a local var once enter this function
+    * commands
+        * let gdb do something automatically when hit a break point
+        * e.g. auto add watchpoint to a local var once enter this function
+            (gdb) break func
+            (gdb) commands
+            >   watch var
+            >   continue
+            > end
 
     * r (run)
-		* $ r arg1 arg2 arg3
-			* run with arguments	
+        * $ r arg1 arg2 arg3
+            * run with arguments    
 
     * info
         * $ info b
@@ -61,6 +87,12 @@
             * see information of threads
         * $ info sharedlibrary
             * see at which addr each library is loaded
+        * $ info frame N
+            * show more information about frame number N
+        * $ info locals
+            * show all local variable is this frame
+        * $ info reg
+            * show all register values
 
     * disable
         * $ disable NUM
@@ -68,33 +100,62 @@
 
     * c (continue)
     * n (next)
+        * execute util the next line in src code, note one line of src code maybe consist of several instructions
+        * if we want to step 1 instruction by 1 instruction, we should use $ ni
+
+    * ni
+        * execute next asm instruction
+
     * p (print)
         * print variable value
         * $ p VAR
+        * $ p /x VAR
+            * print variable in hex
+        * $ p /t VAR
+            * print variable in binary
 
     * x
         * print variable in hex
         * $ x /200b VAR
             * 200 means print 200 bytes, b means separate each byte
 
+        * x/10i $rip-20
+            * print 10 instructions from address of $rip-20
+
     * set
-        * assign a value to a variable
-        * $ set var VAR=100
+        * assign a value to a program variable
+            * $ set VAR=100
+        * create a gdb convenicence variable and increase it
+            * $ set $var=1
+            * $ set $var=$var+1
+            * $ show conv
     
     - set scheduler-locking on/off
         * when tracing a multi-thread program, after a threat trigger the breakpoint, if not set scheduler lock on, when another thread trigger a breakpoint, gdb will transfer to this thread
         * when finish the trace under a thread, remember to set scheduler lock off, then the other thread can trigger a breakpoint 
 
-	- set print elements 0
-		* when printing a long string or array, by default it can not print whole variable, set this to enable
+    - set disassemble-next-line on/off
+        * let gdb show the x86 instruction of next line
 
-	- set print repeats 0
-		* gdb will omit repeated elements, set this to avoid
+    - set disassembly-flavor att/intel
+        * set x86 instruction syntax format 
 
-	- set history save on
-	- set history size 4096
-	- set history filename ~/.gdb_history
-		* save gdb history to file
+    - set print elements 0
+        * when printing a long string or array, by default it can not print whole variable, set this to enable
+
+    - set print pretty
+        * print a data member line by line when print a object
+
+    - set pagination off
+        * disable gdb to ask "Type <return> to continue, or q <return> to quit"
+
+    - set print repeats 0
+        * gdb will omit repeated elements, set this to avoid
+
+    - set history save on
+    - set history size 4096
+    - set history filename ~/.gdb_history
+        * save gdb history to file
 
     * s (step)
         * when going to enter a function, use "$ s" to go into the function
@@ -106,17 +167,17 @@
         * execute to the return of the caller of current function
         *  the return val will be stored in %rax
 
-	* return VAL
-		* discard current stack and return VAL
+    * return VAL
+        * discard current stack and return VAL
 
     * disassemble FUNCTION
         * disassemble the machone code of FUNCTION and show the assemble code
 
-	* disassemble/m FUNCTION
-		* show the assemble code and source code together
+    * disassemble/m FUNCTION
+        * show the assemble code and source code together
     
-	* detach
-		* detach the current process that is being debugged
+    * detach
+        * detach the current process that is being debugged
 
     * disc (disconnect)
         * detach from remote debug
@@ -125,22 +186,45 @@
         * see a struct's construction
 
     * watch VAR
-        * when VAR is written, set a breakpoint
-		* watch on an address
-			* watch *0x10793ad0
-		* watch a variable outside the local scope
-			* watch -l localptr->member
-				* localptr is a local variable, it will disappear after gdb leave the frame, but localptr->member is a varible that still exists, so use -l to continue the watch.
-			* another way
-				watch *(type*) &localptr->member
-			
+        * only break on write
+        * watch on an address
+            * watch *0x10793ad0
+        * watch a variable outside the local scope
+            * $ watch -l localptr->member
+                * localptr is a local variable, it will disappear after gdb leave the frame, but localptr->member is a varible that still exists, so use -l to continue the watch.
+            * another way
+                * $ watch *(type*) &localptr->member
+            
+    * rwatch VAR
+        * only break on read (access the memory)
+        * cannot rwatch gdb variables, need to find their addr
+
+    * awatch VAR
+        * break on both read/write
+        * cannot awatch gdb variables, nedd to find their addr
+
+    * catch EVENT
+        * set catchpoint to catch events like syscall, assert, exception, exec, fork, handlers, signal, ...
+        * $ catch syscall 
+            * break when catching system call
+
+    * tcatch EVENT
+        * Set a catchpoint that is enabled only for one stop. The catchpoint is automatically deleted after the first time the event is caught.
 
     * thread THREAD_ID
         * switch to specific thread, debugging on this thread
         * when this thread encounter a breakpoint, other threads still run
 
-	* thread apply all bt
-		* print all thread's bt
+    * thread apply all bt
+        * print all thread's bt
+
+    * util
+        * continue execution util the next start of loop
+
+    * jump
+        * jump LINENUM
+        * jump *ADDR
+        * jump +1
 
     * up
         * goto upper stack
@@ -148,11 +232,15 @@
     * down
         * goto under stack
 
-	* frame N
-		* goto frame N
+    * frame N
+        * goto frame N
 
     * add-symbol-file FILE ADDR
         * add a symbol file to certain address
+
+    * show
+        * $ show conv
+            * show all convenicence variable in list
 
 * parameter
     * usage
@@ -160,16 +248,17 @@
     * help
         * $ help set ?
     * list of parameter
-        * listsize
+        * $ show listsize
             * how many lines a list will show
-
+    * execute shell commnad
+        * $ shell
 
 
 * remote debug
     * when need it?
         * customer(target machine) only has ELF file, source code on the host machine
             * ELF file may still contain symbol table, so still can be debug, but cannot see every line
-		* when do remote debug, symbol is loaded from local (dev machine), so one can set break point before it connect to remote target
+        * when do remote debug, symbol is loaded from local (dev machine), so one can set break point before it connect to remote target
     * config gdbserver and gdbclient
         * source code is in client, server only has executable file
         * step
@@ -179,7 +268,7 @@
 
 # Options
 -ex "command"
-	* execute command after start gdb
+    * execute command after start gdb
     
 # Example
 $ gdb --tui ./a.out
@@ -208,5 +297,5 @@ $ gdb ./a.out core
         (gdb)
         ```
 * disassemble a function called foo
-	$ gdb ./a.out -batch -ex 'disassemble foo'
+    $ gdb ./a.out -batch -ex 'disassemble foo'
 

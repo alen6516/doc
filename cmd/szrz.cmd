@@ -6,7 +6,7 @@
 
     
 # Example
-* on mobazterm
+* on mobaxterm
     * download from linux
         * $ sz filename
         * right click
