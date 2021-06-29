@@ -1,3 +1,15 @@
+## system/hardware information tool
+   * lspci
+        * list devices connecting to PCIe
+   * dmesg
+   * lsmod
+        * module information
+   * lsof
+        * list all open files including loaded modules
+   * lshw
+   * dmidecode
+        * a handy command-line utility for sysadmin to find out hardware information right from the operating system
+
 ## elf related tool
     * nm
         * list symbols from obj files
