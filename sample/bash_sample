@@ -39,7 +39,6 @@ $RANDOM     get a random integer
         * in this case, we don't worried about what filename to use
 
 
-
 # wildcard
 *
     means 0 to unlimit number of any char
@@ -252,66 +251,57 @@ $ [ -d /tmp/dir ] || mkdir /tmp/dir && touch /tmp/dir/test
 
 # if-else判斷式
 if [ -n "$INPUT" ] && [ "$INPUT" == "Yes" ]; then
-  echo "result is Yes"
+    echo "result is Yes"
 elif [ -n "$INPUT" ] && [ "$INPUT" == "No" ]; then
-  echo "result is No"
+    echo "result is No"
 else
-  echo "wrong input"
+    echo "wrong input"
 fi
 
 if [ "$1" = "1" ]; then
     ...
 done
 
-# 讀取argument
-if [ ! -z "$1" ]; then
-  ARGS=$1
-fi
-echo $ARGS
+# 判斷式
+| 關於某個檔名的『檔案類型』判斷，如 test -e filename 表示存在否              |                                                                              |
+| ----------------------------------------------------- | ---------------------------------------------------------------------------- |
+| -e                                                    | 該『檔名』是否存在？(常用)                                                               |
+| -f                                                    | 該『檔名』是否存在且為檔案(file)？(常用)                                                     |
+| -d                                                    | 該『檔名』是否存在且為目錄(directory)？(常用)                                                |
+| -b                                                    | 該『檔名』是否存在且為一個 block device 裝置？                                               |
+| -c                                                    | 該『檔名』是否存在且為一個 character device 裝置？                                           |
+| -S                                                    | 該『檔名』是否存在且為一個 Socket 檔案？                                                     |
+| -p                                                    | 該『檔名』是否存在且為一個 FIFO (pipe) 檔案？                                                |
+| -L                                                    | 該『檔名』是否存在且為一個連結檔？                                                            |
+| 2. 關於檔案的權限偵測，如 test -r filename 表示可讀否 (但 root 權限常有例外) |                                                                              |
+| -r                                                    | 偵測該檔名是否存在且具有『可讀』的權限？                                                         |
+| -w                                                    | 偵測該檔名是否存在且具有『可寫』的權限？                                                         |
+| -x                                                    | 偵測該檔名是否存在且具有『可執行』的權限？                                                        |
+| -u                                                    | 偵測該檔名是否存在且具有『SUID』的屬性？                                                       |
+| -g                                                    | 偵測該檔名是否存在且具有『SGID』的屬性？                                                       |
+| -k                                                    | 偵測該檔名是否存在且具有『Sticky bit』的屬性？                                                 |
+| -s                                                    | 偵測該檔名是否存在且為『非空白檔案』？                                                          |
+| 3. 兩個檔案之間的比較，如： test file1 -nt file2                  |                                                                              |
+| -nt                                                   | (newer than)判斷 file1 是否比 file2 新                                             |
+| -ot                                                   | (older than)判斷 file1 是否比 file2 舊                                             |
+| -ef                                                   | 判斷 file1 與 file2 是否為同一檔案，可用在判斷 hard link 的判定上。 主要意義在判定，兩個檔案是否均指向同一個 inode 哩！ |
+| 4. 關於兩個整數之間的判定，例如 test n1 -eq n2                      |                                                                              |
+| -eq                                                   | 兩數值相等 (equal)                                                                |
+| -ne                                                   | 兩數值不等 (not equal)                                                            |
+| -gt                                                   | n1 大於 n2 (greater than)                                                      |
+| -lt                                                   | n1 小於 n2 (less than)                                                         |
+| -ge                                                   | n1 大於等於 n2 (greater than or equal)                                           |
+| -le                                                   | n1 小於等於 n2 (less than or equal)                                              |
+| 5. 判定字串的資料                                            |                                                                              |
+| test -z string                                        | 判定字串是否為 0 ？若 string 為空字串，則為 true                                             |
+| test -n string                                        | 判定字串是否非為 0 ？若 string 為空字串，則為 false。<br>註： -n 亦可省略                            |
+| test str1 == str2                                     | 判定 str1 是否等於 str2 ，若相等，則回傳 true                                              |
+| test str1 != str2                                     | 判定 str1 是否不等於 str2 ，若相等，則回傳 false                                            |
+| 6. 多重條件判定，例如： test -r filename -a -x filename         |                                                                              |
+| -a                                                    | (and)兩狀況同時成立！例如 test -r file -a -x file，則 file 同時具有 r 與 x 權限時，才回傳 true。      |
+| -o                                                    | (or)兩狀況任何一個成立！例如 test -r file -o -x file，則 file 具有 r 或 x 權限時，就可回傳 true。      |
+| !                                                     | 反相狀態，如 test ! -x file ，當 file 不具有 x 時，回傳 true                                |
 
-
-# Press any key to continue (without Enter)
-read -n 1 -s -r -p "Press any key to continue"
-
-
-# 檢查執行者身份
-whoami_ret="$(whoami)"
-if [ "$whoami_ret" != "root" ]; then
-  echo "This script must be run as root"
-  exit
-fi
-
-
-# 使用者輸入
-read -p "Please input (Y/N), default is N:" ANSWER
-if [ "$ANSWER" == "Y" -o "$ANSWER" == "y" ]; then
-  echo "result is Yes"
-fi
-
-
-# 執行指令的結果
-pyOpenSSL_ret="$(rpm -q python-openssl | grep install | wc -l)"
-if [ "$pyOpenSSL_ret" == "1" ]; then
-  echo "python-openssl is not installed, please install python-openssl"
-  exit
-fi  
-
-
-# 類似 traverse 陣列
-SERVER_LIST=(192.168.0.1 192.168.0.2 192.168.0.3)
-for IP in ${SERVER_LIST[@]}
-do
-  echo "IP address: $IP"
-done
-
-
-# array
-IP=(10.10.10.10 20.20.20.20)
-length=${#IP[@]}
-for ((i=0; i<length; i++))
-do
-    echo ${IP[$i]}
-done
 
 
 # Switch case
@@ -335,7 +325,7 @@ esac
 # while Loop
 until [ "$ANSWER" == "yes" ]
 do
-  read -p "Please input \"yes\":" ANSWER
+    read -p "Please input \"yes\":" ANSWER
 done
 
 
@@ -343,8 +333,8 @@ done
 i=0
 while [ "$i" != "10" ]
 do
-  i=$(($i+1))
-  echo $i
+    i=$(($i+1))
+    echo $i
 done
 
 
@@ -357,21 +347,21 @@ while sleep 2; do echo thinking; done
 # for loop
 for CAR in AUDI VOLVO BENZ
 do
- echo ${CAR}
+    echo ${CAR}
 done
 
 
 # for loop
 for i in $(seq 1 10)
 do
-  echo ${i}
+    echo ${i}
 done
 
 
 # for loop
 for ((i=1; i<=10; i=i+1))
 do
-  echo $i
+    echo $i
 done
 
 
@@ -379,17 +369,6 @@ done
 for i in $(ls)
 do
   echo $i
-done
-
-
-# 等候某個事件發生
-FILE_EXISTED=0;
-while [ $FILE_EXISTED -ne "1" ]; 
-do
-  if [ -z "/root/test_file" ];then
-    FILE_EXISTED=1
-  fi
-  sleep 1;
 done
 
 
@@ -402,6 +381,17 @@ PRINT_FUNCTION "first_args"
 foo() {
     echo ${FUNCNAME[0]}     # print function name
 }
+
+# 等候某個事件發生
+FILE_EXISTED=0;
+while [ $FILE_EXISTED -ne "1" ]; 
+do
+  if [ -z "/root/test_file" ];then
+    FILE_EXISTED=1
+  fi
+  sleep 1;
+done
+
 
 
 # 檔案比較
@@ -435,5 +425,122 @@ n1 -le n2	        n1 小於等於 n2。
 -n "$str"	            str 為非空字串。
 
 
-# 將字串前面的0去掉
+## 將字串前面的0去掉
 echo "00005 00010 00601 00550" | awk '$0*=1'
+
+## readline 逐行讀取
+```bash
+exec << $FILENAME
+
+while read line
+do
+    printf "%b\n" $line
+done
+```
+
+## 讀取argument
+if [ ! -z "$1" ]; then
+    ARGS=$1
+f
+echo $ARGS
+
+
+## Press any key to continue (without Enter)
+read -n 1 -s -r -p "Press any key to continue"
+
+
+## 檢查執行者身份
+whoami_ret="$(whoami)"
+if [ "$whoami_ret" != "root" ]; then
+    echo "This script must be run as root"
+    exit
+fi
+
+
+## 使用者輸入
+read -p "Please input (Y/N), default is N:" ANSWER
+if [ "$ANSWER" == "Y" -o "$ANSWER" == "y" ]; then
+    echo "result is Yes"
+fi
+
+
+## 執行指令的結果
+pyOpenSSL_ret="$(rpm -q python-openssl | grep install | wc -l)"
+if [ "$pyOpenSSL_ret" == "1" ]; then
+    echo "python-openssl is not installed, please install python-openssl"
+    exit
+fi  
+
+
+## 類似 traverse 陣列
+SERVER_LIST=(192.168.0.1 192.168.0.2 192.168.0.3)
+for IP in ${SERVER_LIST[@]}
+do
+    echo "IP address: $IP"
+done
+
+
+## array
+IP=(10.10.10.10 20.20.20.20)
+length=${#IP[@]}
+for ((i=0; i<length; i++))
+do
+    echo ${IP[$i]}
+done
+
+## 取得時間
+    date +'%Y %m %d %H %M %S'
+    
+    # 取得秒數
+    date +'%s'
+
+
+## 將指令存為變數
+    x="ls | wc"
+    eval $x
+    y=$(eval $x)
+    echo $y
+
+
+## 四則運算
+    # 一般宣告出來的變數，形態都是字串，無法做運算
+    a=6
+    b=3
+    
+    #可以用declare -i 來宣告整數變數
+    declare -i c=a-b　　# 宣告變數 c 為整數。
+    
+    # 或利用bash內建的指令let
+    let d=a*b　　　　 　# 使用 let 指令做數值運算。
+    
+    # 利用指令expr，不過請注意空格
+    e=`expr $a / $b`　　# 使用 expr 指令做數值運算。
+    
+    f=$(expr $a + $b)　 # 與 f=`expr $a + $b` 是一樣的。
+    
+    #推薦用這個，避免空格的失誤
+    g=$(($a+$b))
+
+
+## printf
+    # 以 printf 取代 echo
+    
+    %s : 印字串，但無法解析 \n
+    %d : 10 進位整數
+    %o : 8  進位整數
+    %f : 浮點數
+    %b : 印字串，但可解析 \n
+    
+    printf "%b\n" abc
+
+## 取得當前行號及函式名稱
+- [ref](https://blog.csdn.net/clmotskatrina/article/details/8143770)
+    // 當前函式名稱
+    $FUNCNAME[0]
+    
+    // 當前行號
+    $LINENO
+## 取得該腳本的相對於當前目錄的相對位置
+    CURR_PATH=`pwd`
+    SCRIPT_PATH=$BASH_SOURCE
+
