@@ -36,8 +36,10 @@
             * search and filter network packets
         * tcpdump
         * tshark
+            * command line wireshark, having more functions than tcpdump and will be helpful to analyze large pcap file
         * tcprewrite
         * tcpreplay
+        * hexedit
         * editcap
             * Edit and/or translate the format of capture files
 
