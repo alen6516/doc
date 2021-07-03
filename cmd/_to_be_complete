@@ -1,3 +1,15 @@
+## system/hardware information tool
+   * lspci
+        * list devices connecting to PCIe
+   * dmesg
+   * lsmod
+        * module information
+   * lsof
+        * list all open files including loaded modules
+   * lshw
+   * dmidecode
+        * a handy command-line utility for sysadmin to find out hardware information right from the operating system
+
 ## elf related tool
     * nm
         * list symbols from obj files
@@ -43,3 +55,54 @@
             * see network traffic
         * iptraf
             * see network traffic
+
+## every linux networking tool I know -- Julia Evans
+* ss, netstat, lsof, fuser
+    * check open port
+* tc
+* rsync
+    * copy only changed files over ssh
+* ngrep
+* tshark
+* tcpflow
+    * capture and assemble TCP streams
+* mitmproxy
+    * spy on SSL connections your programs are making
+* p0f
+    * idenify OS of hosts connecting to you
+* openvpn
+* wiregurad
+    * a newer vpn
+* socat
+    * proxy a TCP socket to a unix domain socket
+* nftables
+    * a new version of iptables
+* mtr
+    * a better traceroute
+* tcptraceroute
+    * using tcp packets instead of icmp to tracroute
+* ethtool
+    * manage physical ethernet connections and networks cards
+* iw, iwconfig
+    * manage wireless networks settings
+* sysctl
+    * config linux kernel's network stack
+
+* openssl
+    * do literally anything with SSL certifacates
+* stunnel
+    * make a SSL proxy for an insecure servere
+* iptraf, nethogs, iftop, ntop
+    * see what's using bandwidth
+* ab, nload, iperf
+    * benchmarking tools
+* python -m SimpleHTTPServer
+    * serve files from a directory
+* ipcalc
+    * easily see what 12.21.2.3/25 means
+* nsenter
+    * enter a container process's network namespace
+
+### http
+
+* httpie
