@@ -3,10 +3,11 @@ short cut       | function
 ----------------|:--------
 ctrl + u        | 從游標處向前刪除指令串
 ctrl + k        | 從游標處向後刪除指令串
-ctrl + a        | 移動游標到行首
-ctrl + e        | 移動游標到行尾
 ctrl + w        | 刪除一個word
 ctrl + y        | paste the words deleted by ctrl + u/k/w
+alt  + .        | paste the argument of the last command
+ctrl + a        | 移動游標到行首
+ctrl + e        | 移動游標到行尾
 ctrl + p        | 顯示上一個指令
 ctrl + n        | 顯示下一個指令
 ctrl + r        | 在歷史裡搜尋指令(一邊打一邊繼續按 ctrl + r)
@@ -16,6 +17,7 @@ ctrl + d        | 中斷輸入
 ctrl + z        | 暫停執行
 ctrl + s        | freeze
 <ctrl + q> *2   | unfreeze (ctrl-q has been the leader key of tmux, tmux allow pressing ctrl-q twice to send this signal to terminal)
+ctrl + x + e    | open a temporary file to write a script
 !!              | 執行上一個指令
 !-N             | 執行上 N 個指令
 !N              | 執行 history 裡編號 N 的指令
