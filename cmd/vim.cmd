@@ -110,7 +110,9 @@ B           | 同上，但忽略一些標點符號
 %           | 游標在括弧上時，移至匹配的括弧上
 :NUM        | 跳到第 NUM 行
 ''          | 回到剛才游標所在行
-g;          | 移至最後修改處
+'"          | jump to where I left the file
+'.          | jump to the last modification place
+''          | jump back
 
 
 # scroll window
@@ -244,8 +246,6 @@ mx          | mark 住游標所在位置 (x 可用英文字母或數字)
 `x          | 回到書籤位置
 'x          | 回到書籤設定行首行
 :marks      | 書籤列表
-'.          | jump to the last modification place
-''          | jump back
 delmarks a  | delete mark a
 delmarks!   | delelte all lowercase marks
 
