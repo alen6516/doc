@@ -29,6 +29,8 @@
 ## Recovery
 * cancel modify before git add (be careful)
     $ git checkout -- <file>
+    $ git checkout -- .
+        * for all modification
 
 * cancel git add before git commit 
     $ git reset
@@ -44,6 +46,14 @@
 * only want to change commit msg after commit
     $ git reset --soft HEAD^
     $ git commit -m "new msg"
+
+* temporarily stop work at hand, and drop/pop it later
+    $ git stash
+    $ git stash list
+    $ git stash pop stash@{2}
+        * will drop the stash
+    $ git stash apply stash@{2}
+        * will not drop the stash
 
 
 ## Show
