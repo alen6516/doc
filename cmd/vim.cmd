@@ -107,7 +107,7 @@ e           | 移至字尾
 E           | 同上，但忽略一些標點符號
 b           | 移至字首
 B           | 同上，但忽略一些標點符號
-%           | 游標在括弧上時，移至匹配的括弧上
+%           | 游標在括弧上時，移至匹配的括弧上, include [/], #ifdef/#endif
 :NUM        | 跳到第 NUM 行
 ''          | 回到剛才游標所在行
 '"          | jump to where I left the file
@@ -404,6 +404,8 @@ yiw         | yank word under cursor
 ]m          | jump to next }
 [[          | jump to previous start { of a function
 ]]          | jump to next start { of a function
+[{          | jump to the { of current code
+]}          | jump to the } of current code
 :%! xxd     | view binary in hex with the aid of xxd
 :%! xxd -r  | convert hex back (but actually the file will be different from the original one, use cksum to check it)
 :setlocal display=uhex      | display file in hex

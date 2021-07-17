@@ -1,4 +1,5 @@
 # Description
+find the share lib's path of a executive
 
 # Overview
 

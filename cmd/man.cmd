@@ -14,6 +14,12 @@
     * 有些時候一個主題名稱在不同章節中有不同的說明文件，如果查詢一個主題的時候沒有指定章節，預設會依照 1 n l 8 3 2 3posix 3pm 3perl 5 4 9 6 7 這個順序來搜尋，然後顯示第一個搜尋到的章節。
     * 例如 passwd 這個主題有 passwd(1) 與 passwd(5) 兩個章節
 
+* often used chapters
+    * 1: user commands
+    * 2: system calls
+    * 3: library routines
+    * 7: misc
+
 
 * 對於某關鍵字，列出所有章節
     * $ man -aw printf
