@@ -125,3 +125,12 @@ ret far	 STACK_ADJUS                    lret $STACK_ADJUST
 * pop EAX
     * read value pointed by RSP and store to EAX
 	* increment RSP by sizeof EAX (8 bytes)
+
+* TEST %eax, %eax
+  JE   400e77 <phase_1+0x23>
+    * jump if %eax is zero
+
+* testb $0x10,0x8(%eax)
+  jne   0x80ed604 <dapriv_disk_op+293>
+    * 0x10 AND 0x8(%eax), if result is 0, ZF is turned on
+    * jump if ZF is not set.
