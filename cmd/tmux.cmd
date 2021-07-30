@@ -32,6 +32,12 @@ new          | create new session
 )            | switch back to the previous session
 L            | switch back to the previous used session
 
+* share session to others on the same server
+    * $ tmux -S /tmp/shared new -s shared
+    * $ chmon 777 /tmp/shared
+    * $ tmux -S /tmp/shared attach -t shared -r
+        * -r means attach with readonly
+
 
 window 相關  |                                        
 ------------ | -------------------------------------- 
