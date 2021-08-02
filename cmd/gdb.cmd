@@ -134,6 +134,9 @@
         * when tracing a multi-thread program, after a threat trigger the breakpoint, if not set scheduler lock on, when another thread trigger a breakpoint, gdb will transfer to this thread
         * when finish the trace under a thread, remember to set scheduler lock off, then the other thread can trigger a breakpoint 
 
+    - set non-stop on
+        * when debugging a multithreaded application, while a breakpoint hits, the debugger will freeze all the threads. You can tell the debugger to let the other threads continue run by this
+
     - set disassemble-next-line on/off
         * let gdb show the x86 instruction of next line
 
@@ -156,6 +159,11 @@
     - set history size 4096
     - set history filename ~/.gdb_history
         * save gdb history to file
+
+    - set follow-fork-mode child
+    - set detach-on-fork on
+        * when process call fork, system call, continue with the child
+        * also detach other processes when process call fork
 
     * s (step)
         * when going to enter a function, use "$ s" to go into the function
@@ -265,6 +273,28 @@
             * on server, execute the file
             * on server, execute "$ gdbserver :PORT --attach `pidof PROCESS`"
             * on client, enter gdb, execute "$ target remote SERVER_IP:PORT"
+
+* .gdbinit
+    * You can define it in .gdbinit file (in your debugging folder) and GDB loads and execute it automatically
+    * You can also define your own macros
+    ```
+    define irg
+        info registers
+        info threads
+    end
+     
+    define pdb
+        print a1
+        print a2
+        call print_dbg()
+    end
+
+    echo "hi"
+    b add
+    commands
+    print a1
+    call print_dbg()
+    ```
 
 # Options
 -ex "command"
