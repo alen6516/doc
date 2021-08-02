@@ -51,15 +51,24 @@ int var; /**< Detailed description after the member */
 
 ## code flow inside a large function
 ```
+/**
+ * Desctription of the function
+ */
 function {
 {
+    // top filter to filter apparent fail case
+    if (...) return;
+
+    // main logic
 	if (...) {
 		goto result 1;
 	} else if (...) {
 		goto result 2;
-	} else {
+	} else if {
 		goto result 3;
-	}
+	} else {
+        goto error;
+    }
 
 result 1:
 	...
@@ -70,5 +79,26 @@ result 2:
 result 3:
 	...
 	return;
+error:
+    ...
+    return;
 }
 ```
+
+## code flow of a module
+* graph the code flows and describe what this function do briefly:
+    * code flow A:
+        * main()
+            * // prepare para
+            * do_stuff()
+                * // main caller
+                * if A == check()
+                    * do_A()
+                * check_result()
+    * code flow B:
+        * main()
+            * // prepare para
+            * do_stuff()
+                * if B == check()
+                    * do_B()
+                * check_result()

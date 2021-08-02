@@ -47,7 +47,7 @@ window 相關  |
 w            | choose window (window tree)            
 &            | kill window                            
 f            | find window through name               
-l            | last window
+l            | last-used window
 :move-window -t 0       將當前 window 移至編號 0 (最前)
 :swap-window -s 4 -t 2  將編號 4 與 2 window 交換
 :swap-window -t -1      move the window leftward by 1
@@ -68,6 +68,8 @@ z            | zoom in/out the pane
 <            | pane 邊界左移5單位                      
 +            | pane 邊界上移5單位                      
 -            | pane 邊界下移5單位                      
+ctrl-Arrow   | pane resize by 1
+Alt-Arrow    | pane resize by 5
 :break-pane  | 把當前的 pane 用一個新的 window 開啟   
 :setw synchronize-panes on/off      | 同步/解除同步 pane (also can use for sending command to all pane)
 :join-pain -s                       | join pane from certain window
