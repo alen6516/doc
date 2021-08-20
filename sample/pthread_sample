@@ -1,0 +1,32 @@
+- pthread API
+  	- pthread_mutex_lock()
+    	- hang until acquiring the lock
+
+  	- pthread_mutex_unlock()
+
+  	- pthread_mutex_trylock()
+    	- return immitiately if not acquiring a lock
+
+  	- pthread_cond_signal(&cond)
+    	- send signal to another thread which is waiting by calling pthread_cond_wait(&cond)
+    	- if there are multuple threads waiting, only one thread will receive the signal, depends on the priority and waiting time
+    	- however, in some implementation it will send signals to multiple threads, so use a while loop to avoid multiple threads works 
+			```
+          	while(!condition) {
+          		pthread_cond_wait(&cond, &mut);
+          	}
+			```
+      
+  	- pthread_cond_wait(&cond)
+    	- have to get lock first, and then can call wait to hang the thread
+    	- hang until receive signal from another thread
+    	- release lock
+
+    - pthead_self()
+        - pthreads from the same process, shared the same pid but different pthread_self() 
+
+when multiple process compete a lock, only one process acquire the lock
+other processes will sleep, which means OS will mot schedule them
+if use spinlock, then process will not sleep
+until the lock is release, OS will pick up the process with the highest priority to run from the waiting list
+in ISR context, it is not recommended to acquire lock because we don't know when we can get it, but ISR should be short
