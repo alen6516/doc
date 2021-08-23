@@ -119,8 +119,11 @@
         * $ x /200b VAR
             * 200 means print 200 bytes, b means separate each byte
 
-        * x/10i $rip-20
+        * $ x/10i $rip-20
             * print 10 instructions from address of $rip-20
+
+        * $ x/20w $rip-20
+            * print 20 bytes and present in words from address of $rip-20
 
     * set
         * assign a value to a program variable
