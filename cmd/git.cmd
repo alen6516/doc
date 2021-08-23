@@ -79,3 +79,10 @@
 
 * find commits within a time period
     $ git log --oneline --since="9am" --until="12am" --after="2017-01"
+
+## SSH key authtication to allow git push without password
+* gen the ssh key, copy the public key and paste to github account
+* try it by
+    * $ ssh -T git@github.com
+* on command line, enter the repo and type
+    * $ git remote set-url origin git@github.com:username/REPO.git

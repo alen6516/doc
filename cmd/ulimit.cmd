@@ -23,8 +23,11 @@ $ ulimit -c
 $ ulimit -c 1024
     * set the limit of generated core file to be 1024 KB
 
+$ ulimit -c unlimited
+    * set unlimited to the generated core file
+
 $ ulimit -n 4096
-    * set the limit of files that a process can open to 4096
+    * set the limit of files (file descriptors) that a process can open to 4096
 
 $ ulimit -n unlimited
     * set the limit of files that a process can open to unlimited
