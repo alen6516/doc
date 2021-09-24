@@ -125,6 +125,15 @@
         * $ x/20w $rip-20
             * print 20 bytes and present in words from address of $rip-20
 
+        * $ x/16 0x7f2b3a21b840-32
+            * 16 means print 16 word, a word is 4 bytes (so total print 64 bytes)
+            * print start from 0x7f2b3a21b840-32, note if use $var-32, the offset will be 32*sizeof(var)
+            * (gdb) x/16w 0x7f2b3a21b840-32
+                    0x7f2b3a21b820: 0x00000000      0x00000000      0x00000004      0x00000005
+                    0x7f2b3a21b830: 0x00000000      0x00000000      0x00000004      0x1234567c
+                    0x7f2b3a21b840: 0x1234567a      0x00000000      0x3a1f5010      0x00007f2b
+                    0x7f2b3a21b850: 0x00000000      0x00000000      0x00000000      0x00000000
+
     * set
         * assign a value to a program variable
             * $ set VAR=100
