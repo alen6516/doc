@@ -26,10 +26,10 @@ list symbols from object files
     sort all symbols by its address, not alphabetically
 # Symbol type
 T
-    * the symbol is in text (code) section, and it is global
+    * the symbol is in text (code) section, and it is global (global function)
     * linker will fail if it detects global symbol redefination
 t
-    * the symbol is in text (code) section, and it is local
+    * the symbol is in text (code) section, and it is local (static function)
     
 # Example
 $ nm obj_file
