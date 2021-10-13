@@ -116,7 +116,11 @@
 
     * x
         * print variable in hex
-        * $ x /200b VAR
+        * $ x/gx
+            * g means giant word (64-bits)
+            * x means show in hex
+
+        * $ x/200b VAR
             * 200 means print 200 bytes, b means separate each byte
 
         * $ x/10i $rip-20
