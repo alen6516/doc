@@ -30,6 +30,10 @@ int whitespace[256]
        = { [' '] = 1, ['\t'] = 1, ['\h'] = 1,
            ['\f'] = 1, ['\n'] = 1, ['\r'] = 1 };
 
+## array type cast
+int arr[3] = {1, 2, 3};
+int a[4] = (int[4]*) arr;
+
 # state
 ## switch case
 switch(n) {
@@ -84,8 +88,7 @@ printf("Total time taken by CPU: %f sec", total_t);
 # random number
 include <stdlib.h>
 include <time.h>
-srand(time(NULL));
-/* if don't use srand(time(NULL)), the result of rand() will be the same */
+srand(time(NULL)); /* if don't use srand(time(NULL)), the result of rand() will be the same */
 int a = (rand() % 100)+1;
 
 # process
@@ -111,19 +114,23 @@ pthread_join()
 pthread_exit()
     * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
 
-# Misc
-## How to define 32-bit long 0xFFFFFFFF ?
-u32 = ~(u32)0;
-
+# Macro
 ## __VA_ARGS__
 #define my_printf(...) 			printf(__VA_ARGS__)
 #define my_printf(format, ...) 	printf(format, ##__VA_ARGS__)
 	* when user call my_printf("without arg\n"), if we don't use "##", result will be printf(format, ) => one comma left
 	* another ability if "##" is to stick 2 variables in macro
 
-## array type cast
-int arr[3] = {1, 2, 3};
-int a[4] = (int[4]*) arr;
+## print a macro and its content as a string
+#define AVG(a,b)    (a+b)/2
+#define GET_VARIABLE_STRING(x) #x
+#define GET_MACRO_CONTENT_STRING(macro) GET_VARIABLE_STRING(macro)
+printf("%s = %s = %d\n", GET_VARIABLE_STRING(AVG(2,4)), GET_MACRO_CONTENT_STRING(AVG(2,4)), AVG(2,4));
+    * "AVG(2,4) = (2+4)/2 = 3"
+
+# Misc
+## How to define 32-bit long 0xFFFFFFFF ?
+u32 = ~(u32)0;
 
 ## const* int vs int const*
 const *int p = &a; 	// write to *p is illegal
