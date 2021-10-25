@@ -60,6 +60,9 @@
 * show diff between 2 commit
     $ git diff k73ud..dj374
 
+* save git diff file
+    $ git diff > my.diff
+
 * show branch
     $ git show-branch
 
@@ -79,6 +82,13 @@
 
 * find commits within a time period
     $ git log --oneline --since="9am" --until="12am" --after="2017-01"
+
+## Patch/Apply
+* patch
+    $ git apply ~/my.diff
+
+* just check if we can seamlessly patch, but don't really patch
+    $ git apply --check ~/my.diff
 
 ## SSH key authtication to allow git push without password
 * gen the ssh key, copy the public key and paste to github account
