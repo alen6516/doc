@@ -114,6 +114,12 @@ pthread_join()
 pthread_exit()
     * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
 
+## atomic
+* diff between __sync* and __atomic*
+    * __atomic is newer
+    * basically they are the same, just __atomic have a parameter to speficy the memory-order
+    * ref: https://stackoverflow.com/questions/23446210/what-is-the-difference-between-the-sync-and-atomic-intrinsics-of-gcc
+
 # Macro
 ## __VA_ARGS__
 #define my_printf(...) 			printf(__VA_ARGS__)
