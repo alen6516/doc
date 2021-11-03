@@ -96,3 +96,17 @@
     * $ ssh -T git@github.com
 * on command line, enter the repo and type
     * $ git remote set-url origin git@github.com:username/REPO.git
+
+## Example
+* done a commit and pushed it to remote master, but want to destory that commit
+    * $ git log --oneline
+        * check which commit we want to reset
+    * $ git reset HASH
+        * after that, HEAD will point to the commit of HASH
+        * the modifications will become unstaged
+        * continue to modify the code
+    * $ git commit
+        * make a new commit
+    * $ git push --force
+        * use --force to replace the unwanted commit in the remote master
+
