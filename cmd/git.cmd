@@ -31,6 +31,8 @@
     $ git checkout -- <file>
     $ git checkout -- .
         * for all modification
+    $ git checkout COMMIT
+        * go to certain commit
 
 * cancel git add before git commit 
     $ git reset
@@ -42,6 +44,9 @@
     $ git reset HEAD~1
         * $ git reset --hard HEAD~3
             * cancel the last 3 commit (be careful)
+            * --hard will discard all change, including new files
+        * if not adding --hard, then only HEAD moves, but your modification is still here
+
 
 * only want to change commit msg after commit
     $ git reset --soft HEAD^
