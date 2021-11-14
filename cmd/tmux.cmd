@@ -71,6 +71,7 @@ z            | zoom in/out the pane
 ctrl-Arrow   | pane resize by 1
 Alt-Arrow    | pane resize by 5
 :break-pane  | 把當前的 pane 用一個新的 window 開啟   
+:set-option history-limit 5000      | change the scrollback buffer size in tmux, but it will take effect in a new pane
 :setw synchronize-panes on/off      | 同步/解除同步 pane (also can use for sending command to all pane)
 :join-pain -s                       | join pane from certain window
 :join-pain -t                       | join pane to certain window

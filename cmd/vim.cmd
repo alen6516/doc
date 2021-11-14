@@ -218,6 +218,7 @@ short cut   | function
 short cut   | function
 ------------|:--------
 /           | 向下找
+/abc\c      | search with case-insensitive (find [aA][bB][cC])
 ?           | 向上找
 n           | 尋找下一個
 N           | 尋找上一個
