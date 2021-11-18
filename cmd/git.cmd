@@ -87,8 +87,12 @@
 * patch
     $ git apply ~/my.diff
 
+* unpatch
+    $ git apply -r ~/my.diff
+
 * just check if we can seamlessly patch, but don't really patch
     $ git apply --check ~/my.diff
+    $ git apply -R --check ~/my.diff
 
 ## SSH key authtication to allow git push without password
 * gen the ssh key, copy the public key and paste to github account
