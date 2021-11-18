@@ -31,6 +31,8 @@
     $ git checkout -- <file>
     $ git checkout -- .
         * for all modification
+    $ git checkout COMMIT
+        * go to certain commit
 
 * cancel git add before git commit 
     $ git reset
@@ -42,6 +44,9 @@
     $ git reset HEAD~1
         * $ git reset --hard HEAD~3
             * cancel the last 3 commit (be careful)
+            * --hard will discard all change, including new files
+        * if not adding --hard, then only HEAD moves, but your modification is still here
+
 
 * only want to change commit msg after commit
     $ git reset --soft HEAD^
@@ -100,3 +105,17 @@
     * $ ssh -T git@github.com
 * on command line, enter the repo and type
     * $ git remote set-url origin git@github.com:username/REPO.git
+
+## Example
+* done a commit and pushed it to remote master, but want to destory that commit
+    * $ git log --oneline
+        * check which commit we want to reset
+    * $ git reset HASH
+        * after that, HEAD will point to the commit of HASH
+        * the modifications will become unstaged
+        * continue to modify the code
+    * $ git commit
+        * make a new commit
+    * $ git push --force
+        * use --force to replace the unwanted commit in the remote master
+
