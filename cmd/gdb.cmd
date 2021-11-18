@@ -218,6 +218,8 @@
                 * localptr is a local variable, it will disappear after gdb leave the frame, but localptr->member is a varible that still exists, so use -l to continue the watch.
             * another way
                 * $ watch *(type*) &localptr->member
+        * watch point with condition
+            * $ watch -l var if var == 9487
             
     * rwatch VAR
         * only break on read (access the memory)
