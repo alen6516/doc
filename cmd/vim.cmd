@@ -95,6 +95,8 @@ $		    | 移至行首
 ^           | 移至第一個非空白字元
 Ctrl + d    | 下移 10 行
 Ctrl + u    | 上移 10 行
+n Ctrl + d  | set ctrl-d to scroll n lines (reset by :set scroll=0)
+n Ctrl + u  | set ctrl-u to scroll n lines (reset by :set scroll=0)
 gg          | 移至檔首
 g_          | 移至本行最後一個非空白字元
 G           | 移至檔尾

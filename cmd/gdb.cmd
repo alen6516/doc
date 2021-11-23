@@ -61,6 +61,10 @@
         * trace under certain thread NT
         * when stop, all threads are stop
 
+    * add breakpoint in C code
+        * #include <signal.h>
+        * raise(SIGINT);
+
     * condition 2 if a==b
         * add condition to a existing breakpoint
 
@@ -93,6 +97,8 @@
             * show all local variable is this frame
         * $ info reg
             * show all register values
+        * $ info macro CONST
+            * show a constant defined by #define, but program must be compiled with -g3
 
     * disable
         * $ disable NUM
@@ -119,6 +125,9 @@
         * $ x/gx
             * g means giant word (64-bits)
             * x means show in hex
+
+        * $ x/3i $pc
+            * show next 3 instructions
 
         * $ x/200b VAR
             * 200 means print 200 bytes, b means separate each byte

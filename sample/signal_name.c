@@ -1,4 +1,23 @@
 /*
+            ┌────────┐                                ┌──────────────┐
+            │        │                                │    process   │
+            │  cpu   │                                │              │
+            │        │                                └───────▲──────┘
+            └───┬────┘                                        │    5. process receive SEGSEGV
+                │                                             │
+1. cpu execute a illegal inst                                 │    6. process store current status
+                │                                             │
+                │                                             │       and enter the sig_handler
+2. cpu execute int(3) to interrpt           ┌──────────┐      │
+                │                           │          │      │       to do coredump
+                └──────────────────────────►│  kernel  ├──────┘
+                                            │          │
+                                            └──────────┘
+                                 3. enter kernel mode, kernel lookup irq
+
+                                 4. kernel send signal to the process that cause the error
+
+
 	 1 -> SIGHUP
 	 2 -> SIGINT
 	 3 -> SIGQUIT

@@ -26,5 +26,5 @@ int main () {
     // handle ctrl-z
     signal(SIGTSTP, tstp_handler);
     
-
+    raise(SIGINT);  // set breakpoint in C code for gdb
 }
