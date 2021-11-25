@@ -257,6 +257,18 @@ if [ "$1" = "1" ]; then
     ...
 done
 
+if [[ "$1" = "1" || "$1" = "2" ]]; then
+    ...
+done
+
+# =, ==, -eq in if condition
+* = and == are for string comparison
+* = and == are equivalent in bash, but only = is legal in sh, so = is recommended
+* -eq is for numeric comparison
+* [] is an alias of test command
+* [[]] is a bash, zsh key word
+* (()) is used to test an arithmetic expression
+
 # 判斷式
 | 1. 關於某個檔名的『檔案類型』判斷，如 test -e filename 表示存在否
 | ----------------------- | ---------------------------------------------------------------------------- 
@@ -296,6 +308,8 @@ done
 | test -n string          | 判定字串是否非為 0 ？若 string 為空字串，則為 false。<br>註： -n 亦可省略
 | test str1 == str2       | 判定 str1 是否等於 str2 ，若相等，則回傳 true
 | test str1 != str2       | 判定 str1 是否不等於 str2 ，若相等，則回傳 false
+
+
 | 6. 多重條件判定，例lename
 | -a                      | (and)兩狀況同時成立！例如 test -r file -a -x file，則 file 同時具有 r 與 x 權限時，才回傳 true。
 | -o                      | (or)兩狀況任何一個成立！例如 test -r file -o -x file，則 file 具有 r 或 x 權限時，就可回傳 true。

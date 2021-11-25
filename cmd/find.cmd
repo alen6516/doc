@@ -62,3 +62,6 @@ $ find ./ -name "*.c" -exec grep -wl main {} \;
     * find .c file which contains "main"
 
 $ find ./ -name "*.mp3" -o -name "*.mp4"
+
+$ find . -name "*.[ch]" | xargs wc -l
+    * find the total line count of *.c *.h file
