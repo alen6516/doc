@@ -147,26 +147,26 @@ if (pthread_spin_trylock(&spin_lock)) {
     pthread_spin_unlock(&spin_lock);
 }
 
-# Misc
-## How to define 32-bit long 0xFFFFFFFF ?
-u32 = ~(u32)0;
-=======
-## atomic
-* diff between __sync* and __atomic*
-    * __atomic is newer
-    * basically they are the same, just __atomic have a parameter to speficy the memory-order
-    * ref: https://stackoverflow.com/questions/23446210/what-is-the-difference-between-the-sync-and-atomic-intrinsics-of-gcc
->>>>>>> ba04e2cd5a9bdd8c115e8e615fba4c97c39bb25a
-
 # Macro
+## if define
+```
+#ifdef AAA
+#define LOG(...)    printf(__VA_ARGS__)
+#elif defined(BBB)
+#define LOG(...)    perror(__VA_ARGS__)
+#else
+#define LOG(...)
+#endif
+```
+
+
 ## __VA_ARGS__
 #define my_printf(...) 			printf(__VA_ARGS__)
 #define my_printf(format, ...) 	printf(format, ##__VA_ARGS__)
 	* when user call my_printf("without arg\n"), if we don't use "##", result will be printf(format, ) => one comma left
 	* another ability if "##" is to stick 2 variables in macro
 
-<<<<<<< HEAD
-=======
+
 ## print a macro and its content as a string
 #define AVG(a,b)    (a+b)/2
 #define GET_VARIABLE_STRING(x) #x
@@ -174,10 +174,12 @@ u32 = ~(u32)0;
 printf("%s = %s = %d\n", GET_VARIABLE_STRING(AVG(2,4)), GET_MACRO_CONTENT_STRING(AVG(2,4)), AVG(2,4));
     * "AVG(2,4) = (2+4)/2 = 3"
 
+
 ## build bug in preprocessor, we can use it to see if a compile flag is on
 #ifndef DEBUG
 #error Only Debug builds are supported
 #endif
+
 
 # String
 // # ========== 複製 ==========
@@ -233,16 +235,42 @@ printf("%s = %s = %d\n", GET_VARIABLE_STRING(AVG(2,4)), GET_MACRO_CONTENT_STRING
 // 將 s 中前 n 個字元全部設定為 c
 // void *memset(void *s, int c, size_t n)
 
+
+# atomic
+## atomic API
+* diff between __sync* and __atomic*
+    * __atomic* is newer
+    * basically they are the same, just __atomic have a parameter to speficy the memory-order
+    * ref: https://stackoverflow.com/questions/23446210/what-is-the-difference-between-the-sync-and-atomic-intrinsics-of-gcc
+
+## _Atomic
+_Atomic int sum;
+#// C11 standard added
+#// managed by <stdatomic.h> and <threads.h>
+
+## atomic_fetch_add
+include <stoatomic.h>
+include <threads.h>
+atomic_int counter;
+atomic_fetch_add(&counter, 1);
+#// C11
+#// defined in <stdatomic.h>
+
+## gcc thread local variable
+__thread int id;
+
+
 # Misc
 ## How to define 32-bit long 0xFFFFFFFF ?
 u32 = ~(u32)0;
 
->>>>>>> ba04e2cd5a9bdd8c115e8e615fba4c97c39bb25a
+
+
 ## const* int vs int const*
 const *int p = &a; 	// write to *p is illegal
 int const *p = &a;  // write to *p is illegal
 int *const p = &a;  // write to p is illegal
-## when const is at the left-side of *, int is const; when const is at the right-side of *, pointer is const.
+#// when const is at the left-side of *, int is const; when const is at the right-side of *, pointer is const.
 
 
 ## volatile and const, the following 2 are the same
@@ -260,19 +288,3 @@ int a = (int) strtol(argv[1], NULL, 10);
         a = a^b;        \
     }                   \
 })
-
-## gcc thread local variable
-__thread int id;
-
-## _Atomic
-_Atomic int sum;
-## C11 standard added
-## managed by <stdatomic.h> and <threads.h>
-
-## atomic_fetch_add
-include <stoatomic.h>
-include <threads.h>
-atomic_int counter;
-atomic_fetch_add(&counter, 1);
-## C11
-## defined in <stdatomic.h>
