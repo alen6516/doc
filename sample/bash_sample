@@ -434,6 +434,7 @@ n1 -le n2	        n1 小於等於 n2。
 # 字串比較
 "$str1" == "$str2"	    str1 等於 str2 (=兩邊要空格)。
 "$str1" != "$str2"      str1 不等於 str2。
+"$str1" == "root"*      str1 is started with root
 -z "$str"               str 為空字串。
 -n "$str"	            str 為非空字串。
 
