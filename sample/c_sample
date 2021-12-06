@@ -36,10 +36,7 @@ int whitespace[256]
 int arr[3] = {1, 2, 3};
 int a[4] = (int[4]*) arr;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ba04e2cd5a9bdd8c115e8e615fba4c97c39bb25a
 # state
 ## switch case
 switch(n) {
@@ -124,7 +121,6 @@ _exit(int status)
 ## pthread_exit()
     * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
 
-<<<<<<< HEAD
 ## pthread mutex
 pthread_mutex_t count_lock = PTHREAD_MUTEX_INITIALIZER;
 pthread_mutex_lock(&count_lock);
@@ -263,8 +259,6 @@ __thread int id;
 # Misc
 ## How to define 32-bit long 0xFFFFFFFF ?
 u32 = ~(u32)0;
-
-
 
 ## const* int vs int const*
 const *int p = &a; 	// write to *p is illegal
