@@ -1,3 +1,20 @@
+# Data struct
+
+## Stack
+* First-in-last-out
+* Can solve Tower of Hanoi problem (河內塔)
+    * description: Given 3 rods (A, B, C) and a couple of disks which can slide onto any rods. At begining the disks are on rod A in order, now need to move them to rod C and every move should follow the rule that smaller disk can not be under the bigger one.
+
+## Tree
+* binary tree
+    * Traversal: Preorder, Inorder, Postorder, Level-order
+        * Preorder: root node  => left child  => right child
+        * Inorder : left child => root node   => right child
+        * Postoder: left child => right child => root node
+        * Level-order: just level-by-level and from top to ground
+
+    * Search: Depth-first search, Breath-first search
+
 ## bloom filter
 
 * for the input value, use 3 hash function to hash and get 3 result bit, mark the 3 bits on a bitarray
@@ -23,6 +40,7 @@
 # Sort
 
 * Selection Sort and Insertion Sort are simple sorts. They are usually used in small amount data sorting and have worse performance in larger amount of data.
+* Merge Sort, Heap Sort, Quick Sort are efficient sort (avg time complexity O(n log n))
 
 ## Selection Sort
 
@@ -49,6 +67,3 @@
     * worst O(n^2)
     * avg   O(n^2)
 * Space: θ(1)
-
-# Efficient Sort
-* Merge Sort, Heap Sort, Quick Sort are efficient sort (avg time complexity O(n log n))
