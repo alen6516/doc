@@ -56,6 +56,55 @@ switch(n) {
 	}
 }
 
+# function
+## function pointer
+int *func(int num, char *str)
+{
+    ...
+}
+int* (*func_pointer)(int, char*);
+func_pointer = &func;   // & can be omitted
+
+## function pointer as a parameter in a function
+int func(int a2)
+{
+    return a2; 
+}
+
+// not using typedef
+int call_func(int (*call_this)(int))
+{
+    int ret = call_this(5);
+    return ret;
+}
+
+// using typedef
+typedef int (*func_pointer)(int);
+int call_func(func_pointer call_this)
+{
+    int ret = call_this(5);
+    return ret;
+}
+
+int result = call_func(func);
+
+## function pointer array
+void run() { printf("start\n"); }
+void stop() { printf("stop\n"); }
+void exit() { printf("exit\n"); }
+
+static void (*command[])(void) = {run, stop, exit};
+
+int OnStateChange(unsigned int state)
+{
+    if (state > 3) {
+        printf("Wrong state\n");
+        return -1;
+    }
+
+    command[state]();
+    return 0;
+}
 
 # date
 ## format print
@@ -261,7 +310,7 @@ __thread int id;
 u32 = ~(u32)0;
 
 ## const* int vs int const*
-const *int p = &a; 	// write to *p is illegal
+const int *p = &a;  // write to *p is illegal
 int const *p = &a;  // write to *p is illegal
 int *const p = &a;  // write to p is illegal
 #// when const is at the left-side of *, int is const; when const is at the right-side of *, pointer is const.
