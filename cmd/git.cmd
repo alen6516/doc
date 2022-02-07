@@ -3,6 +3,21 @@
     * a pointer to pointer which branch yor are on now
     * check by $ cat .git/HEAD
 
+* master
+    * the default branch after creating a new repo
+
+* Remote
+    * remote repository; it's an alias of repo's remote URL
+
+* Origin
+    * it's an alias on your local for a particular remote repo
+
+## Pull/fetch
+* fetch means only fetch remote data
+    $ git fetch --all && git checkout <remotebranch>
+        * fetch remote data and checkout to a remote branch
+ 
+
 ## Branch
 * create branch
     $ git branch bugfix
@@ -15,8 +30,9 @@
 
 * checkout to other branch
     $ git chechout bugfix
+
+    $ git checkout -b sister
         * create and checkout to a non-exist branch
-            $ git checkout -b sister
 
 * delete a branch
     $ git branch -d bugfix
@@ -102,20 +118,22 @@
 ## SSH key authtication to allow git push without password
 * gen the ssh key, copy the public key and paste to github account
 * try it by
-    * $ ssh -T git@github.com
+    $ ssh -T git@github.com
 * on command line, enter the repo and type
-    * $ git remote set-url origin git@github.com:username/REPO.git
+    $ git remote set-url origin git@github.com:username/REPO.git
 
 ## Example
 * done a commit and pushed it to remote master, but want to destory that commit
-    * $ git log --oneline
+    $ git log --oneline
         * check which commit we want to reset
-    * $ git reset HASH
+    $ git reset HASH
         * after that, HEAD will point to the commit of HASH
         * the modifications will become unstaged
         * continue to modify the code
-    * $ git commit
+    $ git commit
         * make a new commit
-    * $ git push --force
+    $ git push --force
         * use --force to replace the unwanted commit in the remote master
 
+* check remote URL
+    $ git remote -v
