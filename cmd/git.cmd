@@ -26,7 +26,7 @@
     $ git branch
 
 * rename a branch
-    $ git branch -m bugfix my_patch
+    $ git branch -m <new-name>
 
 * checkout to other branch
     $ git chechout bugfix
