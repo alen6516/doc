@@ -56,22 +56,37 @@ $RANDOM     get a random integer
     means at least 1 char except the chars in the []
 
 # Variable modify
+## ref: https://linux.vbird.org/linux_basic/centos7/0320bash.php#variable_other
 ## Delete
-${PATH#/*local/bin:}
-    * # means delete rightward from the start of VAR to the 1st matched pattern
-    * "/*local/bin:" is the pattern, * is wildcard
+${VAR#Pattern:}
+    * # means delete VAR rightward to the 1st matched pattern
+    * ex: ${$PATH#/*local/bin}
+        * "/*local/bin:" is the pattern, * is wildcard
+        * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+        * after  $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
+    * ex: ${$PATH#/*:}
+        * "/*:" is the pattern
+        * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+        * after  $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
 
-${PATH##/*:}
-    * delete rightward from the start of VAR to the longest matched pattern
-    * ## means longest matched pattern
+${VAR##Pattern}
+    * ## means delete VAR rightward to the longest matched pattern
+    * ex: ${$PATH##/*:}
+        * before $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
+        * after  $PATH: /usr/sbin
 
-${PATH%:*bin}
-    * % means delete leftward from the end of VAR to the 1st matched pattern
-    * ${FILE%.txt}
+${VAR%Pattern}
+    * % means delete VAR leftward to the 1st matched pattern
+    * ex: ${FILE%.txt}
         * remove the suffix ".txt" from $FILE
+    * ex: $PWD="/home/alan/linux/driver/gpu", how to get path at linux/ ?
+        * ${$PWD%linux*}"linux/"
    
-${PATH%%:*bin}
-    * %% means delete leftward from the end of VAR to the longest matched pattern
+${VAR%%Pattern}
+    * %% means delete VAR leftward to the longest matched pattern
+    * ex: ${$PATH%%:*bin:}
+        * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+        * after  $PATH: /usr/local/bin
 
 ## Replace
 ${PATH/sbin/SBIN}
