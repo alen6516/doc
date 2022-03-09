@@ -35,3 +35,6 @@ $ declare -A RFC=(          \
             echo $key
         done
         ```
+
+$ declare -f function
+    * show a function's definition
