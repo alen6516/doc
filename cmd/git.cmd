@@ -3,19 +3,31 @@
     * a pointer to pointer which branch yor are on now
     * check by $ cat .git/HEAD
 
-* master
-    * the default branch after creating a new repo
-
 * Remote
-    * remote repository; it's an alias of repo's remote URL
+    * remote SERVER(github server); it's an alias of repo's remote URL
 
 * Origin
-    * it's an alias on your local for a particular remote repo
+    * it's a particular remote REPO
+
+* master
+    * the default BRANCH after creating a new repo
 
 ## Pull/fetch
-* fetch means only fetch remote data
+* fetch means only fetch remote data to .git/FETCH_HEAD
     $ git fetch --all && git checkout <remotebranch>
-        * fetch remote data and checkout to a remote branch
+        * fetch all remote branch data and checkout to a remote branch
+
+    $ git fetch origin
+        * fetch master branch from origin
+
+    $ git fetch origin dev
+        * fetch dev branch from origin
+
+* pull
+    * base on local .git/FETCH_HEAD, git fetch remote branch and git merge those data with local branch
+    $ git pull origin master
+        * fetch origin's master branch data and merge to local master branch
+        * equal to $ git fetch origin master; git merge origin/master;
  
 
 ## Branch
@@ -84,6 +96,9 @@
 * save git diff file
     $ git diff > my.diff
 
+* show 10 lines of the context instead of 3 lines by default
+    $ git diff -U10 path/to/file
+
 * show branch
     $ git show-branch
 
@@ -98,8 +113,8 @@
 * find commits with certain msg
     $ git log --oneline --grep="WTF"
 
-* find commits with certain pattern in the committed files
-    $ git log -S "Ruby"
+* find commits with certain pattern in the committed files, can be used to find deleted lines
+    $ git log -S "Ruby" path/to/file
 
 * find commits within a time period
     $ git log --oneline --since="9am" --until="12am" --after="2017-01"
@@ -114,6 +129,13 @@
 * just check if we can seamlessly patch, but don't really patch
     $ git apply --check ~/my.diff
     $ git apply -R --check ~/my.diff
+
+## rebase/merge/suqash
+* rebase
+    $ git rebase -i COMMIT
+        * interactive mode to do rebase:
+            * r: reword to commit msg
+            * e: edit the code change
 
 ## SSH key authtication to allow git push without password
 * gen the ssh key, copy the public key and paste to github account
