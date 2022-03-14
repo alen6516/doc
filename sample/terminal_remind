@@ -1,6 +1,8 @@
 # terminal short cut
 short cut       | function
 ----------------|:--------
+ctrl + Left     | move leftward a word
+ctrl + Right    | move rightward a word
 ctrl + u        | 從游標處向前刪除指令串
 ctrl + k        | 從游標處向後刪除指令串
 ctrl + w        | 刪除一個word
@@ -18,15 +20,19 @@ ctrl + z        | 暫停執行
 ctrl + s        | freeze
 <ctrl + q> *2   | unfreeze (ctrl-q has been the leader key of tmux, tmux allow pressing ctrl-q twice to send this signal to terminal)
 ctrl + x + e    | open a temporary file to write a script
-!!              | 執行上一個指令
-!-N             | 執行上 N 個指令
-!N              | 執行 history 裡編號 N 的指令
-!ps             | 執行上一個以 ps 開頭的指令
-!$              | 上一個指令的最後一個參數
+!!              | 上一個指令
+!-N             | 上 N 個指令
+!N              | history 裡編號 N 的指令
+!ps             | 上一個以 ps 開頭的指令
+!ps:p           | 顯示 !ps 會執行的指令
+!$              | 上一個指令的最後一個參數(上一個指令是 cat install.sh 的話就是 install.sh)
+$_              | 上一個指令的最後一個參數
 !^              | 上一個指令的第 1 個參數(指令後的)
 !*              | 上一個指令的所有參數
-!:N             | 上一個指令的第 N 個參數
+!*:p            | 顯示 !* 會執行的指令
+!:N             | 上一個指令的第 N 個參數(0代表上一個命令本身)
 !ls:2           | 上一個以 ls 開頭的指令的第 2 個參數
 sudo !!         | 用 sudo 來執行上個指令
 shift + PgUp    | scroll up in bash
 shift + PgDown  | scroll down in bash
+Alt + .         | 顯示上一個命令最後一個參數
