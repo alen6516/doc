@@ -3,6 +3,33 @@
     * a pointer to pointer which branch yor are on now
     * check by $ cat .git/HEAD
 
+* Remote
+    * remote SERVER(github server); it's an alias of repo's remote URL
+
+* Origin
+    * it's a particular remote REPO
+
+* master
+    * the default BRANCH after creating a new repo
+
+## Pull/fetch
+* fetch means only fetch remote data to .git/FETCH_HEAD
+    $ git fetch --all && git checkout <remotebranch>
+        * fetch all remote branch data and checkout to a remote branch
+
+    $ git fetch origin
+        * fetch master branch from origin
+
+    $ git fetch origin dev
+        * fetch dev branch from origin
+
+* pull
+    * base on local .git/FETCH_HEAD, git fetch remote branch and git merge those data with local branch
+    $ git pull origin master
+        * fetch origin's master branch data and merge to local master branch
+        * equal to $ git fetch origin master; git merge origin/master;
+ 
+
 ## Branch
 * create branch
     $ git branch bugfix
@@ -11,12 +38,13 @@
     $ git branch
 
 * rename a branch
-    $ git branch -m bugfix my_patch
+    $ git branch -m <new-name>
 
 * checkout to other branch
     $ git chechout bugfix
+
+    $ git checkout -b sister
         * create and checkout to a non-exist branch
-            $ git checkout -b sister
 
 * delete a branch
     $ git branch -d bugfix
@@ -68,6 +96,9 @@
 * save git diff file
     $ git diff > my.diff
 
+* show 10 lines of the context instead of 3 lines by default
+    $ git diff -U10 path/to/file
+
 * show branch
     $ git show-branch
 
@@ -82,8 +113,8 @@
 * find commits with certain msg
     $ git log --oneline --grep="WTF"
 
-* find commits with certain pattern in the committed files
-    $ git log -S "Ruby"
+* find commits with certain pattern in the committed files, can be used to find deleted lines
+    $ git log -S "Ruby" path/to/file
 
 * find commits within a time period
     $ git log --oneline --since="9am" --until="12am" --after="2017-01"
@@ -99,23 +130,32 @@
     $ git apply --check ~/my.diff
     $ git apply -R --check ~/my.diff
 
+## rebase/merge/suqash
+* rebase
+    $ git rebase -i COMMIT
+        * interactive mode to do rebase:
+            * r: reword to commit msg
+            * e: edit the code change
+
 ## SSH key authtication to allow git push without password
 * gen the ssh key, copy the public key and paste to github account
 * try it by
-    * $ ssh -T git@github.com
+    $ ssh -T git@github.com
 * on command line, enter the repo and type
-    * $ git remote set-url origin git@github.com:username/REPO.git
+    $ git remote set-url origin git@github.com:username/REPO.git
 
 ## Example
 * done a commit and pushed it to remote master, but want to destory that commit
-    * $ git log --oneline
+    $ git log --oneline
         * check which commit we want to reset
-    * $ git reset HASH
+    $ git reset HASH
         * after that, HEAD will point to the commit of HASH
         * the modifications will become unstaged
         * continue to modify the code
-    * $ git commit
+    $ git commit
         * make a new commit
-    * $ git push --force
+    $ git push --force
         * use --force to replace the unwanted commit in the remote master
 
+* check remote URL
+    $ git remote -v

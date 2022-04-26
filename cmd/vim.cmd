@@ -315,7 +315,8 @@ short cut   | function
 Ctrl-w n    | 同 :new ，開新視窗
 Ctrl-w s    | 以 :sp 將原檔再開一個新視窗
 Ctrl-w q    | 結束分割出來的視窗
-
+Ctrl-w H    | Change horizontal splits to vertical
+Ctrl-w K    | Change vertical splits to horizontal
 
 # Shell command
 short cut       | function

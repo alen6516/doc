@@ -1,290 +1,415 @@
-# size of data type
-void        1 byte
-char        1 byte
-short       2 bytes
-int         4 bytes
-float       4 bytes
-double      8 bytes
-long        8 bytes
-pointer     8 bytes
-NULL        8 bytes
-long double 16 bytes
-# C11 recommends to use int8_t, int16_t, int32_t, int64_t
-# uint8_t, uint16_t, uint32_t, uint64_t to avoid dependence problem.
+# size of data type {
+    void        1 byte
+    char        1 byte
+    short       2 bytes
+    int         4 bytes
+    float       4 bytes
+    double      8 bytes
+    long        8 bytes
+    pointer     8 bytes
+    NULL        8 bytes
+    long double 16 bytes
+    # C11 recommends to use int8_t, int16_t, int32_t, int64_t
+    # uint8_t, uint16_t, uint32_t, uint64_t to avoid dependence problem.
+# }
 
 
-# Array
-## use 
-char const *arr[] = {"abc", "def", "ghi"};
-## rather than
-char *arr[] = {"abc", "def", "ghi"};
+# Array {
+    # declare
+	# 不能用 = 來 assign 一個 array
+	str = "string";		# error: assignment to expression with array type
+	arr = {1, 2, 3}; 	# error: expected expression before ’ token
+	str1 = str2; 		# error: assignment to expression with array type
 
-## designated initializers
-int a[6] = { [4] = 29, [2] = 15 };
-# this is ISO C99 standard, also supported in gcc gnu89 as ab extension
-# is equivalent to int a[6] = { 0, 0, 15, 0, 0, 29, 0 }
+	# 可以初始化 (在 declaration 時，這裡的 = 不是 assign)
+	char s[10] = "string"; 	# 合法
 
-int widths[] = { [0 ... 9] = 1, [10 ... 99] = 2, [100] = 3 };
-# this is gcc extension
-# the length of the array will the highest value specified plus one.
+	# 使用 == 來比較兩 array 是合法的，但不會產生預期結果 (兩者被視為 pointer 來比較，因為兩者 address 不同，所以不會相等)
+	if ( str1 == str2 ) ... # no error
+
+    # 未初始化的 array，裡面每個 char 的值不定，print 不出來，可能是 '\0' 也可能不是
+    char s[5];
+    printf("%s\n", s);  # 空的
+    for (int i=0; i<5; i++) printf("%c", s[i] == '\0' ?'y':'n');    # nnnyy
+    printf("");
+    for (int i=0; i<5; i++) printf("%c", s[i] == ' ' ?'y':'n');     # nnnnn
+    printf("");
+
+
+	## size of int array
+	int arr[] = {1, 2, 3};
+	printf("%d\n", (int)sizeof(arr));	# 3 個 int => 12
+
+
+	## size of char array
+	char str[] = {'1', '2', '3'};
+	printf("%d\n", (int)sizeof(str));	# 3 個 char => 3
+
+
+	## size of string
+	char str[] = "123";
+	printf("%d\n", (int)sizeof(str));	# 結尾有一個 '\0' => 4
+
+	char *str = "123";
+	printf("%d\n", (int)sizeof(str)); 	# str 是 pointer!! => 8
+
+
+	## int array shift
+	int arr[] = {1, 2, 3};
+	printf("%d\n", (arr+1)[1]);			# 出現 + 時，arr 視為 pointer ，arr+1 指向 2，而 (arr+1)[] 則又視為陣列 {2, 3} ，該陣列第 1 項 => 3
+	printf("%d\n", (int)sizeof(arr+0));	# 出現 + 時，arr 視為 pointer => 8
+
+
+	## char arr shift
+	char *str = "abc";
+	printf("%c\n", (str+1)[1]); 		# c
+	printf("%d\n", sizeof(str+1));		# pointer => 8
+	printf("%d\n", sizeof(str));		# pointer => 8
+
+
+    ## use 
+    char const *arr[] = {"abc", "def", "ghi"};
+    # rather than
+    char *arr[] = {"abc", "def", "ghi"};
+
+
+    ## designated initializers
+    int a[6] = { [4] = 29, [2] = 15 };
+    # this is ISO C99 standard, also supported in gcc gnu89 as ab extension
+    # is equivalent to int a[6] = { 0, 0, 15, 0, 0, 29, 0 }
+
+    int widths[] = { [0 ... 9] = 1, [10 ... 99] = 2, [100] = 3 };
+    # this is gcc extension
+    # the length of the array will the highest value specified plus one.
  
-int whitespace[256]
+    int whitespace[256]
        = { [' '] = 1, ['\t'] = 1, ['\h'] = 1,
            ['\f'] = 1, ['\n'] = 1, ['\r'] = 1 };
 
-## array type cast
-int arr[3] = {1, 2, 3};
-int a[4] = (int[4]*) arr;
 
-<<<<<<< HEAD
+    ## array type cast
+    int arr[3] = {1, 2, 3};
+    int a[4] = (int[4]*) arr;
+# }
 
-=======
->>>>>>> ba04e2cd5a9bdd8c115e8e615fba4c97c39bb25a
-# state
-## switch case
-switch(n) {
-	/* 
-	 * If want to declare variable in case
-	 * need to use {} to pack 
-	 */
-	case 1: {
-		int x;
-		foo(x);
-		return x;
-	}
-	case 2: {
-		int x;
-		bar(x);
-		return x;
-	}
-}
+# state {
+    ## switch case
+    switch(n) {
+        /* 
+         * If want to declare variable in case
+         * need to use {} to pack 
+         */
+        case 1: {
+            int x;
+            foo(x);
+            return x;
+        }
+        case 2: {
+            int x;
+            bar(x);
+            return x;
+        }
+    }
+# }
 
-
-# date
-## format print
-include <time.h>
-time_t rawtime;   
-time(&rawtime);
-struct tm *timeinfo = localtime ( &rawtime );
-
-char buf[80];
-strftime (buffer,80,"Now it's %I:%M%p.",timeinfo);
-puts(buffer);
+# function {
+    ## function pointer
+    int *func(int num, char *str)
+    {
+        ...
+    }
+    int* (*func_pointer)(int, char*);
+    func_pointer = &func;   # & can be omitted
 
 
-## gettimeofday
-include <time.h>
-struct timeval   tv;
-struct timezone  tz;
-gettimeofday(&tv,&tz);	/* &tz could be NULL */
-
-printf("tv_sec:%d\n",tv.tv_sec);
-printf("tv_usec:%d\n",tv.tv_usec);
-printf("tz_minuteswest:%d\n",tz.tz_minuteswest);
-printf("tz_dsttime:%d\n",tz.tz_dsttime);
+    ## function pointer as a parameter in a function
+    int func(int a2)
+    {
+        return a2; 
+    }
 
 
-# clock time
-include <time.h>
-clock_t start_t, end_t;
-double total_t;
-start_t = clock();
-do_thing();
-end_t = clock();
-total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
-printf("Total time taken by CPU: %f sec", total_t);
+    ## not using typedef
+    int call_func(int (*call_this)(int))
+    {
+        int ret = call_this(5);
+        return ret;
+    }
 
 
-# random number
-include <stdlib.h>
-include <time.h>
-srand(time(NULL)); /* if don't use srand(time(NULL)), the result of rand() will be the same */
-int a = (rand() % 100)+1;
+    ## using typedef
+    typedef int (*func_pointer)(int);
+    int call_func(func_pointer call_this)
+    {
+        int ret = call_this(5);
+        return ret;
+    }
+
+    int result = call_func(func);
 
 
-# process
+    ## function pointer array
+    void run() { printf("start\n"); }
+    void stop() { printf("stop\n"); }
+    void exit() { printf("exit\n"); }
+
+    static void (*command[])(void) = {run, stop, exit};
+
+    int OnStateChange(unsigned int state)
+    {
+        if (state > 3) {
+            printf("Wrong state\n");
+            return -1;
+        }
+
+        command[state]();
+        return 0;
+    }
+# }
+
+# date {
+    ## format print
+    include <time.h>
+    time_t rawtime;   
+    time(&rawtime);
+    struct tm *timeinfo = localtime ( &rawtime );
+
+    char buf[80];
+    strftime (buffer,80,"Now it's %I:%M%p.",timeinfo);
+    puts(buffer);
+
+
+    ## gettimeofday
+    include <time.h>
+    struct timeval   tv;
+    struct timezone  tz;
+    gettimeofday(&tv,&tz);	/* &tz could be NULL */
+
+    printf("tv_sec:%d\n",tv.tv_sec);
+    printf("tv_usec:%d\n",tv.tv_usec);
+    printf("tz_minuteswest:%d\n",tz.tz_minuteswest);
+    printf("tz_dsttime:%d\n",tz.tz_dsttime);
+
+
+    ## clock time
+    include <time.h>
+    clock_t start_t, end_t;
+    double total_t;
+    start_t = clock();
+    do_thing();
+    end_t = clock();
+    total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
+    printf("Total time taken by CPU: %f sec", total_t);
+# }
+
+# random number {
+    include <stdlib.h>
+    include <time.h>
+    srand(time(NULL)); # if don't use srand(time(NULL)), the result of rand() will be the same 
+    int a = (rand() % 100)+1;
+# }
+
+# process {
 ## process exit
-exit(int status)
-    * all functions registered in atexit() and on_exit() are called
-    * return status to caller (command line) 
+    exit(int status)
+        * all functions registered in atexit() and on_exit() are called
+        * return status to caller (command line) 
 
-_exit(int status)
-    * exit the process immediately
-    * close all file descriptors
-    * any children are inherited by process 1
-    * the process's parent is sent a SIGCHLD signal
+    _exit(int status)
+        * exit the process immediately
+        * close all file descriptors
+        * any children are inherited by process 1
+        * the process's parent is sent a SIGCHLD signal
+# }
 
+# pthread {
+    ## pthread_join()
+        * The pthread_join() subroutine blocks the calling thread until the specified threadid thread terminates.
+        * join, mutex and condition variable are 3 synchronization ways of pthread
+        * If a thread is created as detached.
 
-# pthread
-## pthread_join()
-    * The pthread_join() subroutine blocks the calling thread until the specified threadid thread terminates.
-    * join, mutex and condition variable are 3 synchronization ways of pthread
-    * If a thread is created as detached.
+    ## pthread_exit()
+        * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
 
-## pthread_exit()
-    * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
+    ## pthread mutex
+    pthread_mutex_t count_lock = PTHREAD_MUTEX_INITIALIZER;
+    pthread_mutex_lock(&count_lock);
+    global_int++;
+    pthread_mutex_unlock(&count_lock);
 
-<<<<<<< HEAD
-## pthread mutex
-pthread_mutex_t count_lock = PTHREAD_MUTEX_INITIALIZER;
-pthread_mutex_lock(&count_lock);
-global_int++;
-pthread_mutex_unlock(&count_lock);
-
-## pthread spin_lock
-pthread_spinlock_t spin_lock;
-pthread_spin_init(&spin_lock, PTHREAD_PROCESS_PRIVATE);
-# PTHREAD_PROCESS_PRIVATE means this spinlock is only shared among threads of the same process
-pthread_spin_lock(&spin_lock);
-do_thing();
-pthread_spin_unlock(&spin_lock);
-
-## pthread spin_trylock
-pthread_spinlock_t spin_lock;
-pthread_spin_init(&spin_lock, PTHREAD_PROCESS_PRIVATE);
-if (pthread_spin_trylock(&spin_lock)) {
-    do_thing()
+    ## pthread spin_lock
+    pthread_spinlock_t spin_lock;
+    pthread_spin_init(&spin_lock, PTHREAD_PROCESS_PRIVATE);
+    # PTHREAD_PROCESS_PRIVATE means this spinlock is only shared among threads of the same process
+    pthread_spin_lock(&spin_lock);
+    do_thing();
     pthread_spin_unlock(&spin_lock);
-}
 
-# Macro
-## if define
-```
-#ifdef AAA
-#define LOG(...)    printf(__VA_ARGS__)
-#elif defined(BBB)
-#define LOG(...)    perror(__VA_ARGS__)
-#else
-#define LOG(...)
-#endif
-```
+    ## pthread spin_trylock
+    pthread_spinlock_t spin_lock;
+    pthread_spin_init(&spin_lock, PTHREAD_PROCESS_PRIVATE);
+    if (pthread_spin_trylock(&spin_lock)) {
+        do_thing()
+        pthread_spin_unlock(&spin_lock);
+    }
+# }
 
-
-## __VA_ARGS__
-#define my_printf(...) 			printf(__VA_ARGS__)
-#define my_printf(format, ...) 	printf(format, ##__VA_ARGS__)
-	* when user call my_printf("without arg\n"), if we don't use "##", result will be printf(format, ) => one comma left
-	* another ability if "##" is to stick 2 variables in macro
-
-
-## print a macro and its content as a string
-#define AVG(a,b)    (a+b)/2
-#define GET_VARIABLE_STRING(x) #x
-#define GET_MACRO_CONTENT_STRING(macro) GET_VARIABLE_STRING(macro)
-printf("%s = %s = %d\n", GET_VARIABLE_STRING(AVG(2,4)), GET_MACRO_CONTENT_STRING(AVG(2,4)), AVG(2,4));
-    * "AVG(2,4) = (2+4)/2 = 3"
+# Macro {
+    ## if define
+    ```
+    #ifdef AAA
+    #define LOG(...)    printf(__VA_ARGS__)
+    #elif defined(BBB)
+    #define LOG(...)    perror(__VA_ARGS__)
+    #else
+    #define LOG(...)
+    #endif
+    ```
 
 
-## build bug in preprocessor, we can use it to see if a compile flag is on
-#ifndef DEBUG
-#error Only Debug builds are supported
-#endif
+    ## __VA_ARGS__
+    #define my_printf(...) 			printf(__VA_ARGS__)
+    #define my_printf(format, ...) 	printf(format, ##__VA_ARGS__)
+        * when user call my_printf("without arg\n"), if we don't use "##", result will be printf(format, ) => one comma left
+        * another ability if "##" is to stick 2 variables in macro
 
 
-# String
-// # ========== 複製 ==========
-// char *strcpy(char *s1, const char *s2)
-// char *strncpy(char *s1, const char *s2, size_t n)
-
-// # ========== 串接 ==========
-// char *strcat(char *s1, const char *s2)
-// char *strncat(char *s1, const char *s2, size_t n)
-
-// # ========== 比較 ==========
-// int char strcmp( const char *s1, const char *s2)
-// int char strncmp( const char *s1, const char *s2, size_t n)
-
-// 計算長度
-// size_t strlen(const char *s)
-
-// # ========== 搜尋 ==========
-// 回傳在字串 s 中，字元 c 第一次出現位置的指標
-// char *strchr(const char *s, int c)
-
-// 計算經過幾個字元會在字串 s1 中遇到屬於 s2 中的字元
-// size_t strcspn(const char *s1, const char *s2)
-
-// 計算經過幾個字元會在字串 s1 中遇到不屬於 s2 中的字元
-// size_t strspn(const char *s1, const char *s2)
-
-// 回傳在字串 s2 中的任何字元在 s1 第一次出現位置的指標
-// char *strpbrk(const char *s1, const char *s2)
-
-// 回傳在字串 s 中，字元 c 最後一次出現位置的指標
-// char *strrchr(const char *s, int c)
-
-// 回傳在字串 s2 在 s1 第一次出現位置的指標
-// char *strstr(const char *s1, const char *s2)
-
-// 以字串 s2 的內容切割 s1
-// char *strtok(char *s1, const char *s2)
-
-// # ========== memory ==========
-// 從 s2 所指向的資料複製 n 個字元到 s1
-// void *memcpy(void *s1, const void *s2, size_t n)
-
-// 從 s2 所指向的資料複製 n 個字元到 s1
-// void *memmove(void *s1, const void *s2, size_t n)
-
-// 比較 s1 與 s2 前 n 個字元的資料
-// int memcmp(const void *s1, const void *s2, size_t n)
-
-// 找出字元 c 在 s 前 n 個字元第一次出現的位置
-// void *memchr(const void *s, int c, size_t n)
-
-// 將 s 中前 n 個字元全部設定為 c
-// void *memset(void *s, int c, size_t n)
+    ## print a macro and its content as a string
+    #define AVG(a,b)    (a+b)/2
+    #define GET_VARIABLE_STRING(x) #x
+    #define GET_MACRO_CONTENT_STRING(macro) GET_VARIABLE_STRING(macro)
+    printf("%s = %s = %d\n", GET_VARIABLE_STRING(AVG(2,4)), GET_MACRO_CONTENT_STRING(AVG(2,4)), AVG(2,4));
+        * "AVG(2,4) = (2+4)/2 = 3"
 
 
-# atomic
-## atomic API
-* diff between __sync* and __atomic*
-    * __atomic* is newer
-    * basically they are the same, just __atomic have a parameter to speficy the memory-order
-    * ref: https://stackoverflow.com/questions/23446210/what-is-the-difference-between-the-sync-and-atomic-intrinsics-of-gcc
+    ## build bug in preprocessor, we can use it to see if a compile flag is on
+    #ifndef DEBUG
+    #error Only Debug builds are supported
+    #endif
+# }
 
-## _Atomic
-_Atomic int sum;
-#// C11 standard added
-#// managed by <stdatomic.h> and <threads.h>
+# String {
+    # ========== 複製 ==========
+    char *strcpy(char *s1, const char *s2)
+    char *strncpy(char *s1, const char *s2, size_t n)
 
-## atomic_fetch_add
-include <stoatomic.h>
-include <threads.h>
-atomic_int counter;
-atomic_fetch_add(&counter, 1);
-#// C11
-#// defined in <stdatomic.h>
+    # ========== 串接 ==========
+    char *strcat(char *s1, const char *s2)
+    char *strncat(char *s1, const char *s2, size_t n)
 
-## gcc thread local variable
-__thread int id;
+    # ========== 比較 ==========
+    int char strcmp( const char *s1, const char *s2)
+    int char strncmp( const char *s1, const char *s2, size_t n)
+
+    # 計算長度
+    size_t strlen(const char *s)
+
+    # ========== 搜尋 ==========
+    # 回傳在字串 s 中，字元 c 第一次出現位置的指標
+    char *strchr(const char *s, int c)
+
+    # 計算經過幾個字元會在字串 s1 中遇到屬於 s2 中的字元
+    size_t strcspn(const char *s1, const char *s2)
+
+    # 計算經過幾個字元會在字串 s1 中遇到不屬於 s2 中的字元
+    size_t strspn(const char *s1, const char *s2)
+
+    # 回傳在字串 s2 中的任何字元在 s1 第一次出現位置的指標
+    char *strpbrk(const char *s1, const char *s2)
+
+    # 回傳在字串 s 中，字元 c 最後一次出現位置的指標
+    char *strrchr(const char *s, int c)
+
+    # 回傳在字串 s2 在 s1 第一次出現位置的指標
+    char *strstr(const char *s1, const char *s2)
+
+    # 以字串 s2 的內容切割 s1
+    char *strtok(char *s1, const char *s2)
+
+    # ========== memory ==========
+    # 從 s2 所指向的資料複製 n 個字元到 s1
+    void *memcpy(void *s1, const void *s2, size_t n)
+
+    # 從 s2 所指向的資料複製 n 個字元到 s1
+    void *memmove(void *s1, const void *s2, size_t n)
+
+    # 比較 s1 與 s2 前 n 個字元的資料
+    int memcmp(const void *s1, const void *s2, size_t n)
+
+    # 找出字元 c 在 s 前 n 個字元第一次出現的位置
+    void *memchr(const void *s, int c, size_t n)
+
+    # 將 s 中前 n 個字元全部設定為 c
+    void *memset(void *s, int c, size_t n)
+# }
+
+# atomic {
+    ## atomic API
+    * diff between __sync* and __atomic*
+        * __atomic* is newer
+        * basically they are the same, just __atomic have a parameter to speficy the memory-order
+        * ref: https://stackoverflow.com/questions/23446210/what-is-the-difference-between-the-sync-and-atomic-intrinsics-of-gcc
 
 
-# Misc
-## How to define 32-bit long 0xFFFFFFFF ?
-u32 = ~(u32)0;
+    ## _Atomic
+    _Atomic int sum;
+    #// C11 standard added
+    #// managed by <stdatomic.h> and <threads.h>
 
 
+    ## atomic_fetch_add
+    include <stdatomic.h>
+    include <threads.h>
+    atomic_int counter;
+    atomic_fetch_add(&counter, 1);
+    #// C11
+    #// defined in <stdatomic.h>
 
-## const* int vs int const*
-const *int p = &a; 	// write to *p is illegal
-int const *p = &a;  // write to *p is illegal
-int *const p = &a;  // write to p is illegal
-#// when const is at the left-side of *, int is const; when const is at the right-side of *, pointer is const.
+
+    ## gcc thread local variable
+    __thread int id;
+# }
+
+# Misc {
+    ## How to define 32-bit long 0xFFFFFFFF ?
+    u32 = ~(u32)0;
 
 
-## volatile and const, the following 2 are the same
-volatile const int x;
-const volatile int x;
+    ## const* int vs int const*
+    const int *p = &a;  // write to *p is illegal
+    int const *p = &a;  // write to *p is illegal
+    int *const p = &a;  // write to p is illegal
+    #// when const is at the left-side of *, int is const; when const is at the right-side of *, pointer is const.
 
-## convert str to int
-int a = (int) strtol(argv[1], NULL, 10);
 
-## swap
-#define SWAP(a, b) ({   \
-    if (a != b) {       \
-        a = a^b;        \
-        b = a^b;        \
-        a = a^b;        \
-    }                   \
-})
+    ## volatile and const, the following 2 are the same
+    volatile const int x;
+    const volatile int x;
+
+
+    ## convert str to int
+    int a = (int) strtol(argv[1], NULL, 10);
+    # or use atoi
+    #include <stdlib.h>
+    int a = atoi(str);
+
+
+    ## swap
+    #define SWAP(a, b) do {     \
+        if (a != b) {           \
+            a = a^b;            \
+            b = a^b;            \
+            a = a^b;            \
+        }                       \
+    } while (0)
+
+
+    ## swap pointer 
+    #define SWAP_POINTER(p1, p2) do {   \
+        if (p1 != p2) {                 \
+            p1 = (void*) ((unsigned long)p1^(unsigned long)p2);     \
+            p2 = (void*) ((unsigned long)p1^(unsigned long)p2);     \
+            p1 = (void*) ((unsigned long)p1^(unsigned long)p2);     \
+        }                                                           \
+    } while (0)
+# }
