@@ -1,3 +1,9 @@
+## tips
+* be very careful when you want to change a function's parameter, because you need to change all the caller, and not all caller is easy to cnahge
+    * that's why many people just implement a similar API to use
+* if the code is not wrong, don't refactor or change
+    * don't refactor unless we are able to do a completed test
+
 ## comment in doxygen style
 * [ref](https://flcwiki.desy.de/How%20to%20document%20your%20code%20using%20doxygen)
 * [ref](https://www.cs.cmu.edu/~410/doc/doxygen.html)
