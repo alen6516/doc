@@ -46,8 +46,13 @@
     $ git checkout -b sister
         * create and checkout to a non-exist branch
 
-* delete a branch
+* delete a branch locally
     $ git branch -d bugfix
+    $ git branch -D bugfix
+        * if branch contain unmerged commits, need to use -D
+
+* delete a branch on remote
+    $ git push --delete origin bugfix
 
 * merge a branch (to current branch)
     $ git merge bugfix
@@ -129,6 +134,15 @@
 * just check if we can seamlessly patch, but don't really patch
     $ git apply --check ~/my.diff
     $ git apply -R --check ~/my.diff
+
+* format-patch and am
+    $ git format-patch -1 <commit-ish-here> -o <output-dir> -- drivers/gpu/drm/amd/display/
+    $ git am -p6 <output-dir>/*.patch
+
+* cherry-pick
+    * the target commit is 55669487 on B branch, and want to cherry-pick this commit to branch A
+    * first checkout to branch A, then:
+    $ git cherry-pick 55669487
 
 ## rebase/merge/suqash
 * rebase

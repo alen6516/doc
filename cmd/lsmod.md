@@ -6,3 +6,7 @@ Show the status of modules in the Linux Kernel
 # Options
     
 # Example
+$ lsmod | grep "amdgpu"
+
+$ modinfo amdgpu
+    * show detail information of a module

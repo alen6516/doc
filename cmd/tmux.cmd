@@ -85,11 +85,12 @@ b            | send prefix
 d            | detach client                          
 [            | 游標可以移動                               
 <SPACE>      | start copy
-<ENTER>      | copy text
-]            | paste text
+<ENTER>      | copy text to buffer
+=            | select buffer and paste text
+]            | paste text in buffer0
 :set -g mouse on/off        允許滑鼠select window, select pane, resize pane
 
-script for launch
+Script for launch
     ```
     #!/bin/bash
 

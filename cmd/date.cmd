@@ -18,4 +18,8 @@ date +format
     
     
 # Example
-date +%H:%M:%S
+$ date +%H:%M:%S
+
+* change format of date from Chinese to English
+    $ sudo localectl set-locale LC_TIME=en_US.UTF-8
+    * or edit /etc/default/locale
