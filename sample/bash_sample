@@ -160,6 +160,11 @@ $ declare -i number=$RANDOM*10/32768; echo $number
     * $RANDOM 是介於 0~32767
 
 
+# random string
+$ echo $RANDOM | md5sum | base64
+    * will give you a 49-char string
+
+
 # 正常結束
 exit 0
 
@@ -224,6 +229,8 @@ fd=dup(1);
     * `$ cat < $FILE`
         * 將右邊的檔案內容作為左邊輸入的 stdin
 
+## clear a file
+    * `$ > file`
 
 ## redirection and here string
     ```
@@ -281,8 +288,8 @@ done
 * = and == are for string comparison
 * = and == are equivalent in bash, but only = is legal in sh, so = is recommended
 * -eq is for numeric comparison
-* [] is an alias of test command
-* [[]] is a bash, zsh key word
+* [] is an alias of test command, not a syntax
+* [[]] is a bash, zsh syntax, more powerful than []
 * (()) is used to test an arithmetic expression
 
 # 判斷式
@@ -574,3 +581,29 @@ done
     CURR_PATH=`pwd`
     SCRIPT_PATH=$BASH_SOURCE
 
+## prompt yes/no to user
+    while true; do
+        read -p "Do you wish to install this program? " yn
+        case $yn in
+            [Yy]* )
+                make install; break
+                ;;
+
+            [Nn]* )
+                exit
+                ;;
+
+            * )
+                echo "Please answer yes or no."
+                ;;
+        esac
+    done
+
+    ### or use select command, no need a while loop
+    echo "Do you wish to install this program?"
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) make install; break;;
+            No  ) exit;;
+        esac
+    done
