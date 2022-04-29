@@ -112,6 +112,15 @@
     }
 # }
 
+# struct {
+    ## pack
+    struct foo {
+        int id;
+        char str[0];
+    } __attribute__((packed));
+    typedef struct foo Foo;
+# }
+
 # function {
     ## function pointer
     int *func(int num, char *str)
@@ -412,4 +421,22 @@
             p1 = (void*) ((unsigned long)p1^(unsigned long)p2);     \
         }                                                           \
     } while (0)
+
+    ## readline
+    #include <stdio.h>
+    FILE *fp;
+    char *line = NULL;
+    size_t len = 0;     //
+    ssize_t read;       // number of char I read
+
+    fp = fopen("file", "r");
+    if (!fp) exit(EXIT_FAILURE);
+
+    // line = NULL and len = 0 will ask getline to malloc
+    while (-1 != (read = getline(&line, &len, fp))) {
+        printf("Retrieved line of length %zu:\n", read);
+        printf("%s", line);
+    }
+
+    fclose(fp);
 # }
