@@ -54,6 +54,14 @@
 	printf("%d\n", (int)sizeof(str)); 	# str 是 pointer!! => 8
 
 
+    ## scanf a string
+    char str[100];
+    scanf(" %99[^\n]", str);
+    ### first space is used to skip a ' ', '\t', '\n' in the input buffer left by the previous scanf
+    ### %[^\n] means match a string not equal to '\n' and stores it (plus a '\0')
+    ### 99 means at most read 99 chars from the input
+
+
 	## int array shift
 	int arr[] = {1, 2, 3};
 	printf("%d\n", (arr+1)[1]);			# 出現 + 時，arr 視為 pointer ，arr+1 指向 2，而 (arr+1)[] 則又視為陣列 {2, 3} ，該陣列第 1 項 => 3

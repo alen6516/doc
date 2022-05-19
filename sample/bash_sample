@@ -73,6 +73,7 @@ ${VAR#Pattern:}
 ${VAR##Pattern}
     * ## means delete VAR rightward to the longest matched pattern
     * ex: ${$PATH##/*:}
+        * "/*:" is the pattern
         * before $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
         * after  $PATH: /usr/sbin
 
@@ -85,7 +86,8 @@ ${VAR%Pattern}
    
 ${VAR%%Pattern}
     * %% means delete VAR leftward to the longest matched pattern
-    * ex: ${$PATH%%:*bin:}
+    * ex: ${$PATH%%:*bin}
+        * ":*bin" is the pattern
         * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
         * after  $PATH: /usr/local/bin
 

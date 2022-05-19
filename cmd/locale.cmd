@@ -15,3 +15,5 @@ $ locale -a
 
 $ sudo update-locale LC_TIME=en_US.utf-8
     * or manually revise /etc/default/locale
+    * $ export LC_TIME=en_US.UTF-8
+        * to let current shell take effect
