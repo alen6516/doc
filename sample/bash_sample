@@ -59,20 +59,20 @@ $(nproc)    number of processing units
 # Variable modify
 ## ref: https://linux.vbird.org/linux_basic/centos7/0320bash.php#variable_other
 ## Delete
-${VAR#Pattern:}
+${VAR#Pattern}
     * # means delete VAR rightward to the 1st matched pattern
-    * ex: ${$PATH#/*local/bin}
+    * ex: ${PATH#/*local/bin}
         * "/*local/bin:" is the pattern, * is wildcard
         * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
         * after  $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
-    * ex: ${$PATH#/*:}
+    * ex: ${PATH#/*:}
         * "/*:" is the pattern
         * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
         * after  $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
 
 ${VAR##Pattern}
     * ## means delete VAR rightward to the longest matched pattern
-    * ex: ${$PATH##/*:}
+    * ex: ${PATH##/*:}
         * "/*:" is the pattern
         * before $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
         * after  $PATH: /usr/sbin
@@ -82,11 +82,11 @@ ${VAR%Pattern}
     * ex: ${FILE%.txt}
         * remove the suffix ".txt" from $FILE
     * ex: $PWD="/home/alan/linux/driver/gpu", how to get path at linux/ ?
-        * ${$PWD%linux*}"linux/"
+        * ${PWD%linux*}"linux/"
    
 ${VAR%%Pattern}
     * %% means delete VAR leftward to the longest matched pattern
-    * ex: ${$PATH%%:*bin}
+    * ex: ${PATH%%:*bin}
         * ":*bin" is the pattern
         * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
         * after  $PATH: /usr/local/bin
@@ -127,6 +127,14 @@ declare -A FILE=(                           \
     [".ctags"]=".ctags"                     \
     [".cscope_maps.vim"]=".cscope_maps.vim" \
 )
+
+echo "keys are: " ${!FILE[@]}
+echo "values are: " ${FILE[@]}
+
+for key in ${!FILE[@]}
+do
+    echo $key ${FILE[$key]}
+done
 
 ## set value
 FILE['key']='value'
