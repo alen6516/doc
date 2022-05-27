@@ -85,6 +85,15 @@
     $ git reset --soft HEAD^
     $ git commit -m "new msg"
 
+* recover from reset --hard
+    $ git reflog show
+        4d917ec (HEAD -> master) HEAD@{0}: reset: moving to HEAD~1
+        76df500 HEAD@{1}: commit: add hash_table
+        4d917ec (HEAD -> master) HEAD@{2}: commit: update util.h
+        6371e12 (origin/master, origin/HEAD) HEAD@{3}: commit: update
+    $ git reset HEAD@{1}
+
+
 * temporarily stop work at hand, and drop/pop it later
     $ git stash
     $ git stash list
