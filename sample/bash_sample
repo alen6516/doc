@@ -60,7 +60,7 @@ $(nproc)    number of processing units
 ## ref: https://linux.vbird.org/linux_basic/centos7/0320bash.php#variable_other
 ## Delete
 ${VAR#Pattern}
-    * # means delete VAR rightward to the 1st matched pattern
+    * # means delete VAR rightward until delete the 1st matched pattern
     * ex: ${PATH#/*local/bin}
         * "/*local/bin:" is the pattern, * is wildcard
         * before $PATH: /usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
@@ -71,7 +71,7 @@ ${VAR#Pattern}
         * after  $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
 
 ${VAR##Pattern}
-    * ## means delete VAR rightward to the longest matched pattern
+    * ## means delete VAR rightward until delete the longest matched pattern
     * ex: ${PATH##/*:}
         * "/*:" is the pattern
         * before $PATH: /usr/bin:/usr/local/sbin:/usr/sbin
@@ -145,11 +145,21 @@ FILE['key']='value'
 ## expand the keys
 "${!FILE[@]}"
 
-## example
-for sound in "${!animals[@]}";
-do
-    echo "$sound - ${animals[$sound]}"; 
-done
+# Declare indexed array
+declare -A FILE=(".vimrc" ".bashrc" ".tmux.conf")
+echo ${FILE[0]}
+echo ${FILE[@]}     # all items
+echo ${FILE[@]:2:3} # extracting the 3rd element
+echo ${FILE[1]:2:4} # extracting parts of an element ("ash")
+echo ${FILE[@]/.vimrc/.ssh} # find and replace array items
+unset FILE[2]       # removeing an element from the array
+
+echo ${#FILE[@]}    # get size of the array
+echo ${#FILE[1]}    # get the size of an element in the array
+
+FILE=(${FILE[@]} ".ctags" ".bash_aliases")  # adding new items to the array
+FILE2=(${FILE[@]})  # copy the array
+
 
 # $() 與 ${} 區別
 $(cmd) 相當於 `cmd`
@@ -299,6 +309,8 @@ done
 * = and == are equivalent in bash, but only = is legal in sh, so = is recommended
 * -eq is for numeric comparison
 * [] is an alias of test command, not a syntax
+    * [ is a command, and that's why we need a space between [ and the next word
+    * ] is an mandatory argument of [ command, that's why we need space between it and its previous word
 * [[]] is a bash, zsh syntax, more powerful than []
 * (()) is used to test an arithmetic expression
 
@@ -477,12 +489,12 @@ echo "00005 00010 00601 00550" | awk '$0*=1'
 
 ## readline 逐行讀取
 ```bash
-exec << $FILENAME
+filename="file.txt"
 
 while read line
 do
     printf "%b\n" $line
-done
+done << $filename
 ```
 
 ## 讀取argument

@@ -49,7 +49,7 @@ w            | choose window (window tree)
 f            | find window through name               
 l            | last-used window
 :move-window -t 0       將當前 window 移至編號 0 (最前)
-:swap-window -s 4 -t 2  將編號 4 與 2 window 交換
+:swap-window -s 4 -t 2  將編號 4 與 2 window 交換 (swapw)
 :swap-window -t -1      move the window leftward by 1
 :swap-window -t +1      move the window rightward by 1
 

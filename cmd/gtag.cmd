@@ -10,73 +10,55 @@
     * provide cs command in vim
 * ctags
     * provide c-] and c-t hot-key
+* global
+    * gtag-cscope is cscope except that it use GNU global as a search engine instead of cscope's one
+    * gtags-cscope do not provide "find functions called by this function"
 
-* add
+* how to use?
+    * in short
+        * apt install global
+        * vim plugin install https://github.com/aceofall/gtags.vim.git
+            * then we don't need to install ctags and can use ctrl-]/ctrl-t to jump
+        * add to .vimrc
 
-    * ```
-        set cscopeprg=gtags-cscope 'replace cscope's control panel
-        cs add GTAGS	'將gtags加入cscope的資料庫搜尋，讓cs -a 指令可以用，need to intall cscope first
-        ```
+* add to .vimrc
+    ```
+    set cscopetag
+    # 如果設定了cscopetag選項就可以在使用cscope資料中使用命令(:tags,ctrl-])來瀏覽標記
+    # no need, already in the plugin gtags-cscope.vim
 
-    * cs add GTAGS 是讓 vim 可以直接用 gtag 的 tag
+    set cscopeprg=gtags-cscope  "tell vim to use gtags-cscope as cscope
 
-* works
+    cs add GTAGS  "let cs command can read GTAGS database
+    cs add cscope.out "let cs command read cscope.out database
 
-    * install global and make manually
-
-        * ```
-            sudo apt-get build-dep global
-            sudo apt-get install libncurses5-dev libncursesw5-dev
-            ```
-
-        * 
-
-    * add .vimrc
-
-        * ```
-            set cscopetag " use cscope for tags command
-            set cscopeprg=’gtags-cscope’ "replace cscope with gtags-cscope
-            cs add GTAGS "replace cscope with gtags-cscope
-            "set tags=./tags,./TAGS,tags;~,TAGS;~
-            set tags=./tags,./TAGS,./GTAGS;
-            
-            " gtags.vim top config
-            let GtagsCscope_Auto_Load = 1
-            let GtagsCscope_Auto_Map = 1
-            let GtagsCscope_Quiet = 1
-            ```
-
-    * add plugin
-
-        * https://github.com/aceofall/gtags.vim
-
-    * drawback
-
-        * gtags-cscope do not provide "find functions called by this function"
-
-* next
-
-    * test global provide by pkg
-        * it works
+    source ~/.cscope_maps.vim   "map cs command to short-cut
+    ```
 
 * conclusion
-
     * .vim/plugin should contain 
         * gtags-cscope.vim
             * replace cscope
         * gtags.vim
             * replace ctags
+
     * .vimrc should contain
         * set tags=./tags,./TAGS,tags;~,TAGS;~
             * it is for ctags to tell vim where to find ctags' tag file, it allow vim to recursively find tags file
             * but for gtags, by default it will do so, so actually no need to add this line
-            * for cscope, it only allow cscope.out in the current dir
+            * for cscope, it only allow cscope.out in the current dir, so don't add this line
         * set cscopetag
             * allow cscope for using 'ctrl-]', '':ta', 'vim -t'
         * :cs add cscope.out
             * add cscope database 
+
     * gtags' advantage
-        * auto complete for Gtags function_name
+        * auto complete for Gtags function_name(??
         * $ global -u
             * grageraly update
-    * gtags need ctags? need cscope?
+
+    * gtags vs ctags vs cscope
+        * ctags
+            * can generate tag file and let user jump in vim
+            * no control panel
+        * gtags and cscope are bascially the same, but cscope is no longer maintained

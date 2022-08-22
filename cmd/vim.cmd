@@ -395,7 +395,8 @@ vim -r 檔名 | 有 .swp 時緊急恢復
 vim -x 檔名 | 加密檔案，以後要開檔時會要求輸入密碼
 ctrl + a    | 遞增游標所在數字
 ctrl + x    | 遞減游標所在數字
-:set ff=dos | change ff to dos system (no change in appearance), Unix's ff is /r, dos is /r/n
+:set ff=dos | change ff to dos system (no change in appearance), Unix's ff is /r, dos is /r/n (will represent as  in file)
+:set ff=unix| change ff to unix system
 <Ctrl-w> z  | close preview window (YCM hint will show in preview window)
 K           | lookup a API in manpage
 gD          | jump to the definition of function
@@ -435,3 +436,11 @@ vim -d file_a file_b        | use vim to check file diff
     - 好像只能顯示本檔
 - Srcexpl
     - 利用 ctag，可以開一個 vim split window 跳到 ctags 找到的定義處
+
+# vim8 built-in plug manager
+- put the vim plug into particular path
+    - ~/.vim/pack/my_plugs/start
+        - change my_plugs to whatever
+        - default vim will load the plug under this path
+    - ~/.vim/pack/my_plugs/opt
+        - need to manually load the plugs under this dir

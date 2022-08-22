@@ -127,6 +127,22 @@
         char str[0];
     } __attribute__((packed));
     typedef struct foo Foo;
+
+	## initialize
+	struct inner {
+		int a;
+		int b;
+	};
+
+	struct outer {
+		struct inner in;
+		int c;
+	}
+
+	struct outer out = {
+		.in = { 0, 0},
+		.c = 0
+	};
 # }
 
 # function {
@@ -182,6 +198,19 @@
         command[state]();
         return 0;
     }
+# }
+
+# string {
+    include <string.h>
+    char str[3];
+    memset(str, 'g', 3);
+    printf("%s\n", str);    // "ggg"
+
+    strncpy(str, "aa", 2);
+    printf("%s\n", str);    // "aag"
+
+    strncpy(str, "aa", 3);
+    printf("%s\n", str);    // "aa"
 # }
 
 # date {
@@ -298,6 +327,16 @@
     printf("%s = %s = %d\n", GET_VARIABLE_STRING(AVG(2,4)), GET_MACRO_CONTENT_STRING(AVG(2,4)), AVG(2,4));
         * "AVG(2,4) = (2+4)/2 = 3"
 
+    ## stringizing
+    #define xstr(s) str(s)
+    #define str(s) #s
+    #define foo 4
+    str (foo)
+        * "foo"
+    xstr (foo)
+        * xstr (4)
+        * str (4)
+        * "4"    
 
     ## build bug in preprocessor, we can use it to see if a compile flag is on
     #ifndef DEBUG

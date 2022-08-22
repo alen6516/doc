@@ -12,6 +12,7 @@
 * master
     * the default BRANCH after creating a new repo
 
+
 ## Pull/fetch
 * fetch means only fetch remote data to .git/FETCH_HEAD
     $ git fetch --all && git checkout <remotebranch>
@@ -53,6 +54,9 @@
 
 * delete a branch on remote
     $ git push --delete origin bugfix
+
+* delete all branches other than master
+    $ git branch | grep -v "master" | xargs git branch -D
 
 * merge a branch (to current branch)
     $ git merge bugfix
@@ -130,8 +134,12 @@
 * find commits with certain pattern in the committed files, can be used to find deleted lines
     $ git log -S "Ruby" path/to/file
 
+* find commits modifying a specific function
+    $ git log -L :myfunction:path/to/myfile.c
+
 * find commits within a time period
     $ git log --oneline --since="9am" --until="12am" --after="2017-01"
+
 
 ## Patch/Apply
 * patch
@@ -182,3 +190,24 @@
 
 * check remote URL
     $ git remote -v
+
+* remove a commit from history
+    * git rebase -i and use d for delete
+
+* reorder 2 joint commits
+    * git rebase -i and change the order of commits and save
+
+* combine 2 joint commits
+    * git rebase -i and use s for squash, it will squash with the one before it
+
+* set upstream
+    $ git push -u origin <branch>
+
+* run git command outside a repo folder
+    $ git -C path/to/repo log
+
+* amend the author of a commit
+    $ git rebase -i SHA
+        * change "pick" to "e" for the target commit
+    $ git commit --amend --author="Author Name <email@addres.com>"
+    $ git rebase --continue
