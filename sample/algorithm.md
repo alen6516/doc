@@ -7,6 +7,21 @@
 
 ## Tree
 * binary tree
+    * type:
+        * AVL tree
+        * Binary search tree
+        * Red-black tree
+
+    * Binary search tree
+        * left child's value <= father's value <= right child's value
+
+    * AVL tree
+        * first self-balance tree
+        * A balancing factor is allocated for each node in the AVL tree, based on whether the tree is balanced or not.
+            * the correct balance factor is 1, 0 and *1
+        * If the tree has a new node, it will be rotated to ensure that it is balanced
+        * Common operations such as viewing, insertion, and removal take O(log n) time
+
     * Traversal: Preorder, Inorder, Postorder, Level-order
         * Preorder: root node  => left child  => right child
         * Inorder : left child => root node   => right child

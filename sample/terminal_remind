@@ -5,11 +5,13 @@ ctrl + Left     | move leftward a word
 ctrl + Right    | move rightward a word
 ctrl + u        | 從游標處向前刪除指令串
 ctrl + k        | 從游標處向後刪除指令串
-ctrl + w        | 刪除一個word
 ctrl + y        | paste the words deleted by ctrl + u/k/w
 alt  + .        | paste the argument of the last command
+ctrl + w        | 向左刪除一個 word
+alt  + d        | 向右刪除一個 word
 ctrl + a        | 移動游標到行首
 ctrl + e        | 移動游標到行尾
+ctrl + arrow    | 左右移動一個 word
 ctrl + p        | 顯示上一個指令
 ctrl + n        | 顯示下一個指令
 ctrl + r        | 在歷史裡搜尋指令(一邊打一邊繼續按 ctrl + r)

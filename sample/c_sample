@@ -100,7 +100,7 @@
     int a[4] = (int[4]*) arr;
 # }
 
-# state {
+# statement {
     ## switch case
     switch(n) {
         /* 
@@ -118,6 +118,14 @@
             return x;
         }
     }
+
+    ## ?:
+    printf("%d\n", a ?: b);
+
+    ## typeof()
+    extern int foo();
+    typedef(foo()) var;
+    /* function foo will not be executed */
 # }
 
 # struct {
@@ -143,6 +151,41 @@
 		.in = { 0, 0},
 		.c = 0
 	};
+
+    ## for nested struct we don't need a struct name
+    struct outer {
+        struct {
+            int a;
+        } inner;
+    };
+
+    ## declare a local struct
+    void foo()
+    {
+        struct {size_t x; char a[]; } *p;
+        p = malloc(sizeof(*p) + 100);
+    }
+# }
+
+# union {
+    struct foo {
+        union {
+            int x;
+            int y
+        } value;
+    };
+
+    struct bar {
+        union {
+            int x;
+            int y;
+        };
+    };
+
+    struct foo foo;
+    struct bar bar;
+    foo.value.x = 10;
+    bar.y = 10;
 # }
 
 # function {
@@ -200,6 +243,22 @@
     }
 # }
 
+# get {
+    #include <stdio.h>
+    int fgetc (FILE *stream);
+    # read next char from stream and return it as an unsigned char cast to an int, or EOF on end of file error
+
+
+    char*  fgets (char *s, int size, FILE *stream);
+    int getc (FILE *stream);
+    # is equivalent to fgetc() except that it may be implemeted as a macro
+
+    int getchar (void);
+    char* gets (char *s);
+    # Briefly, f-start API means this API is implemented by function rather than Macro.
+    # However, in GUN C, these f-start API are also implemented by function, and just use a Macro to wrap it.
+# }
+
 # string {
     include <string.h>
     char str[3];
@@ -211,6 +270,14 @@
 
     strncpy(str, "aa", 3);
     printf("%s\n", str);    // "aa"
+# }
+
+# bit operation {
+    ## turn on a bit
+    flag |= bit;
+
+    ## turn off a bit
+    flag &= ~bit;
 # }
 
 # date {
@@ -255,6 +322,39 @@
     int a = (rand() % 100)+1;
 # }
 
+# fork {
+    #include <stdio.h>
+    #include <stdlib.h>
+    #include <sys/types.h>
+    #include <unistd.h>
+    #include <sys/wait.h>
+    pid_t pid;
+    int status;
+
+    if ((pid = fork()) < 0) {
+        perror("fail to fork");
+        exit(1);
+    }
+
+    /* Child */
+    if (pid == 0) {
+        exit(0);
+	}
+
+    /* Parent
+     * Gives you time to observe the zombie using $ ps aux | grep 'Z'
+	 * here child exits but parents have not called wait, so child become zombie
+	 */
+    sleep(10);
+
+    /* ... and after that, parent wait(2)s its child's
+     * exit status, and prints a relevant message. */
+    pid = wait(&status);
+    if (WIFEXITED(status))
+        fprintf(stderr, "\n\t[%d]\tProcess %d exited with status %d.\n",
+                (int) getpid(), pid, WEXITSTATUS(status));
+# }
+
 # process {
 ## process exit
     exit(int status)
@@ -278,6 +378,7 @@
         * in main(), if main() finishes before threads it spawned exit, all its child threads are terminated, but if call pthread_exit() before finishing main(), it will block and support the threads before they are done.
 
     ## pthread mutex
+    #// hang until acquiring the lock
     pthread_mutex_t count_lock = PTHREAD_MUTEX_INITIALIZER;
     pthread_mutex_lock(&count_lock);
     global_int++;
@@ -292,12 +393,152 @@
     pthread_spin_unlock(&spin_lock);
 
     ## pthread spin_trylock
+    #// return immitiately if not acquiring a lock
     pthread_spinlock_t spin_lock;
     pthread_spin_init(&spin_lock, PTHREAD_PROCESS_PRIVATE);
     if (pthread_spin_trylock(&spin_lock)) {
         do_thing()
         pthread_spin_unlock(&spin_lock);
     }
+
+    ## pthread_cond_signal(&cond)
+    #// - Send signal to another thread which is waiting by calling pthread_cond_wait(&cond)
+    #// - If there are multuple threads waiting, only one thread will receive the signal, depends on the priority and waiting time
+    #// - However, in some implementation it will send signals to multiple threads, so use a while loop to avoid multiple threads works 
+    while(!condition) {
+        pthread_cond_wait(&cond, &mut);
+    }
+
+    ## pthread_cond_wait(&cond)
+    #// - Have to get lock first, and then can call wait to hang the thread.
+    #// - Hang until receive signal from another thread.
+    #// - Release lock.
+
+    
+    ## pthead_self()
+    #// pthreads from the same process, shared the same pid but different pthread_self() 
+    
+    ## conclusion
+    #// - When multiple process compete a lock, only one process acquire the lock.
+    #// - Other processes will sleep, which means OS will mot schedule them.
+    #// - If use spinlock, then process will not sleep.
+    #// - Until the lock is release, OS will pick up the process with the highest priority to run from the waiting list.
+    #// - In ISR context, it is not recommended to acquire lock because we don't know when we can get it, but ISR should be short.
+# }
+
+# Signal {
+    #include <signal.h>
+    bool KEEP = 1;
+
+    void int_handler() {
+        KEEP = 0;
+        printf("bye\n");
+    }
+
+    void tstp_handler() {
+        printf("press ctrl-z\n");
+    }
+
+    void* child_threade() {
+        while(KEEP);
+    }
+
+    int main () {
+        // handle ctrl-c
+        signal(SIGINT, int_handler);
+
+        // handle ctrl-z
+        signal(SIGTSTP, tstp_handler);
+        
+        // set breakpoint in C code for gdb
+        raise(SIGINT);
+    }
+# }
+
+# completion {
+    # a synchronization mechanism in kernel
+    struct completion {
+        unsigned int        done;
+        wait_queue_head_t   wait;
+    };
+
+    # APIs:
+    #define COMPLETION_INITIALIZER(work) { 0, __WAIT_QUEUE_HEAD_INITIALIZER((work).wait) }
+    #define DECLARE_COMPLETION(work) struct completion work = COMPLETION_INITIALIZER(work)
+    static inline void init_completion(struct completion *x)
+    {
+        x->done = 0;
+        init_waitqueue_head(&x->wait);
+    }
+ 
+    ## wait APIs:
+    void wait_for_completion(struct completion *x);
+    int wait_for_completion_interruptible(struct completion *x);
+    unsigned long wait_for_completion_timeout(struct completion *x, unsigned long timeout);
+    unsigned long wait_for_completion_interruptible_timeout(struct completion *x, unsigned long timeout);
+
+    ## wakeup APIs:
+    void complete(struct completion *x);
+    void complete_all(struct completion *x);
+
+    ## example:
+    {
+        #include <linux/module.h>
+        #include <linux/init.h>
+         
+        #include <linux/sched.h>
+        #include <linux/kernel.h>
+        #include <linux/fs.h>
+        #include <linux/types.h>
+        #include <linux/completion.h>
+         
+        MODULE_LICENSE("GPL");
+         
+        static int complete_major = 250;
+        DECLARE_COMPLETION(g_comp);
+         
+        ssize_t complete_read(struct file *filp, char __user *buf, size_t count, loff_t *pos)  {
+            printk(KERN_ERR "process %i (%s) going to sleep\n", current->pid,current->comm);
+            wait_for_completion(&g_comp);
+            printk(KERN_ERR "awoken %i (%s)\n", current->pid, current->comm);
+            return 0;
+        }
+         
+        ssize_t complete_write(struct file *filp, const char __user *buf,size_t count, loff_t *pos) {
+            printk(KERN_ERR "process %i (%s) awakening the readers...\n", current->pid, current->comm);
+            complete(&g_comp);
+            return count;
+        }
+         
+        struct file_operations complete_fops = {
+            .owner = THIS_MODULE,
+            .read  = complete_read,
+            .write = complete_write,
+        };
+         
+        int complete_init(void) {
+            int result;
+            result = register_chrdev(complete_major, "complete", &complete_fops);
+            if(result < 0)
+                return result;
+            if(complete_major == 0)
+                complete_major = result;
+            return 0;
+        }
+
+        void complete_cleanup(void) {
+            unregister_chrdev(complete_major, "complete");
+        }
+
+        module_init(complete_init);
+        module_exit(complete_cleanup);
+    }
+
+    ## testing steps:
+    1. mknod /dev/complete 創建 complete節點，在linux上驅動程序需要手動創建文件節點。
+    2. insmod complete.ko 插入驅動模塊，這裏要注意的是，因爲我們的代碼中是手動分配的設備號，很可能被系統已經使用了，所以如果出現這種情況，查看/proc/devices文件。找一個沒有被使用的設備號。
+    3. cat /dev/complete 用於讀該設備，調用設備的讀函數
+    4. 打開另一個終端輸入 echo “hello” > /dev/complete 該命令用於寫入該設備。
 # }
 
 # Macro {
@@ -342,6 +583,43 @@
     #ifndef DEBUG
     #error Only Debug builds are supported
     #endif
+
+    ## Use macro to define enum and switch case to print error code
+    ```
+    // The X-macro
+    #define LIST_OF_ERRORS                             \
+           X(ERROR_MSG_1, "Failed to open file.\n")    \
+           X(ERROR_MSG_2, "Failed to read file.\n")    \
+           X(ERROR_MSG_3, "Failed to execute abc.\n")
+
+    // 1st definition of X to define enum error codes
+    #define X(e, m) e,
+    enum {
+    LIST_OF_ERRORS
+    };
+    #undef X
+
+    // 2nd definition of X to define cases in a switch
+    void print_error(int e)
+    {
+    #define X(e, m) case e: printf("[ERROR] : code (%d)\n\t%s", e, m); break;
+      switch(e) {
+        LIST_OF_ERRORS
+        default: printf("[ERROR] : unknown code (%d)\n", e);
+      }
+    #undef X
+    }
+
+    int main(void)
+    {
+      print_error(ERROR_MSG_2);
+      print_error(ERROR_MSG_1);
+      print_error(ERROR_MSG_3);
+      print_error(10);
+
+      return 0;
+    }
+    ```
 # }
 
 # String {
@@ -432,9 +710,14 @@
 
 
     ## const* int vs int const*
-    const int *p = &a;  // write to *p is illegal
-    int const *p = &a;  // write to *p is illegal
-    int *const p = &a;  // write to p is illegal
+    const int *p = &a;
+    #// declare p a pointer to const int
+    #// so *p = 5 is wrong, p++ is right
+    #// same as int const *p = &a
+
+    int *const p = &a;
+    #// declare p a const pointer to int type
+    #// *p = 5 is right, p++ is wrong
     #// when const is at the left-side of *, int is const; when const is at the right-side of *, pointer is const.
 
 
@@ -486,4 +769,7 @@
     }
 
     fclose(fp);
+
+    ## build bug on compile time
+    #define BUILD_BUG_ON(condition) ((void)sizeof(char[1 - 2*!!(condition)]))
 # }

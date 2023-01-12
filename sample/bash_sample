@@ -313,6 +313,9 @@ done
     * ] is an mandatory argument of [ command, that's why we need space between it and its previous word
 * [[]] is a bash, zsh syntax, more powerful than []
 * (()) is used to test an arithmetic expression
+* () is used to execute command in subshell
+    * (a=1)
+    * then echo $a will get nothing
 
 # 判斷式
 | 1. 關於某個檔名的『檔案類型』判斷，如 test -e filename 表示存在否
@@ -477,11 +480,11 @@ n1 -le n2	        n1 小於等於 n2。
 
 
 # 字串比較
-"$str1" == "$str2"	    str1 等於 str2 (=兩邊要空格)。
-"$str1" != "$str2"      str1 不等於 str2。
-"$str1" == "root"*      str1 is started with root
--z "$str"               str 為空字串。
--n "$str"	            str 為非空字串。
+[[ "$str1" == "$str2" ]]    str1 等於 str2 (=兩邊要空格)。
+[[ "$str1" != "$str2" ]]    str1 不等於 str2。
+[[ "$str1" == "root"* ]]    str1 is started with root
+-z "$str"                   str 為空字串。
+-n "$str"	                str 為非空字串。
 
 
 ## 將字串前面的0去掉

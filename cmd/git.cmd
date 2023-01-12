@@ -105,6 +105,8 @@
         * will drop the stash
     $ git stash apply stash@{2}
         * will not drop the stash
+    $ git stash show -p stash@{2}
+        * check the diff but not apply
 
 
 ## Show
@@ -140,6 +142,13 @@
 * find commits within a time period
     $ git log --oneline --since="9am" --until="12am" --after="2017-01"
 
+* show history change of a file
+    $ git log -p -- path/to/file
+
+* show commit history of a file graphically
+    $ gitk path/to/file
+        * need to enable X11-forwarding if connecting to linux via SSH
+
 
 ## Patch/Apply
 * patch
@@ -160,6 +169,8 @@
     * the target commit is 55669487 on B branch, and want to cherry-pick this commit to branch A
     * first checkout to branch A, then:
     $ git cherry-pick 55669487
+    $ git cherry-pick -n 55669487
+        * cherry-pick but not commit, we can unstage some files and then commit, the message will be stored by cherry-pick
 
 ## rebase/merge/suqash
 * rebase
@@ -211,3 +222,13 @@
         * change "pick" to "e" for the target commit
     $ git commit --amend --author="Author Name <email@addres.com>"
     $ git rebase --continue
+
+* insert a commit between 2 consecutive commits
+    * for example, we want to insert a commit B between commit A and C
+    * git rebase -i A~1
+    * change commit A's "pick" to "edit", and save & exit
+    * create commit B by git commit
+    * git rebase --continue
+
+* add files to the last commit without changing the commit message
+    $ git commit --amend --no-edit

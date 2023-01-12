@@ -42,3 +42,5 @@ $ apt build-dep global
     * build the environment for the  compilation of package "global"
     * if fail, make sure you have uncomment lines starting with deb-src in source.list, and do apt update
     
+$ apt list tmux*
+    * find the package named tmux*

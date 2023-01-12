@@ -23,3 +23,7 @@ $ tar xf archive.tar
     * tar.xz
         $ tar Jcvf folder.tar.xz folder
         $ tar Jxvf folder.tar.xz
+
+    * bz2, .bz, .tar.bz2, .tbz2
+        $ bzip2 -z folder
+        $ bzip2 -dkv folder.bz2

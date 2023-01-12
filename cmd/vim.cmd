@@ -67,7 +67,7 @@ qqq	            | q
 <leader> + h    | :noh
 <leader> + v    | open my vim help
 Tab	            | indent
-Shift + Tab	    | unindent	# shift + tab 會被xhsell解析掉，而 vim 下 Ctrl+Tab = Tab
+Shift + Tab	    | unindent	# shift + tab 會被xshell解析掉，而 vim 下 Ctrl+Tab = Tab
 
 # 移動於 window 間 (move among windows)
 short cut       | function
@@ -149,6 +149,8 @@ x           | 刪除游標所在字元
 X           | 刪除游標前之字元
 dd          | 刪除一整行
 dw          | 刪除一個字(不適用中文)
+daw         | delete a word under cursor
+caw         | delete a word under cursor and enter insert mode
 dG          | 刪除至檔尾
 dgg         | 刪除至檔首
 D           | 刪除至行尾(含游標所在字元)

@@ -48,6 +48,8 @@ w            | choose window (window tree)
 &            | kill window                            
 f            | find window through name               
 l            | last-used window
+new          | create a new window as the last one
+new-window -a| create new window and insert at the next index
 :move-window -t 0       將當前 window 移至編號 0 (最前)
 :swap-window -s 4 -t 2  將編號 4 與 2 window 交換 (swapw)
 :swap-window -t -1      move the window leftward by 1
