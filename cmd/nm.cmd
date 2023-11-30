@@ -13,7 +13,7 @@ list symbols from object files
 --defined-only
     display only defined symbols
 
--g 
+-g
     display only external symbols
 
 -a
@@ -30,7 +30,7 @@ T
     * linker will fail if it detects global symbol redefination
 t
     * the symbol is in text (code) section, and it is local (static function)
-    
+
 # Example
 $ nm obj_file
     * display symbol value, symbol type, synbol name

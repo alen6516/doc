@@ -62,6 +62,9 @@
     $ git merge bugfix
         * if current branch is master, bugfix branch will be merged to master
 
+* find branches the commit is on
+    $ git branch -a --contains <commit>
+
 
 ## Recovery
 * cancel modify before git add (be careful)
@@ -107,6 +110,10 @@
         * will not drop the stash
     $ git stash show -p stash@{2}
         * check the diff but not apply
+    $ git stash show -p > my.patch
+        * stash the output into a patch file
+    $ git apply --check my.patch && git apply my.patch
+        * verify no errors and apply the patch
 
 
 ## Show
@@ -125,10 +132,10 @@
 * show merge history in graph
     $ git log --graph
 
-* find commits by auther
-    $ git log --oneline --auther="Sherly"
-    * find A or B auther
-    $ git log --oneline --auther="Sherly\|Eddie"
+* find commits by author
+    $ git log --oneline --author="Sherly"
+    * find A or B author
+    $ git log --oneline --author="Sherly\|Eddie"
 
 * find commits with certain msg
     $ git log --oneline --grep="WTF"
@@ -145,10 +152,35 @@
 * show history change of a file
     $ git log -p -- path/to/file
 
+* find the order of 2 commits on the same branch
+    $ git log --oneline | grep "1444f2416bd2\|e0ee0461b2e2" -n
+
 * show commit history of a file graphically
     $ gitk path/to/file
         * need to enable X11-forwarding if connecting to linux via SSH
 
+
+## git grep
+# git grep is very similar. The main difference is that git grep defaults to searching in the files that are tracked by git
+* find the keyword with line number
+    $ git grep -n WORD
+
+* count the times of keywork
+    $ git grep -c WORD
+
+* find keyword and show the function it is in
+    $ git grep -p WORD *.c
+
+* add a break and a heading for each search result for better viewing
+    $ git grep --break --heading WORD
+
+* search keyword to only .txt files
+    $ git grep WORD -- *.txt
+    $ grep -R --include=*.txt WORD .
+
+* search keyword in the previous version of the repo
+    $ git grep WORD HEAD~
+    $ git checkout HEAD~; grep -R WORD ,; git checkout -
 
 ## Patch/Apply
 * patch
@@ -203,13 +235,17 @@
     $ git remote -v
 
 * remove a commit from history
-    * git rebase -i and use d for delete
+    $ git rebase -i and use d for delete
+
+* revert a commit
+    $ git revert <COMMIT>
+        * note this will create a revert commit
 
 * reorder 2 joint commits
-    * git rebase -i and change the order of commits and save
+    $ git rebase -i and change the order of commits and save
 
 * combine 2 joint commits
-    * git rebase -i and use s for squash, it will squash with the one before it
+    $ git rebase -i and use s for squash, it will squash with the one before it
 
 * set upstream
     $ git push -u origin <branch>
@@ -232,3 +268,7 @@
 
 * add files to the last commit without changing the commit message
     $ git commit --amend --no-edit
+
+* git send-mail
+    $ git send-email --to="xxx" --cc="xxx" <COMMIT>
+        * append -vN for version N

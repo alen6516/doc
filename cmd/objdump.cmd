@@ -1,6 +1,7 @@
 # Description
 
 # Overview
+* see also nm.cmd
 
 # Options
 -M MODE

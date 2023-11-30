@@ -277,6 +277,10 @@
         * $ show conv
             * show all convenicence variable in list
 
+    * signal
+        * send signal to the program
+        * $ signal SIGINT
+
 * parameter
     * usage
         * $ set PARA VALUE
@@ -299,6 +303,7 @@
         * step
             * on server, execute the file
             * on server, execute "$ gdbserver :PORT --attach `pidof PROCESS`"
+                * or "$ gdbserver IP:PORT EXECUTABLE"
             * on client, enter gdb, execute "$ target remote SERVER_IP:PORT"
 
 * .gdbinit

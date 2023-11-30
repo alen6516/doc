@@ -231,6 +231,8 @@ N           | 尋找上一個
 g*          | 同 * ，但部分符合即可
 g#          | 同 # ，但部份符合即可
 /\<aa\>     | match exactly the string
+/word1\|word2    | search word1 or word2
+/\vword1|word2   | search word1 or word2
 
 # substitute (替換)
 :[range]s/pattern/string/[c,e,g,i]
@@ -243,6 +245,7 @@ c           | confirm，每次替換前會詢問
 e           | 不顯示 error
 g           | globe，整行符合的 pattern 都替換
 i           | ignore，不分大小寫
+:%s/green\|blue/white/gc    | replace green and blue by white
 
 # marks (書籤)
 short cut   | function

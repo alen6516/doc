@@ -3,6 +3,11 @@
 # Overview
 * Need to reboot after installing this command
 * Source code is avaliable at https://gitlab.freedesktop.org/mesa/drm, under the tests folder.
+    * sometimes modetest download by apt is broken, we can clone the src code and build
+    $ git clone https://gitlab.freedesktop.org/mesa/drm.git
+    $ meson build
+    $ ninja -C build
+    $ ./build/tests/modetest/modetest
 * Modetest is also available in ChromeOS under the folder src/third_party/libdrm/tests/.
 
 # Options
@@ -11,6 +16,27 @@
 
 -a
     use atomic API
+
+-c
+    list connectors
+
+-e
+    list encoders
+
+-f
+    list framebuffers
+
+-p
+    list CRTCs and planes (pipes)
+
+-C
+    test hw cursor
+
+-v
+    test vsynced page flipping
+
+-w <obj_id>:<prop_name>:<value>
+    set property
     
 # Example
 $ modetest -M amdgpu

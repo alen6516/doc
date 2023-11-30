@@ -6,9 +6,11 @@
 * before using apt build-dep, one may need to edit source.list by uncomment lines start with deb-src and do apt update
 
 # Options
+--dry-run
+    * dry run, not to do anything
     
 # Example
-$ apt-cache search PACKAGE
+$ apt search PACKAGE
     * search package by name, support regex
 
 $ apt-cache show PACKAGE
@@ -39,8 +41,15 @@ $ apt-file search SUBSTRING-OF-PATH
     * search packages with target path
 
 $ apt build-dep global
-    * build the environment for the  compilation of package "global"
+    * build the environment for the compilation of package "global"
     * if fail, make sure you have uncomment lines starting with deb-src in source.list, and do apt update
     
 $ apt list tmux*
     * find the package named tmux*
+
+$ apt show <package>
+$ apt-show-versions <package>
+    * show package version
+
+$ apt-cache policy <package>
+    * show the installed version and candidate version of <package>

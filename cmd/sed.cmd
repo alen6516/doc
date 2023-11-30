@@ -3,15 +3,18 @@
 # Overview
 
 # Options
-
+ -i
+    edit files in place
     
 # Example
-$ sed -i "s/old_string/new_string/g" file1 file2 file3
-    * replace "old_string" with "new_string" in file1, file2, file3
-    * if no -i, the command just output the result to cli
+$ sed -i "s/foo/bar/gI" file1 file2 file3
+    * replace "foo, FOO, FoO, ..." with "bar" in file1, file2, file3
+    * g means global replace
+    * I means to match all cases of foo
 
 $ sed -i '/^$/d' file.txt
     * remove blank lines from a file
+    * d means delete line 
 
-$ sed -i 's/[ \t]*$//' "$1"
+$ sed -i 's/[ \t]*$//' file
     * remove trailing spaces from a file

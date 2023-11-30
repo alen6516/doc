@@ -1,14 +1,18 @@
 # Description
+nc is netcat
 
 # Overview
 
 # Options
--u 
+-l
+    start a daemon to listen
+
+-u
     use UDP
 
 -6
     use ipv6
-    
+
 # Example
 $ nc -v 127.0.0.1 8787
     * Test TCP port is open or not

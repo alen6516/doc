@@ -50,7 +50,10 @@ $ find . -type f -name "*.php"
 
 $ find . -type f -name ".mp3" -exec rm -f {} \;
     * {} means the result
-    * \; is a ending char
+    * \; is used to terminate the "-exec" option
+
+$ find . -type f -exec sed -i 's/XXX/OOO/g' {} \;
+    * find and replace string XXX to OOO in files
 
 $ find . -type f -name ".*"
     * find hidden file

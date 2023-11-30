@@ -2,9 +2,38 @@
 
 # Overview
 
+Services:
+    * gdm3
+        * Gnome display manager
+        * config file is /etc/gdm3/custom.conf
+
+    * lightdm
+        * another display manager
+        * we can use pstree | egrep "lightdm|gdm" to see which are in use
+
+    * NetworkManager (network-manager)
+        * Gnome default network manager
+        * config files are /etc/netplan/*
+
+    * systemd-networkd
+        * yet another network manager
+        * disable by default on Ubuntu
+        * config files are /etc/systemd/network/*
+
+    * systemd-resolved
+        * an independent domain resolution service on linux
+        * entries in /etc/hosts has the highest priority for lookup
+        * config file is /etc/systemd/resolved.conf
+            * if using DHCP, DHCP server will tell host which DNS server to use when doing lookup
+            * otherwise, host will use DNS server specified in this file
+        * resolvectl is a tool to test if systemd-resolved is working
+
 # Options
     
 # Example
+$ sudo systemctl list-units --type=service
+    * list all services under systemctl
+
 $ sudo systemctl isolate multi-user.target
 	* switch to run-level 3
 
@@ -12,8 +41,11 @@ $ systemctl isolate graphical
 	* switch to run-level 5
 
 $ systemctl status network-manager
-
+    * this is the network manger for gnome
+    * we can replace it with systemd-networkd
+    
 $ systemctl status systemd-resolved
+    * check the status of network name resolution
     * to lookup domain name, linux will first check /etc/hosts, if not found then check the config in /etc/resolv.conf and access DNS server
     * the config of systemd-resolved is in /etc/systemd/resolved.conf, below is an example
         ```
@@ -39,3 +71,6 @@ $ systemctl status systemd-resolved
         Cache=no-negative
         ```
     * resolvectl is a tool to test if systemd-resolved is working
+
+$ systemctl restart systemd-logind
+    * logout

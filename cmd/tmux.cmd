@@ -48,6 +48,7 @@ w            | choose window (window tree)
 &            | kill window                            
 f            | find window through name               
 l            | last-used window
+m            | Mark current window (or pane), become default target for -s to join-pane, swap-pane and swap-window
 new          | create a new window as the last one
 new-window -a| create new window and insert at the next index
 :move-window -t 0       將當前 window 移至編號 0 (最前)

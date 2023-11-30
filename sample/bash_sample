@@ -19,11 +19,13 @@ $PS1        提示字元, which is defined in ~/.bashrc
 ${$}        shell 本身的 pid
 $?          上個 cmd 的回傳值
 $!          上個背景執行行程的 pid
+!!         execute the last command
+$_          之前執行指令的最後一個參數
+!$          之前執行指令的最後一個參數
 $0          當前執行的函式或 process 名稱
 "$*"        傳入的所有參數組成的 list => "$1 $2 $3 ..."
 "$@"        與 $* 同 不過個參數是獨立的
 $#          傳入的參數個數
-$_          之前執行指令的最後一個參數
 $$          scipt 本身的 pid 常用來當作 unique 的臨時檔名
 $RANDOM     get a random integer
 $(nproc)    number of processing units
@@ -40,21 +42,27 @@ $(nproc)    number of processing units
         * in this case, we don't worried about what filename to use
 
 
-# wildcard
+# wildcard (in bash)
 *
     means 0 to unlimit number of any char
 
 ?
     means at least 1 char
+    $ ls /etc/?????
+        * find the file under /etc/ with 5 chars as filename
 
 [abcd]
     means at least 1 char which is in the []
 
 [a-z]
     means at least 1 char whose ascii code is from the  ascii code of "a" to ascii code of "z"
+    $ ls /etc/*[0-9]*
+        * find the file under /etc/ with the filename contains number
 
 [^abc]
     means at least 1 char except the chars in the []
+    $ ls /etc/[^a-z]*
+        * find the file under /etc/ with the filename starting with Upper-case chars
 
 # Variable modify
 ## ref: https://linux.vbird.org/linux_basic/centos7/0320bash.php#variable_other
@@ -98,14 +106,39 @@ ${PATH/sbin/SBIN}
 ${PATH//sbin/SBIN}
     * replace all matched "sbin" with "SBIN"
 
+${PATH//$WORD/}
+    * remove all $WORD from $PATH
+
 ## Assign
-$ USER=${USER-root}
+* USER=${USER-root}
     * if variable USER is unset, set it as "root"
     * if USER is set but is "", then this check is not useful
 
-$ USER=${USER:-root}
-    * if variable USER 
+* USER=${USER:-root}
+    * if variable USER is unset or "", set it as "root"
+    * str: means when str is unset or ""
 
+* VAR=${str?"no such str"}
+    * -bash: str: no such str
+    * if str is unset, bash output "no such str", else set VAR=$str
+
+* VAR=${str:?"no such str or str is \"\""}
+    * -bash: str: no such str or str is ""
+    * if str is unset or "", bash output error, else set VAR=$str
+
+## Remove first N charactors
+str="--1920x1080"
+str=${str:2}    # 1920x1080
+
+# or using cut
+str=`cut -c3- <<< $str`   # 1920x1080
+
+## !
+$ !ssh
+    * search in history and execute the most recent command start with "ssh"
+
+$ !!
+    * execute the last command
 
 # 定義變數與列印變數
 VAR="hello world"
@@ -304,6 +337,33 @@ if [[ "$1" = "1" || "$1" = "2" ]]; then
     ...
 done
 
+## check if a variable is number
+if [ -n "$var" ] && [ "$var" -eq "$var" ] 2>/dev/null; then
+
+if [[ $VAR =~ ^[0-9]+$ ]]; then
+
+## check if a variable contains number
+if [[ $VAR =~ [0-9] ]]; then
+
+# check if variable contains only alphabets and numbers
+if [[ $VAR =~ ^[0-9a-zA-Z]+$ ]]; then
+
+# Check if string starts with character
+if [[ $VAR =~ ^[aA] ]]; then
+
+## check if a variable is set
+if [ -z "$var" ]; then
+    # remember, $var needs to be wrapped by ""
+    echo "is not set"
+else
+    echo "is set"
+fi
+
+## check command execution result
+if lsmod | grep drm &> /dev/null; then
+    echo "drm is loaded!"
+fi
+
 # =, ==, -eq in if condition
 * = and == are for string comparison
 * = and == are equivalent in bash, but only = is legal in sh, so = is recommended
@@ -364,6 +424,38 @@ done
 | !                       | 反相狀態，如 test ! -x file ，當 file 不具有 x 時，回傳 true
 
 
+# 檔案比較
+-f file	          file 存在，並且為一檔案。
+-d file	          file 存在，並且為一目錄。
+-r file	          執行此 script 者對 file 具有讀取權限。
+-w file	          執行此 script 者對 file 具有寫入權限。
+-x file	          執行此 script 者對 file 具有執行權限。
+-e file	          file 存在於系統上。
+-s file	          file 存在，並且檔案大小不為 0。
+-u file	          file 具有 SUID 的屬性。
+-g file	          file 具有 SGID 的屬性。
+-k file	          file 具有 Sticky bit 的屬性。
+file1 -nt file2	  file1 較 file2 為新 ( 根據修改時間作比較 )。
+file1 -ot file2	  file1 較 file2 為舊 ( 根據修改時間作比較 )。
+
+
+# 數值比較
+n1 -eq n2	        n1 等於 n2。
+n1 -ne n2	        n1 不等於 n2。
+n1 -gt n2	        n1 大於 n2。
+n1 -ge n2	        n1 大於等於 n2。
+n1 -lt n2	        n1 小於 n2。
+n1 -le n2	        n1 小於等於 n2。
+
+
+# 字串比較
+[[ "$str1" == "$str2" ]]        str1 等於 str2 (=兩邊要空格,變數要"")。
+[[ "$str1" != "$str2" ]]        str1 不等於 str2。
+[[ "$str1" == "root"* ]]        str1 is started with root
+[[ "$str" == *"$substr"* ]]     if str contains substr
+-z "$str"                       str 為空字串。
+-n "$str"	                    str 為非空字串。
+
 
 # Switch case
 case $CAR in
@@ -376,7 +468,7 @@ case $CAR in
   BENZ | benz)
     echo "benz"
   ;;
-  *) 
+  *)
     echo "wrong role type"
     exit
   ;;
@@ -411,6 +503,9 @@ do
     echo ${CAR}
 done
 
+# for loop in one line
+for file in `ls`; do md5sum $file; done
+
 
 # for loop
 for i in $(seq 1 10)
@@ -441,51 +536,23 @@ PRINT_FUNCTION "first_args"
 
 foo() {
     echo ${FUNCNAME[0]}     # print function name
+    return                  # we can return from a function, and exit from a bash
 }
+
+if [[ -z $1 ]]; then
+    shift
+    foo $@                  # pass the 2nd and rest arguments to foo
+fi
 
 # 等候某個事件發生
 FILE_EXISTED=0;
-while [ $FILE_EXISTED -ne "1" ]; 
+while [ $FILE_EXISTED -ne "1" ];
 do
   if [ -z "/root/test_file" ];then
     FILE_EXISTED=1
   fi
   sleep 1;
 done
-
-
-
-# 檔案比較
--f file	          file 存在，並且為一檔案。
--d file	          file 存在，並且為一目錄。
--r file	          執行此 script 者對 file 具有讀取權限。
--w file	          執行此 script 者對 file 具有寫入權限。
--x file	          執行此 script 者對 file 具有執行權限。
--e file	          file 存在於系統上。
--s file	          file 存在，並且檔案大小不為 0。
--u file	          file 具有 SUID 的屬性。
--g file	          file 具有 SGID 的屬性。
--k file	          file 具有 Sticky bit 的屬性。
-file1 -nt file2	  file1 較 file2 為新 ( 根據修改時間作比較 )。
-file1 -ot file2	  file1 較 file2 為舊 ( 根據修改時間作比較 )。
-
-
-# 數值比較
-n1 -eq n2	        n1 等於 n2。
-n1 -ne n2	        n1 不等於 n2。
-n1 -gt n2	        n1 大於 n2。
-n1 -ge n2	        n1 大於等於 n2。
-n1 -lt n2	        n1 小於 n2。
-n1 -le n2	        n1 小於等於 n2。
-
-
-# 字串比較
-[[ "$str1" == "$str2" ]]    str1 等於 str2 (=兩邊要空格)。
-[[ "$str1" != "$str2" ]]    str1 不等於 str2。
-[[ "$str1" == "root"* ]]    str1 is started with root
--z "$str"                   str 為空字串。
--n "$str"	                str 為非空字串。
-
 
 ## 將字串前面的0去掉
 echo "00005 00010 00601 00550" | awk '$0*=1'
@@ -494,10 +561,12 @@ echo "00005 00010 00601 00550" | awk '$0*=1'
 ```bash
 filename="file.txt"
 
-while read line
+while read -r line
 do
     printf "%b\n" $line
-done << $filename
+done < $filename
+# The while loop is executed in a subshell. So any variable in it will not be available once the subshell exits.
+# We can use here-string to let the while loop be in the main shell process.
 ```
 
 ## 讀取argument
@@ -531,7 +600,7 @@ pyOpenSSL_ret="$(rpm -q python-openssl | grep install | wc -l)"
 if [ "$pyOpenSSL_ret" == "1" ]; then
     echo "python-openssl is not installed, please install python-openssl"
     exit
-fi  
+fi
 
 
 ## 類似 traverse 陣列
@@ -541,14 +610,52 @@ do
     echo "IP address: $IP"
 done
 
+## getopts
+usage() { echo "Usage: $0 [-s <45|90>] [-p <string>]" 1>&2; exit 1; }
+
+# a     => option is flag, it takes no parameter
+# a:    => option is argument, it takes a parameter as $OPTARG, bash will throw default error if no parameter is passed
+# :a:   => option is argument, it takes a parameter as $OPTARG, user needs to handle the error if no parameter is passed
+# a:b   => option a is argument, it takes a parameter as $OPTARG, option b is a flag
+# a:b:  => option a and b are both arguments, they take parameters as $OPTARG, bash will throw default error for them if no parameter is passed
+# :a:b: => option a and b are both arguments, they take parameters as $OPTARG, and user needs to handle error for them if no parameter is passed
+while getopts ":a:b:c" option; do
+    case "${option}" in
+        s)
+            s=${OPTARG}
+            ((s == 45 || s == 90)) || usage
+            ;;
+        p)
+            p=${OPTARG}
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${s}" ] || [ -z "${p}" ]; then
+    usage
+fi
+
+echo "s = ${s}"
+echo "p = ${p}"
 
 ## array
 IP=(10.10.10.10 20.20.20.20)
 length=${#IP[@]}
+content=${IP[@]}
 for ((i=0; i<length; i++))
 do
     echo ${IP[$i]}
 done
+
+# remove an element from array
+unset IP[1]
+
+# add element
+IP+=(8.8.8.8)
 
 ## 取得時間
     date +'%Y %m %d %H %M %S'

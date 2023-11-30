@@ -13,7 +13,7 @@ $ locale -a
     $ locale-gen en_US.UTF-8
         * add english support
 
-$ sudo update-locale LC_TIME=en_US.utf-8
+$ sudo update-locale LC_TIME=C
     * or manually revise /etc/default/locale
-    * $ export LC_TIME=en_US.UTF-8
+    * $ export LC_TIME=C
         * to let current shell take effect

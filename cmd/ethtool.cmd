@@ -30,3 +30,14 @@ $ ethtool -k eth1
 $ ethtool -K eth0 tx off rx off
     * disable TCP checksum offload
         * Linux may offload tcp checksum and let NIC to calc and fill it, one can use this command to disable linux to do so
+
+* wake on LAN example
+    * target machine
+        $ ethtool -s enp1sofo wol g
+            * to allow this machine be woken up on Magic packet
+            * need to set this every time after reboot
+            * also need NIC's support and BIOS to enable "Power on by PCI/PCIE devices"
+            * will not work after a power cut
+    * local machine
+        $ wakeonlan <MAC_of_target>
+            * machine needs to be in the same lan of target

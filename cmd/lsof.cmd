@@ -44,3 +44,8 @@ $ lsof -u root -c java
 $ lsof -a -u root -c java
     * list files opened by user root "and" opened by program java
     
+$ lsof -c mpv
+    * when mpv is running, this command is useful to check which .so files are used by mpv
+
+$ lsof -p 1234,5678
+    * list the the files opened by process with pid 1234 and 5678

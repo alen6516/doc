@@ -2,6 +2,7 @@
 
 # Overview
 * many commands don't support using pipe to deliver parameters to it, that's why xargs is useful
+* if command A's output has multiple lines, we can use xargs to provide command B one by one as argument
 
 # Options
 -p
