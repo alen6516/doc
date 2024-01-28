@@ -222,11 +222,13 @@
             * e: edit the code change
 
 ## SSH key authtication to allow git push without password
+* when cloning a repo, choose clone with SSH rather than with HTTPS
 * gen the ssh key, copy the public key and paste to github account
 * try it by
     $ ssh -T git@github.com
 * on command line, enter the repo and type
     $ git remote set-url origin git@github.com:username/REPO.git
+        * this step actually switch remote URLs from HTTPS to SSH, don't need if it is already cloned with SSH
 
 ## Example
 * done a commit and pushed it to remote master, but want to destory that commit
