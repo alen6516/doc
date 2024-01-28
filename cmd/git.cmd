@@ -30,6 +30,15 @@
         * fetch origin's master branch data and merge to local master branch
         * equal to $ git fetch origin master; git merge origin/master;
  
+## clone
+* shallow clone to speed up
+    $ git clone --depth=1 <url>
+        * clone only 1 commit
+
+    $ git clone --depth 5 <url> --branch <branch>
+
+    $ git clone --shallow-since=<date> <url>
+
 
 ## Branch
 * create branch
@@ -195,7 +204,8 @@
 
 * format-patch and am
     $ git format-patch -1 <commit-ish-here> -o <output-dir> -- drivers/gpu/drm/amd/display/
-    $ git am -p6 <output-dir>/*.patch
+    $ git am -p6 xxx.patch
+        $ git am --rej --directory=path/to/patch xxx.patch
 
 * cherry-pick
     * the target commit is 55669487 on B branch, and want to cherry-pick this commit to branch A
@@ -272,3 +282,18 @@
 * git send-mail
     $ git send-email --to="xxx" --cc="xxx" <COMMIT>
         * append -vN for version N
+
+* step to authenticate by ssh key
+    * generate ssh key paire
+        $ ssh-keygen -t ed25519 -C "your_email@example.com"
+    * copy pub key to github page
+    * test ssh key
+        $ ssh -T git@github.com
+        $ git remote set-url origin git@github.com:username/your-repository.git
+        $ git add -A
+        $ git commit -m "xxx"
+        $ git push
+    * Add ssh key to ssh agent
+        $ eval $(ssh-agent -s)
+            * make sure ssh-agent is running
+        $ ssh-add ~/.ssh/id_ed25519

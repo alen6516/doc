@@ -1,6 +1,8 @@
 # Description
 
 # Overview
+* To run docker needs kernel config to support, use check_config.sh to see if current .config support docker or not
+    * https://github.com/coreos/docker/blob/master/contrib/check-config.sh
 
 # Options
 

@@ -58,6 +58,20 @@
     #endif  // this way only works on x86 or amd64 chip, these flags are defined in preprocessor
 # }
 
+# Pointer {
+    # ++/--'s precedence is higher than *(dereference)
+    *ptr++ is equal to *(ptr++)
+    ++*ptr is equal to ++(*ptr)
+
+    # pointer and array
+    int arr[3];
+    int *p1, *p2, *p3;
+    p1 = arr;       # // legal, means p is a pointer to an
+    p2 = &arr;      # // legal, means p is a pointer to array 3 of int
+    p3 = &arr[0];
+    # // p1, p2, p3 are the same
+# }
+
 # Array {
     # declare
 	# 不能用 = 來 assign 一個 array
@@ -142,6 +156,41 @@
     ## array type cast
     int arr[3] = {1, 2, 3};
     int a[4] = (int[4]*) arr;
+
+    ## multidimensional array
+    int arr[][] = {{1, 2}, {3, 4}};  # error, declaration of ‘arr’ as multidimensional array must have bounds for all dimensions except the first
+    int arr[][2] = {{1, 2}, {3, 4}}; # correct
+
+    ## how to pass 2D array to a function?
+
+    # void foo1(int arr[ROW][COL]);
+    int arr1[ROW][COL] = {{...}, ...};
+    foo1(arr1);
+
+    # void foo2(int arr[][COL], int row);
+    int arr2[][COL] = {{...}, ...};
+    foo2(arr2, ROW)
+
+    # void foo3(int *arr, int row, int col);
+    int arr3[][COL] = {{...}, ...};
+    int row = ROW, int col = COL;
+    foo3((int *)arr3, row, col);
+
+    # void foo4(int (*arr)[M]);
+    int arr4[][COL] = {{...}, ...};
+    foo4(arr4);
+
+    # void foo5(int **arr, int row, int col);
+    int **arr5;
+    x = malloc(ROW * sizeof(*arr5));
+    for (int i=0; i<ROW; i++) {
+        arr[i] = malloc(COL * sizeof(*arr5[i]));
+    }
+    foo5(arr, ROW, COL);
+    for (int i=0; i<ROW; i++) {
+        free(arr[i]);
+    }
+    free(arr);
 # }
 
 # statement {
@@ -170,6 +219,15 @@
     extern int foo();
     typedef(foo()) var;
     /* function foo will not be executed */
+
+    ## typedef
+    typedef int myint;
+    typedef char *mystr;
+    typedef void (*myfunc)();
+
+    myint i;        # int i;
+    mystr str;      # char *str;
+    myfunc func;    # void (*func)();
 # }
 
 # struct {
@@ -240,26 +298,24 @@
     {
         ...
     }
-    int* (*func_pointer)(int, char*);
-    func_pointer = &func;   # & can be omitted
+    int* (*func_pointer)(int, char*);   # declare a function pointer
+    func_pointer = &func;               # & can be omitted
 
 
     ## function pointer as a parameter in a function
     int func(int a2)
     {
-        return a2; 
+        return a2;
     }
 
-
-    ## not using typedef
+    ### not using typedef
     int call_func(int (*call_this)(int))
     {
         int ret = call_this(5);
         return ret;
     }
 
-
-    ## using typedef
+    ### using typedef
     typedef int (*func_pointer)(int);
     int call_func(func_pointer call_this)
     {
@@ -489,6 +545,10 @@
     
     ## pthead_self()
     #// pthreads from the same process, shared the same pid but different pthread_self() 
+    #// in linux, use gettid() to get different thread id and use getpid() to get different process id
+        #// pid_t gettid(void);
+        #// pid_t getpid(void);
+        #// pid_t getppid(void);
     
     ## conclusion
     #// - When multiple process compete a lock, only one process acquire the lock.

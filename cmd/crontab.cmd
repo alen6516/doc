@@ -56,4 +56,7 @@ $ crontab -e
 
     00 09-18 * * * /home/gtwang/script.sh --your --parameter
     # 從早上 9 點到下午 6 點，凡遇到整點就執行
+
+    @reboot sleep 10; ping 10.98.34.139
+    # Run at boot
     ```

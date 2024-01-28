@@ -10,6 +10,12 @@
     * dry run, not to do anything
     
 # Example
+$ apt update
+    * update the list of available packages
+
+$ apt upgrade
+    * actually installs newer versions of the packages
+
 $ apt search PACKAGE
     * search package by name, support regex
 

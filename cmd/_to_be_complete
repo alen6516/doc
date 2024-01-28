@@ -20,6 +20,10 @@
     * ldd
         * print shared obj dependencies
 
+## binary tool
+    * xxd
+        * make a hexdump or do the reverse
+
 ## network related tool
     * < web perf tool >
         * siege

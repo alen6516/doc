@@ -1,0 +1,25 @@
+# delayed_work {
+    #include <linux/workqueue.h>
+    struct delayed_work {
+        struct work_struct work;
+        struct timer_list timer;
+
+        /* target workqueue and CPU ->timer uses to queue ->work */
+        struct workqueue_struct *wq;
+        int cpu;
+    };
+
+    # Macro
+    INIT_DELAYED_WORK(_work, _func);
+
+    # push a work into queue
+    int schedule_delayed_work(strtuct delayed_work *work, unsignwd long delay);
+    # schedule_delayed_work(&work, msecs_to_jiffies(interval_msec));
+
+    # delete a work in queue
+    int cancel_delayed_work(struct delayed_work *work);
+    int cancel_delayed_work_sync(struct delayed_work *work);
+
+    # flush works in queue, blocking until queue is empty
+    void flush_schedule_work(void);
+# }
