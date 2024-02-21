@@ -1,14 +1,16 @@
 ## system/hardware information tool
-   * lspci
+    * lspci
         * list devices connecting to PCIe
-   * dmesg
-   * lsmod
+    * dmesg
+    * lsmod
         * module information
-   * lsof
+    * lsof
         * list all open files including loaded modules
-   * lshw
-   * dmidecode
+    * lshw
+    * dmidecode
         * a handy command-line utility for sysadmin to find out hardware information right from the operating system
+    * modinfo
+        * check driver info
 
 ## elf related tool
     * nm
@@ -20,9 +22,22 @@
     * ldd
         * print shared obj dependencies
 
+## lib
+    * ldd
+    * ldconfig
+    * lld
+
 ## binary tool
     * xxd
         * make a hexdump or do the reverse
+
+## file tool
+    * cat
+    * tail
+        * keep tracing the content of output
+    * head
+    * cmp
+        * compare two files byte by byte
 
 ## network related tool
     * < web perf tool >

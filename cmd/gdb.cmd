@@ -11,6 +11,9 @@
     * (gdb) detach
         * let the process keep running
 
+* execute gdb commands from file
+    * $ gdb -x file
+
 * the return value of the last function will be stored in $eax
     * (gdb) p $eax
 
@@ -82,7 +85,7 @@
 
     * r (run)
         * $ r arg1 arg2 arg3
-            * run with arguments    
+            * run with arguments
 
     * info
         * $ info b
@@ -154,7 +157,10 @@
             * $ set $var=1
             * $ set $var=$var+1
             * $ show conv
-    
+
+    - set environment LIBVA_DRIVER_NAME radeonsi
+        * set environment variable
+
     - set scheduler-locking on/off
         * when tracing a multi-thread program, after a threat trigger the breakpoint, if not set scheduler lock on, when another thread trigger a breakpoint, gdb will transfer to this thread
         * when finish the trace under a thread, remember to set scheduler lock off, then the other thread can trigger a breakpoint 

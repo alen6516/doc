@@ -421,6 +421,17 @@
     end_t = clock();
     total_t = (double)(end_t - start_t) / CLOCKS_PER_SEC;
     printf("Total time taken by CPU: %f sec", total_t);
+
+
+    # clock_gettime
+    struct timespec Start, End;
+    clock_gettime(CLOCK_MONOTONIC_RAW, &Start);
+    ...
+    clock_gettime(CLOCK_MONOTONIC_RAW, &End);
+    long seconds = End.tv_sec - Start.tv_sec;
+    long nanoseconds = End.tv_nsec - Start.tv_nsec;
+    double elapsed = seconds * 1000.0 + nanoseconds / 1e6;
+    fprintf(stderr, "[MESA] fome begin to end picture, it takes %f miliseconds\n", elapsed);
 # }
 
 # random number {
@@ -859,6 +870,8 @@
         * __atomic* is newer
         * basically they are the same, just __atomic have a parameter to speficy the memory-order
         * ref: https://stackoverflow.com/questions/23446210/what-is-the-difference-between-the-sync-and-atomic-intrinsics-of-gcc
+
+    * in linux we have atomic_cmpxchg()
 
 
     ## _Atomic
