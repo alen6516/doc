@@ -10,6 +10,7 @@
 
 * pip3 install meson
     * meson installed by pip has higher version than installed by apt
+    * path /usr/local/bin/meson
 * meson installed by apt will be in /usr/bin/meson
 
 # Options

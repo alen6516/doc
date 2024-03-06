@@ -47,6 +47,9 @@
 * check current branch
     $ git branch
 
+* show all remote branch
+    $ git branch -r
+
 * rename a branch
     $ git branch -m <new-name>
 

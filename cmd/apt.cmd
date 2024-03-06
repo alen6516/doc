@@ -14,7 +14,14 @@ $ apt update
     * update the list of available packages
 
 $ apt upgrade
-    * actually installs newer versions of the packages
+    * will automatically install but not remove packages
+
+$ apt dist-upgrade
+    * will install or remove packages as necessary to complete the upgrade
+    * more likely to break software that is performing correctly at current
+
+$ apt do-release-upgrade
+    * update to newer ubuntu release
 
 $ apt search PACKAGE
     * search package by name, support regex

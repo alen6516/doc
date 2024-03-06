@@ -343,6 +343,17 @@
         command[state]();
         return 0;
     }
+
+
+    # {} in a function
+    void foo () {
+        int a = 1;
+        {
+            int a = 2;
+            printf("%d\n", a);  # get 2
+        }
+        printf("%d\n", a);      # get 1
+    }
 # }
 
 # printf {
@@ -685,6 +696,7 @@
 # }
 
 # Macro {
+    # https://blog.csdn.net/Z1tai/article/details/127381366
     ## if define
     ```
     #ifdef AAA
@@ -695,6 +707,39 @@
     #define LOG(...)
     #endif
     ```
+    #if defined(DEBUG)
+    is equivalent to
+    #ifdef DEBUG
+
+    #if !defined(DEBUG)
+    is equivalent to
+    #ifndef DEBUG
+
+    #if defined(DEBUG) && !defined(UNIX)
+        * `if defined` can be used for multiple conditions
+
+    #if vs #ifdef
+    * #if block contains code statement, if condition is true, compiler will compile that code
+    * #ifdef block contains macros, there is no condition, compiler checks if the macro is defined or not
+
+    #if A>0
+        code ...
+    #else if (A == 0) && (B > 0)
+        code ...
+    #else
+        code ...
+    #endif
+    * `#if` check both the macro is defined or not and its value
+    * if we use `#if A` with `gcc -DA`, it works, but compile fail if we use `#define A` in code.
+        * b.c:11:6: error: #if with no expression
+        * because in code we define macro A but not define A's value
+    * `#if A`
+        * check if A is defined and value not 0
+    * `#if (A)`
+        * check if A is defined and value not 0
+    * `#if A>0`
+        * check if A is defined and value > 0
+
 
 
     ## __VA_ARGS__
