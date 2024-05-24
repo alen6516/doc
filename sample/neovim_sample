@@ -1,0 +1,17 @@
+# function I want:
+* jump to definition
+* show call hierarchy
+    * CCTree plugin
+* auto completion
+    * nvim-cmp
+* ale like auto compile and show error
+
+# material
+* https://zhuanlan.zhihu.com/p/439574087
+* https://martinlwx.github.io/zh-cn/config-neovim-from-scratch/
+
+step
+1. install nvim
+2. copy .vimrc to init.vim
+2. install Packer as the plugin manager
+    * follow Packer github page
