@@ -1,0 +1,49 @@
+# virtualenv
+pip install pipenv
+mkdir project
+cd project
+pipenv shell
+
+# argv
+if len(sys.argv) == 2:
+    arg1 = sys.argv[1]
+
+
+# String
+if string.find("is") == -1:
+    print("Not found")
+
+# Misc
+type(obj)
+    * check class type of an obj
+
+sys.exit(0)
+    * exit program
+
+# os
+## list files
+for file in os.listdir():
+    if file.endswith(".html"):
+
+
+# pandas
+import pandas as pd
+df = pd.read_html(file)[0]  # Read HTML file into DataFrame using read_html()
+for value in df.values:
+    if value[0]:
+        print(value[1])
+
+data = pd.read_csv(file)
+df = pd.dataFrame(data=data)
+
+
+for col in df.columns:
+    print("column name: %s" % col)
+    # df[col] is in type of pandas.core.series.Series
+    print("ave of col: %f" % df[col].mean())
+
+for index, rows in df.iterrows():
+    for colname in df.columns:
+        row = rows[colname]
+        print("%s = {%s}\n" % (colname, str(row))
+

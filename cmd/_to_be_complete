@@ -11,6 +11,7 @@
         * a handy command-line utility for sysadmin to find out hardware information right from the operating system
     * modinfo
         * check driver info
+    * inxi
 
 ## elf related tool
     * nm
@@ -21,15 +22,23 @@
         * display information about ELF files
     * ldd
         * print shared obj dependencies
+    * file
+        * check if a obj file has debug_info or stripped
+    * strings
+        * print any readable symbols in a obj file
 
 ## lib
     * ldd
     * ldconfig
+        * search default searching path (/lib, /usr/lib) and the path defined in /etc/ld.so.conf, to find avaliable dynamic linking libraries (in format of lib*.so*), and create the link and cache files that dynamic loading process needs (ld.so).
+        * The default cache file is /etc/ld.so.cache
     * lld
+    * pkg-config
 
 ## binary tool
     * xxd
         * make a hexdump or do the reverse
+    * hexdump
 
 ## file tool
     * cat
@@ -38,6 +47,10 @@
     * head
     * cmp
         * compare two files byte by byte
+
+## misc tool
+    * w3m
+        * command-line based browser
 
 ## network related tool
     * < web perf tool >

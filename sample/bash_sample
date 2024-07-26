@@ -13,6 +13,11 @@ export LANG="en_US.UTF-8"
 # 註解
 #user comment
 
+## add line comment to multi-line command
+https://stackoverflow.com/questions/9522631/how-to-put-a-line-comment-for-a-multi-line-command
+$ echo argument1 `#comment for arg1`  \
+       argument2 `#comment for arg2`  \
+       argument3 `#comment for arg3`
 
 # 特殊變數
 $PS1        提示字元, which is defined in ~/.bashrc
@@ -337,6 +342,10 @@ if [[ "$1" = "1" || "$1" = "2" ]]; then
     ...
 done
 
+if [[ foo && bar ]]; then
+    ...
+done
+
 ## check if a variable is number
 if [ -n "$var" ] && [ "$var" -eq "$var" ] 2>/dev/null; then
 
@@ -511,6 +520,11 @@ for file in `ls`; do md5sum $file; done
 for i in $(seq 1 10)
 do
     echo ${i}
+done
+
+for i in {1..5}
+do
+    ...
 done
 
 
@@ -739,3 +753,7 @@ IP+=(8.8.8.8)
             No  ) exit;;
         esac
     done
+
+## check if a command exists
+    command -v cowsay
+    ### using `command` is cheapter than using `which`

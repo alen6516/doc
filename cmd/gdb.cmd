@@ -13,6 +13,8 @@
 
 * execute gdb commands from file
     * $ gdb -x file
+    * or from gdb console
+        * (gdb) source file
 
 * the return value of the last function will be stored in $eax
     * (gdb) p $eax
@@ -177,7 +179,7 @@
     - set print elements 0
         * when printing a long string or array, by default it can not print whole variable, set this to enable
 
-    - set print pretty
+    - set print pretty on/off
         * print a data member line by line when print a object
 
     - set pagination off
@@ -320,7 +322,7 @@
         info registers
         info threads
     end
-     
+
     define pdb
         print a1
         print a2
@@ -333,6 +335,14 @@
     print a1
     call print_dbg()
     ```
+
+* debuginfod
+    * ref
+        * https://ubuntu.com/server/docs/debug-symbol-packages
+        * https://ubuntu.com/server/docs/about-debuginfod
+    * Since ubuntu 22.04, debuginfod is built-in service. With debuginfod active, we can debug apps or libs easily with symbols downloaded from ddebs pool. We don't need to build to get symbols.
+        * http://ddebs.ubuntu.com/pool/universe/
+
 
 # Options
 -ex "command"

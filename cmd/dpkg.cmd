@@ -20,3 +20,6 @@ $ dpkg --search libc.so
 
 $ dpkg -s amd-nonfree-radeon
     * Report status of specified package
+
+$ mkdir tmp && dpkg-deb -R xxx.deb tmp
+    * create a folder and unpack a deb package into it

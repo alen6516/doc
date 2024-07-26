@@ -97,6 +97,7 @@
 	## size of int array
 	int arr[] = {1, 2, 3};
 	printf("%d\n", (int)sizeof(arr));	# 3 個 int => 12
+    pinntf("%p, %p\n", arr, arr+1);     # 0x7ffee6ba7e70, 0x7ffee6ba7e74
 
 
 	## size of char array
@@ -936,6 +937,41 @@
 
     ## gcc thread local variable
     __thread int id;
+# }
+
+# getopt {
+
+#include <unistd.h>
+const char *optstr = "hdt:x:i:b:y:w:";
+while((c = getopt(argc, argv, optstr)) != -1) {
+    switch(c) {
+        case 't':
+            vic = atoi(optarg);
+            break;
+        case 'x':
+            roi_init.x_start = atoi(optarg);
+            break;
+        case 'i':
+            roi_init.y_start = atoi(optarg);
+            break;
+        case 'b':
+            roi_init.x_end = atoi(optarg);
+            break;
+        case 'y':
+            roi_init.y_end = atoi(optarg);
+            break;
+        case 'w':
+            wait_vblank_count = atoi(optarg);
+            break;
+        case 'd':
+            debug = 1;
+            break;
+        default:
+        case 'h':
+            usage(argv[0]);
+            exit(EXIT_SUCCESS);
+    }
+}
 # }
 
 # Misc {

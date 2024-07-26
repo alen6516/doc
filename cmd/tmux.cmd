@@ -21,6 +21,9 @@ $ tmux at [ -t 0 ]
 $ tmux kill-session -t 0
     * kill session 0
 
+$ tmux new-session -d -s <name>
+    * create a new-session and detach
+
 ## ctrl-q
 
 session 相關 |                                        

@@ -43,3 +43,10 @@
 # Example
 $ gcc -E -dD a.c
     * show Macro Define
+
+* build shared lib from .o file
+    $ gcc -shared *.o -o libavfilter.so
+
+* build shared lib from static lib
+    $ ar -x lib***.a
+    $ gcc -shared *.o -o lib***.so

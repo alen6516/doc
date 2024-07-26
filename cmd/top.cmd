@@ -174,6 +174,7 @@ st  --  Steal Time
 ```
 
 # Options
-    
-# Example
 
+# Example
+$ top -H -p `pidof mpv`
+    * check all threads of mpv

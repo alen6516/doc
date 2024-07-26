@@ -164,6 +164,9 @@
 * show history change of a file
     $ git log -p -- path/to/file
 
+* check when a file was added
+    * git log --diff-filter=A -- path/to/file
+
 * find the order of 2 commits on the same branch
     $ git log --oneline | grep "1444f2416bd2\|e0ee0461b2e2" -n
 
@@ -241,8 +244,9 @@
         * after that, HEAD will point to the commit of HASH
         * the modifications will become unstaged
         * continue to modify the code
-    $ git commit
+    $ git commit -s -m "commit message"
         * make a new commit
+        * -s means add "Signed-of-by:", need to set user.name and user.email first
     $ git push --force
         * use --force to replace the unwanted commit in the remote master
 

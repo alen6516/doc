@@ -1,0 +1,14 @@
+#/etc/default/grub
+
+GRUB_DEFAULT="1>4"
+GRUB_TIMEOUT_STYLE=menu
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2> /dev/null || echo Debian`
+#GRUB_CMDLINE_LINUX_DEFAULT="3 quiet splash modprobe.blacklist=amdgpu"
+#GRUB_CMDLINE_LINUX_DEFAULT="5 quiet splash amd_pstate=active amdgpu.visualconfirm=0x5" # PSR
+#GRUB_CMDLINE_LINUX_DEFAULT="3 quiet splash amd_pstate=active amdgpu.visualconfirm=1" # MPO
+GRUB_CMDLINE_LINUX_DEFAULT="3 quiet splash amd_pstate=active amdgpu.dcdebugmask=0x40" # no MPO
+GRUB_CMDLINE_LINUX="log_buf_len=100M"
+
+# how to escape from grub prompt?
+    # type 'normal' and press esc until menu shows

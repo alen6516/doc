@@ -68,3 +68,7 @@ $ find ./ -name "*.mp3" -o -name "*.mp4"
 
 $ find . -name "*.[ch]" | xargs wc -l
     * find the total line count of *.c *.h file
+
+$ find . -maxdepth 1 -type l -ls
+    * find symbolic link in current directory
+    * -maxdepth 1 to process only current directory

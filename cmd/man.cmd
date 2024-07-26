@@ -47,3 +47,5 @@
         export LESS_TERMCAP_ue=$'\E[0m'           # end underline
         export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
         ```
+
+* for bash builtin commands, there is no man page. We can use `help <command>` instead.

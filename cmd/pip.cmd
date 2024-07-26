@@ -20,3 +20,6 @@ $ pip show <package>
 
 $ sudo python3 -m pip install <package>
     * if no pip3 or somehow it is broken, use this command to install package
+
+$ pip list
+    * show pip packages

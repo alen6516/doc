@@ -57,3 +57,126 @@
     extern u64 nsecs_to_jiffies64(u64 n);
     extern unsigned long nsecs_to_jiffies(u64 n);
 # }
+
+# copy_from_user / copy_to_user {
+    /*
+     * Due to userspace and kernel space separation, we need these 2 functions to copy data. 
+     * In general they are identical to memcpy.
+     * A classic example for using copy_from_user is when you implement the write function of a character device.
+     * Assume you have a module that registers a character device which receives paths of file from the user. Its code will look something like:
+     */
+
+    static ssize_t device_write(struct file *fs, const char *buffer, size_t len, loff_t *offset)
+    {
+        char* file_path = (char*)kmalloc(len, GFP_KERNEL);
+        if (NULL == file_path) {
+            return -ENOMEM;
+        }
+
+        copy_from_user(file_path, buffer, len);
+        file_path[len - 1] = 0x00;
+
+        return len;
+    }
+
+    /*
+     * Ioctl is a system call, system call is started by a userspace thread.
+     * Inside the ioctl, copy_from_user/copy_to_user is used to copy data.
+# }
+
+# completion {
+    # a synchronization mechanism in kernel
+    struct completion {
+        unsigned int        done;
+        wait_queue_head_t   wait;
+    };
+
+    # APIs:
+    #define COMPLETION_INITIALIZER(work) { 0, __WAIT_QUEUE_HEAD_INITIALIZER((work).wait) }
+    #define DECLARE_COMPLETION(work) struct completion work = COMPLETION_INITIALIZER(work)
+    static inline void init_completion(struct completion *x)
+    {
+        x->done = 0;                            # done means how many threads are waked up
+        init_waitqueue_head(&x->wait);
+    }
+    static inline void reinit_completion(struct completion *x)
+    {
+        x->done = 0;
+    }
+    bool completion_done(struct completion *x); # return 0 if there are waiters, 1 if no waiters
+
+
+    ## wait APIs:
+    void wait_for_completion(struct completion *x);
+    int wait_for_completion_interruptible(struct completion *x);
+    unsigned long wait_for_completion_timeout(struct completion *x, unsigned long timeout);
+    unsigned long wait_for_completion_interruptible_timeout(struct completion *x, unsigned long timeout);
+
+    ## wakeup APIs:
+    void complete(struct completion *x);        # wakt up one waiting thread, done++
+    void complete_all(struct completion *x);    # wake up all waiting threads
+
+    ## done
+    # wait will check done, if 0 it will looping, if not 0, it will --done and return
+    # complete will ++done
+    # complete_all will set done to UINT_MAX, completing all waiting thread at one time
+
+    ## example:
+    {
+        #include <linux/module.h>
+        #include <linux/init.h>
+         
+        #include <linux/sched.h>
+        #include <linux/kernel.h>
+        #include <linux/fs.h>
+        #include <linux/types.h>
+        #include <linux/completion.h>
+         
+        MODULE_LICENSE("GPL");
+         
+        static int complete_major = 250;
+        DECLARE_COMPLETION(g_comp);
+         
+        ssize_t complete_read(struct file *filp, char __user *buf, size_t count, loff_t *pos)  {
+            printk(KERN_ERR "process %i (%s) going to sleep\n", current->pid,current->comm);
+            wait_for_completion(&g_comp);
+            printk(KERN_ERR "awoken %i (%s)\n", current->pid, current->comm);
+            return 0;
+        }
+         
+        ssize_t complete_write(struct file *filp, const char __user *buf,size_t count, loff_t *pos) {
+            printk(KERN_ERR "process %i (%s) awakening the readers...\n", current->pid, current->comm);
+            complete(&g_comp);
+            return count;
+        }
+         
+        struct file_operations complete_fops = {
+            .owner = THIS_MODULE,
+            .read  = complete_read,
+            .write = complete_write,
+        };
+         
+        int complete_init(void) {
+            int result;
+            result = register_chrdev(complete_major, "complete", &complete_fops);
+            if(result < 0)
+                return result;
+            if(complete_major == 0)
+                complete_major = result;
+            return 0;
+        }
+
+        void complete_cleanup(void) {
+            unregister_chrdev(complete_major, "complete");
+        }
+
+        module_init(complete_init);
+        module_exit(complete_cleanup);
+    }
+
+    ## testing steps:
+    1. mknod /dev/complete 創建 complete節點，在linux上驅動程序需要手動創建文件節點。
+    2. insmod complete.ko 插入驅動模塊，這裏要注意的是，因爲我們的代碼中是手動分配的設備號，很可能被系統已經使用了，所以如果出現這種情況，查看/proc/devices文件。找一個沒有被使用的設備號。
+    3. cat /dev/complete 用於讀該設備，調用設備的讀函數
+    4. 打開另一個終端輸入 echo “hello” > /dev/complete 該命令用於寫入該設備。
+# }
