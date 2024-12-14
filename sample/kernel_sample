@@ -1,3 +1,24 @@
+# Misc {
+    * function name start with __ means the function is a kernel function, need to be called with cautions
+        * eg. int __register_chrdev()
+# }
+
+# printk {
+    * to print without new line, use KERN_CONT
+    printk(KERN_CONT "this is");
+    printk(KERN_CONT "an apple.\n");
+
+    #define pr_info(fmt, arg ...) \
+        printk(KERN_INFO fmt, ##arg)
+    pr_err()
+# }
+
+# task_struct {
+    * see arch/x86/include/asm/current.h
+    * https://stackoverflow.com/questions/12434651/what-is-the-current-in-linux-kernel-source
+    * in kernel, we can use current->pid to get thread id, and current->comm to get process name
+# }
+
 # delayed_work {
     #include <linux/workqueue.h>
     struct delayed_work {
@@ -13,8 +34,10 @@
     INIT_DELAYED_WORK(_work, _func);
 
     # push a work into queue
-    int schedule_delayed_work(strtuct delayed_work *work, unsignwd long delay);
+    int schedule_delayed_work(struct delayed_work *work, unsignwd long delay);
     # schedule_delayed_work(&work, msecs_to_jiffies(interval_msec));
+
+    schedule_work(struct delayed_work *work);
 
     # delete a work in queue
     int cancel_delayed_work(struct delayed_work *work);
@@ -22,6 +45,10 @@
 
     # flush works in queue, blocking until queue is empty
     void flush_schedule_work(void);
+# }
+
+# mutex {
+    mutex_is_locked(struct mutex *lock)
 # }
 
 # time {
@@ -59,6 +86,10 @@
 # }
 
 # copy_from_user / copy_to_user {
+    #include <linux/fs.h>
+    #include <linux/uaccess.h>  /* for copy_from/to_user */
+
+
     /*
      * Due to userspace and kernel space separation, we need these 2 functions to copy data. 
      * In general they are identical to memcpy.
@@ -66,22 +97,57 @@
      * Assume you have a module that registers a character device which receives paths of file from the user. Its code will look something like:
      */
 
-    static ssize_t device_write(struct file *fs, const char *buffer, size_t len, loff_t *offset)
+    #define BUF_SIZE 1024
+    static my_buf[BUF_SIZE];    /* buffer to store data */
+    static ssize_t my_buf_size  /* size of data in buffer */
+
+    static ssize_t device_write(struct file *fs, const char __user *buf, size_t count, loff_t *pos)
     {
-        char* file_path = (char*)kmalloc(len, GFP_KERNEL);
-        if (NULL == file_path) {
-            return -ENOMEM;
-        }
+        /* Check if we are writing beyond the buf size */
+        if (*pos >= BUF_SIZE)
+            return -ENOSPC;     /* No space left */
 
-        copy_from_user(file_path, buffer, len);
-        file_path[len - 1] = 0x00;
+        /* Limit the number of bytes to write */
+        if (*pos + count > BUF_SIZE)
+            count = BUF_SIZE - *pos;
 
-        return len;
+        if (copy_from_user(my_buf + *pos, buf, count);
+            return -EFAULT;
+
+        /* Update the size of the data in the buf */
+        if (*pos + count > my_buf_size)
+            my_buf_size = *pos + count;
+
+        /* Update the write postion */
+        *pos += count;
+
+        return count;
     }
 
     /*
      * Ioctl is a system call, system call is started by a userspace thread.
      * Inside the ioctl, copy_from_user/copy_to_user is used to copy data.
+     /
+
+    static ssize_t device_read(struct file *fs, char __user *buf, size_t count, loff_t *pos)
+    {
+        ssize_t bytes_read = 0;
+
+        /* check if the position is beyond the end of the data */
+        if (*pos >= my_buffer_size)
+            return 0;
+
+        /* Limit the number of bytes to read */
+        if (*pos + count > my_buf_size)
+            count = my_buf_size - *pos;
+
+        if (copy_to_user(buf, my_buf + *pos, count)
+            return -EFAULT;
+
+        /* Update the read position */
+        *pos += count;
+        bytes_read = count;
+    }
 # }
 
 # completion {

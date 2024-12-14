@@ -13,6 +13,13 @@
     * path /usr/local/bin/meson
 * meson installed by apt will be in /usr/bin/meson
 
+* a typical usage
+    $ mkdir build
+    $ meson setup build
+    $ cd build && ninja
+        * or $ ninja -C build
+    * after ninja building, if we change source code, we can just run ninja again and it will auto run meson if needed.
+
 # Options
 
 # Example

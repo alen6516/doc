@@ -154,7 +154,42 @@ printf "\33[1;31m"
 printf "Color Version: $VAR"
 printf "\33[0m\n"
 
-# Declare array
+## array
+IP=(10.10.10.10 20.20.20.20)
+length=${#IP[@]}
+content=${IP[@]}
+for ((i=0; i<length; i++))
+do
+    echo ${IP[$i]}
+done
+
+# remove an element from array
+unset IP[1]
+
+# add element
+IP+=(8.8.8.8)
+
+# Declare indexed array
+declare -a FILE=(".vimrc" ".bashrc" ".tmux.conf")
+echo ${FILE[0]}
+echo ${FILE[@]}     # all items
+echo ${FILE[@]:2:3} # extracting the 3rd element
+echo ${FILE[1]:2:4} # extracting parts of an element ("ash")
+echo ${FILE[@]/.vimrc/.ssh} # find and replace array items
+unset FILE[2]       # removeing an element from the array
+
+echo ${#FILE[@]}    # get size of the array
+echo ${#FILE[1]}    # get the size of an element in the array
+
+FILE=(${FILE[@]} ".ctags" ".bash_aliases")  # adding new items to the array
+FILE2=(${FILE[@]})  # copy the array
+
+for i in "${FILE[@]}"
+do
+    echo $i
+done
+
+# Declare dict (associative array)
 declare -A FILE=(                           \
     [".vim"]=".vim"                         \
     [".vimrc"]=".vimrc"                     \
@@ -182,21 +217,6 @@ FILE['key']='value'
 
 ## expand the keys
 "${!FILE[@]}"
-
-# Declare indexed array
-declare -A FILE=(".vimrc" ".bashrc" ".tmux.conf")
-echo ${FILE[0]}
-echo ${FILE[@]}     # all items
-echo ${FILE[@]:2:3} # extracting the 3rd element
-echo ${FILE[1]:2:4} # extracting parts of an element ("ash")
-echo ${FILE[@]/.vimrc/.ssh} # find and replace array items
-unset FILE[2]       # removeing an element from the array
-
-echo ${#FILE[@]}    # get size of the array
-echo ${#FILE[1]}    # get the size of an element in the array
-
-FILE=(${FILE[@]} ".ctags" ".bash_aliases")  # adding new items to the array
-FILE2=(${FILE[@]})  # copy the array
 
 
 # $() 與 ${} 區別
@@ -338,7 +358,7 @@ if [ "$1" = "1" ]; then
     ...
 done
 
-if [[ "$1" = "1" || "$1" = "2" ]]; then
+if [[ "$1" = "1" || "$1" != "2" ]]; then
     ...
 done
 
@@ -593,6 +613,8 @@ echo $ARGS
 ## Press any key to continue (without Enter)
 read -n 1 -s -r -p "Press any key to continue"
 
+## confirm before running command
+read -p "confirm: " x; [ "$x" = "y" ] && <command>
 
 ## 檢查執行者身份
 whoami_ret="$(whoami)"
@@ -656,21 +678,6 @@ fi
 echo "s = ${s}"
 echo "p = ${p}"
 
-## array
-IP=(10.10.10.10 20.20.20.20)
-length=${#IP[@]}
-content=${IP[@]}
-for ((i=0; i<length; i++))
-do
-    echo ${IP[$i]}
-done
-
-# remove an element from array
-unset IP[1]
-
-# add element
-IP+=(8.8.8.8)
-
 ## 取得時間
     date +'%Y %m %d %H %M %S'
     
@@ -723,6 +730,16 @@ IP+=(8.8.8.8)
     
     // 當前行號
     $LINENO
+
+    // path to script
+    ${0}
+
+    // parent path
+    ${0%/*}
+
+    // script name
+    ${0##*/}
+
 ## 取得該腳本的相對於當前目錄的相對位置
     CURR_PATH=`pwd`
     SCRIPT_PATH=$BASH_SOURCE

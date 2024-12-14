@@ -7,6 +7,7 @@
     * lsof
         * list all open files including loaded modules
     * lshw
+    * hwinfo
     * dmidecode
         * a handy command-line utility for sysadmin to find out hardware information right from the operating system
     * modinfo
@@ -51,6 +52,20 @@
 ## misc tool
     * w3m
         * command-line based browser
+
+## multi-media tool
+    * mpv
+        * video player
+    * ffmpeg
+    * ffprobe
+    * ffplayer
+        * raw yuv/rgb player
+    * yuviewer
+        * raw yuv viewer
+    * yuv player
+        * Windows tool
+    * mediainfo
+    * gstreamer
 
 ## network related tool
     * < web perf tool >

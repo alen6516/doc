@@ -7,4 +7,5 @@ show mem information
 # Options
 
 # Example
-
+$ lscpu -e=CPU,MHZ
+    * list each CPU freq in MHZ

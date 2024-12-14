@@ -1,4 +1,5 @@
 # Description
+apt install python3-pip
 
 # Overview
 pip install vs apt install
@@ -23,3 +24,10 @@ $ sudo python3 -m pip install <package>
 
 $ pip list
     * show pip packages
+
+$ pip install <pkg> --upgrade
+    * upgrade a pkg
+
+$ pip install poetry
+$ poetry search <pkg>
+    * search pip package using PyPI entry, as pip search is not avaliable

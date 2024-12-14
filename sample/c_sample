@@ -14,9 +14,11 @@
 
     # on 32bit system
     sizeof(size_t) = sizeof(uintptr_t) = sizeof(intptr_t) = sizeof(ptrdiff_t) = 4
+    u64 is 8 bytes, but pointer size is 4 bytes
 
     # on 64bit system
     sizeof(size_t) = sizeof(uintptr_t) = sizeof(intptr_t) = sizeof(ptrdiff_t) = 8
+    u64 is 8 bytes, but pointer size is 8 bytes
 # }
 
 
@@ -377,19 +379,6 @@
     char* gets (char *s);
     # Briefly, f-start API means this API is implemented by function rather than Macro.
     # However, in GUN C, these f-start API are also implemented by function, and just use a Macro to wrap it.
-# }
-
-# string {
-    include <string.h>
-    char str[3];
-    memset(str, 'g', 3);
-    printf("%s\n", str);    // "ggg"
-
-    strncpy(str, "aa", 2);
-    printf("%s\n", str);    // "aag"
-
-    strncpy(str, "aa", 3);
-    printf("%s\n", str);    // "aa"
 # }
 
 # bit operation {
@@ -856,6 +845,17 @@
 # }
 
 # String {
+    #include <string.h>
+    char str[3];
+    memset(str, 'g', 3);
+    printf("%s\n", str);    // "ggg"
+
+    strncpy(str, "aa", 2);
+    printf("%s\n", str);    // "aag"
+
+    strncpy(str, "aa", 3);
+    printf("%s\n", str);    // "aa"
+
     # ========== 複製 ==========
     char *strcpy(char *s1, const char *s2)
     char *strncpy(char *s1, const char *s2, size_t n)
@@ -919,6 +919,36 @@
 
     * in linux we have atomic_cmpxchg()
 
+    * atomic operation requires hw support, and is implemented in assembly code, not C
+    typedef struct {
+        volatile int counter;   // volatile tells gcc not to optimize the data, data access is always from memory not from register
+    } atomic_t;
+
+    * API
+        * atomic_read(v) (*(volatile int *)&(v)->counter)
+            * read and return v
+        * atomic_set(v, i)
+            * set v as i
+        * atomic_add(int i, atomic_t *v)
+            * add i to v
+        * int atomic_add_return(i, v)
+            * add i to v, and return the new value
+        * atomic_sub(i, v)
+            * sub i from v
+        * atomic_sub_and_test(i, v)
+            * sub i from v, and return true of result is 0, else false
+        * atomic_inc(v)
+            * v+1
+        * atomic_dec(v)
+            * v-1
+        * atomic_dec_return(v)
+        * atomic_dec_and_test(v)
+        * atomic_inc_and_test(v)
+        * int atomic_cmpxchg(atomic_t *ptr, int old, int new)
+            * compare *ptr and old, if equal, then assign new to *ptr, return old *ptr
+        * int atomic_add_unless(atomic_t *v, int a, int u)
+            * if v != u, then add a to v and return non-zero value, else return 0
+
 
     ## _Atomic
     _Atomic int sum;
@@ -940,37 +970,36 @@
 # }
 
 # getopt {
-
-#include <unistd.h>
-const char *optstr = "hdt:x:i:b:y:w:";
-while((c = getopt(argc, argv, optstr)) != -1) {
-    switch(c) {
-        case 't':
-            vic = atoi(optarg);
-            break;
-        case 'x':
-            roi_init.x_start = atoi(optarg);
-            break;
-        case 'i':
-            roi_init.y_start = atoi(optarg);
-            break;
-        case 'b':
-            roi_init.x_end = atoi(optarg);
-            break;
-        case 'y':
-            roi_init.y_end = atoi(optarg);
-            break;
-        case 'w':
-            wait_vblank_count = atoi(optarg);
-            break;
-        case 'd':
-            debug = 1;
-            break;
-        default:
-        case 'h':
-            usage(argv[0]);
-            exit(EXIT_SUCCESS);
-    }
+    #include <unistd.h>
+    const char *optstr = "hdt:x:i:b:y:w:";
+    while((c = getopt(argc, argv, optstr)) != -1) {
+        switch(c) {
+            case 't':
+                vic = atoi(optarg);
+                break;
+            case 'x':
+                roi_init.x_start = atoi(optarg);
+                break;
+            case 'i':
+                roi_init.y_start = atoi(optarg);
+                break;
+            case 'b':
+                roi_init.x_end = atoi(optarg);
+                break;
+            case 'y':
+                roi_init.y_end = atoi(optarg);
+                break;
+            case 'w':
+                wait_vblank_count = atoi(optarg);
+                break;
+            case 'd':
+                debug = 1;
+                break;
+            default:
+            case 'h':
+                usage(argv[0]);
+                exit(EXIT_SUCCESS);
+        }
 }
 # }
 
@@ -995,6 +1024,11 @@ while((c = getopt(argc, argv, optstr)) != -1) {
     volatile const int x;
     const volatile int x;
 
+    ## volatile tell compiler don't optimize the code
+    int a = 1;
+    volatile int b = a;
+    return b;
+    ## if no volatile, compiler may directly return a without copying to b
 
     ## convert str to int
     int a = (int) strtol(argv[1], NULL, 10);
@@ -1013,7 +1047,7 @@ while((c = getopt(argc, argv, optstr)) != -1) {
     } while (0)
 
 
-    ## swap pointer 
+    ## swap pointer
     #define SWAP_POINTER(p1, p2) do {   \
         if (p1 != p2) {                 \
             p1 = (void*) ((unsigned long)p1^(unsigned long)p2);     \
@@ -1042,4 +1076,8 @@ while((c = getopt(argc, argv, optstr)) != -1) {
 
     ## build bug on compile time
     #define BUILD_BUG_ON(condition) ((void)sizeof(char[1 - 2*!!(condition)]))
+
+    ## __FILE__, __LINE__
+    #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
+    // __FILE__ gives full path, use this macro to only get file name.
 # }

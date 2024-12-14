@@ -163,6 +163,7 @@
 
 * show history change of a file
     $ git log -p -- path/to/file
+    $ git log --oneline -- path/to/folder
 
 * check when a file was added
     * git log --diff-filter=A -- path/to/file
@@ -174,6 +175,16 @@
     $ gitk path/to/file
         * need to enable X11-forwarding if connecting to linux via SSH
 
+* show commit history of a file
+    $ git log --follow -p -- path/to/file
+        * --follow ensures to show file renames
+        * -p shows the diff
+        * -- tells git it has reached the end of the options and the following things should be treated as an argument
+    $ git log --follow --oneline -- path/to/file
+        * if only want to see commit list
+
+* find the most recent common commit of 2 branches
+    $ git merge-base branch1 branch2
 
 ## git grep
 # git grep is very similar. The main difference is that git grep defaults to searching in the files that are tracked by git

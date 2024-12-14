@@ -12,3 +12,16 @@ LDFLAS = -L/usr/lib
 
 LIBS = -lpthread
 	* tell linker which lib to link
+
+echo_test:
+	echo "hello1"
+	@echo "hello2"
+	# `echo hello1` will also show on terminal
+
+STRING = 'this is a string'
+	* define a string
+
+x = foo
+y= $(x) bar
+x = xyz
+# y will be `xyz bar`, because

@@ -4,38 +4,49 @@ mkdir project
 cd project
 pipenv shell
 
+# sys
 # argv
 if len(sys.argv) == 2:
     arg1 = sys.argv[1]
+
+sys.exit(0)
+    * exit program
 
 # String
 if string.find("is") == -1:
     print("Not found")
 
-# Misc
-type(obj)
-    * check class type of an obj
-
-sys.exit(0)
-    * exit program
+string="abc123"
+string.lstrip("abc")    # 123
+string.rstrip("123")    # abc
+string.striip("a3")     # bc12
+string[1:]              # bc123
+string[:-1]             # abc12
 
 # os
 ## list files
 for file in os.listdir():
     if file.endswith(".html"):
 
-## import
+## if file exists
+if (os.path.isfile(file):
+    print("file exists")
+
+## execute command
+os.system("mv file1 file2")
+
+# import
 import tool
 ...
 ret = tool.get_value()
 
-## print formt
+# print formt
 print("%d %d", % (3, 5))
 
-## str to int
+# str to int
 ten = int("10")
 
-## class
+# class
 class Dog():
     kind = "animal"
 
@@ -111,3 +122,7 @@ df = pd.read_csv(filename, index_col=0)   # read data from csv file, and use col
         * select multuple rows as some particular columns
     * result = df.loc[:, ["City", "Salary"]]
         * select all rows with some particular columns
+
+# Misc
+type(obj)
+    * check class type of an obj

@@ -423,6 +423,9 @@ yiw         | yank word under cursor
 :set list lcs=tab:\|\ (there is a space)        | show indentline when using Tab (not space)
 vim -d file_a file_b        | use vim to check file diff
 
+# Command line options
+$ vim -c "set nonu" sample.txt
+    * run vim with configuration in command line
 
 # Note
 - easiest way to delete swap file

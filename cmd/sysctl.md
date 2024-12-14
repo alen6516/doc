@@ -9,7 +9,8 @@ Configure kernel parameters at runtime
     
 # Example
 $ sysctl -p
-    * load the new configuration after modifying /etc/sysctl.confg
+    * load the new configuration after modifying /etc/sysctl.conf
 
 $ sysctl -w net.ipv4.conf.all.rp_filter=0
     * write config to memory right away
+    * to permanently change the config, edit /etc/sysctl.conf

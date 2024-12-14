@@ -13,3 +13,9 @@ $ cat /proc/cpuinfo
 
 $ cat /proc/meminfo
     * show mem info
+
+$ cat > dst_file.txt << eof
+> this is
+> the content
+> of file
+> eof

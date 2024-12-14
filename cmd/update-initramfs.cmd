@@ -1,4 +1,5 @@
 # Description
+after installing new module, if the module is included in initramfs, we need to update initramfs
 
 # Overview
 

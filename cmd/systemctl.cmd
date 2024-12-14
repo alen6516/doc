@@ -34,6 +34,9 @@ Services:
 $ sudo systemctl list-units --type=service
     * list all services under systemctl
 
+$ sudo systemctl --type=service --state=active
+    * list services/daemons handled by systemd
+
 $ sudo systemctl isolate multi-user.target
 	* switch to run-level 3
 

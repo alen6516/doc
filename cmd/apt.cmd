@@ -66,6 +66,13 @@ $ apt build-dep global
     * build the environment for the compilation of package "global"
     * if fail, make sure you have uncomment lines starting with deb-src in source.list, and do apt update
 
+$ apt build-dep linux
+    * If see "You must put some 'source' URIs in your sources.list", need to
+    $ sudo cp /etc/apt/sources.list /etc/apt/sources.list~
+    $ sudo sed -Ei 's/^# deb-src /deb-src /' /etc/apt/sources.list
+    $ sudo apt-get update
+    * and then run this command
+
 $ apt list tmux*
     * find the package named tmux*
 

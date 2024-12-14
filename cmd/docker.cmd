@@ -29,9 +29,22 @@ Hello from Docker!
 This message shows that your installation appears to be working correctly.
 ...
 
+5. Allow user to execute docker without sudo
+    $ sudo groupadd docker
+    $ sudo usermod -aG docker $USER
+    $ newgrp docker
+        * or logout and loging
+    $ docker run hello-world
+        * check if it take effects
+
 # Options
+--privileged=true
+    * when using this option with docker run, docker root will have real root permission to touch host kernel, useful when we want docker to use certain hw of the host.
 
 # Example
+$ docker search <image>
+    * search an image in docker's hub
+
 $ docker pull ubuntu:22.04
     * pull ubuntu 22.04 image from docker's hub
 
@@ -63,11 +76,3 @@ $ docker image ls
 
 $ docker image rm <IMAGE_ID>
     * remove image by ID
-
-* allow user to execute docker without sudo
-    $ sudo groupadd docker
-    $ sudo usermod -aG docker $USER
-    $ newgrp docker
-        * or logout and loging
-    $ docker run hello-world
-        * check if it take effects

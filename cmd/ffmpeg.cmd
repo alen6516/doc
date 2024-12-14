@@ -3,10 +3,15 @@ ffmpeg video converter
 
 # Overview
 * https://hackmd.io/@kd01/ffmpeg-help
+* https://trac.ffmpeg.org/wiki/HWAccelIntro
+    * many command example
 
 # Options
 --version
     check version and build config
+
+-pix_fmts
+    check format list
 
 -map 0
     map ALL streams(video, audio, subtitle, data) from input to output file
@@ -19,6 +24,10 @@ ffmpeg video converter
 
 -c:a:137 libvorbis <OUTPUT>
     re-encode the 138th audio with libvorbis
+
+-hwaccel <HWACCEL>
+    none/auto/vdpau/dxva2/d3d11va/vaapi/qsv
+    * use -hwaccels to check the hw acceleeration current ffmpeg build supports
 
 # Example
 $ ffmpeg -i INPUT.mp4 -vf fps=30 OUTPUT.mp4
@@ -55,3 +64,23 @@ $ ffmpeg -re -hwaccel vaapi -hwaccel_output_format vaapi -i bbb_1080p_30fps.mp4 
     * ask ffmpeg to only do hardware decoding
     * -f null -
         * tells ffmpeg to throw away the output, which is important to avoid additional memory transfers/io operations with saving the output
+
+$ ffmpeg.exe -re -hwaccel d3d11va -hwaccel_output_format d3d11 -i xxx.mp4 -f null -
+    * windows cmd command, using MS d3d11va API to decode
+    * -hwaccel_output_format will specify the raw data (YUV) format after decoding.
+
+$ ffmpeg -hwaccel dxva2 -hwaccel_output_format dxva2_vld -i input.mkv -c:v av1_amf output.mp4
+$ ffmpeg -hwaccel d3d11va -hwaccel_output_format d3d11 -i input.mkv -c:v hevc_amf output.mp4
+    * To avoid raw data copy between GPU memory and system memory, use -hwaccel_output_format dxva2_vld when using DX9 and use -hwaccel_output_format d3d11 when using DX11
+
+$ ffmpeg -framerate $FRAMERATE -i out/im%3d.png -c:v libx264 -pix_fmt yuv420p -r $FRAMERATE out.mp4
+    * generate yuv420 h264 encoding video from images
+    * if we don't specify yuv420, it will generate yuv444
+    * -framerate specifies the input framerate
+    * -r specifies the output framerate
+
+$ ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i $1 -c:v rawvideo -pix_fmt yuv420p out.yuv
+    * hardware decode yuv420 video into yuv420p raw format
+
+$ ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -f rawvideo -pix_fmt yuv420p -s:v 1920x1080 -i $1 -vs 'fps=30, hwupload' -c:v h264_vaapi -bf 0 encode_out.mp4
+    * hardware encode yuv420p format into h264 video

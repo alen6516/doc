@@ -342,6 +342,21 @@
         * https://ubuntu.com/server/docs/about-debuginfod
     * Since ubuntu 22.04, debuginfod is built-in service. With debuginfod active, we can debug apps or libs easily with symbols downloaded from ddebs pool. We don't need to build to get symbols.
         * http://ddebs.ubuntu.com/pool/universe/
+    * before ubuntu 22.04, we need to apt install -dbgsym packages manually
+        * enable the ddebs.ubuntu.com repository
+            $ sudo apt install ubuntu-dbgsym-keyring
+        * create a ddeb.list file
+            $ echo "deb http://ddebs.ubuntu.com $(lsb_release -cs) main restricted universe multiverse
+              deb http://ddebs.ubuntu.com $(lsb_release -cs)-updates main restricted universe multiverse
+              deb http://ddebs.ubuntu.com $(lsb_release -cs)-proposed main restricted universe multiverse" | \
+              sudo tee -a /etc/apt/sources.list.d/ddebs.list
+        $ sudo apt update
+        $ sudo apt install PACKAGE-dbgsym
+    * if using ubuntu after 22.04
+        $ export DEBUGINFOD_URLS="https://debuginfod.ubuntu.com"
+        * add "set debuginfod enabled on" to ~/.gdbinit
+            * if not adding this line, gdb will ask you at every launch
+        * after that, when running program, gdb will download symbols automatically
 
 
 # Options
