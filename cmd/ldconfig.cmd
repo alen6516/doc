@@ -13,6 +13,10 @@
         * add path/to/XXXlib.so
     * sudo ldconfig
 
+* LD_DEBUG=help ls
+* LD_DEBUG=libs ls
+    * see how share lib is loaded by loader when executing a process
+
 # Options
 
 # Example
@@ -24,3 +28,9 @@ $ ldconfig -p | grep libxxx
     - there may be 2 libva.so.2, one from /opt/amdgpu/lib/x86_64-linux-gnu/ and another from /lib/x86_64-linux-gnu/
     - we can edit /etc/ld.so.conf.d/20-amdgpu.conf and sudo ldconfig to specify the preferred lib
     - or for libva, we can use $ env LIBVA_DRIVER_PATH="xxx" mpv to specify
+
+* some useful env variable:
+    export LIBGL_DRIVERS_PATH=/opt/mesa/lib:/opt/mesa/lib:/opt/mesa/lib/dri
+    export LD_LIBRARY_PATH=/opt/mesa/lib:$LD_LIBRARY_PATH
+    export VK_ICD_FILENAMES=/opt/mesa/share/vulkan/icd.d/intel_icd.x86_64.json
+    export PKG_CONFIG_PATH=/opt/drm/lib/x86_64-linux-gnu/pkgconfig/:$PKG_CONFIG_PATH

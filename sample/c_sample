@@ -99,6 +99,7 @@
 	## size of int array
 	int arr[] = {1, 2, 3};
 	printf("%d\n", (int)sizeof(arr));	# 3 個 int => 12
+    printf("%d\n", (int)sizeof(arr)/sizeof(arr[0]));    # 3 (arr needs to be an array, not pointer)
     pinntf("%p, %p\n", arr, arr+1);     # 0x7ffee6ba7e70, 0x7ffee6ba7e74
 
 
@@ -630,6 +631,11 @@
     while(!condition) {
         pthread_cond_wait(&cond, &mut);
     }
+
+    ## pthread_cond_broadcast(&cond)
+    #// - Send signal to another thread which is waiting by calling pthread_cond_wait(&cond)
+    #// - If there are multuple threads waiting, all threads will receive the signal
+    #// - Need to acquire lock first
 
     ## pthread_cond_wait(&cond)
     #// - Have to get lock first, and then can call wait to hang the thread.

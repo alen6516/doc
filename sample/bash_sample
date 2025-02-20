@@ -45,6 +45,11 @@ $(nproc)    number of processing units
         * | means pass the content of sdtout to th next command as the stdin
         * second - mean stdin (which is the conten of the stdout from the first command)
         * in this case, we don't worried about what filename to use
+:
+    * Bourne shells didn't have true and false as built-in commands. true was instead simply aliased to :, and false to something like `let 0`.
+    $ if command; then :; else ...; fi
+    $ if command; then true; else ...; fi
+    * above are equal
 
 
 # wildcard (in bash)
@@ -333,6 +338,10 @@ $ condition && cmd1 || cmd2
 $ [ -d /tmp/dir ] || mkdir /tmp/dir && touch /tmp/dir/test
     * think it
 
+$ condition || { command1; command2; }
+    * if condition is true, command1 and command2 would be executed
+    * { command; }
+        * Placing a list of commands between curly braces causes the list to be executed in the current shell context. No subshell is created. The semicolon (or newline) following list is required.
 
 # Pipe
 * only pass stdout to cmd after pipe
@@ -522,6 +531,9 @@ done
 
 # while true
 while :
+do
+    ...
+done
 
 # while loop in one line
 while sleep 2; do echo thinking; done

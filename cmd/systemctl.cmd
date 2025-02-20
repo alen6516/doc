@@ -15,6 +15,10 @@ Services:
         * Gnome default network manager
         * config files are /etc/netplan/*
 
+    * sshd
+        * Openssh daemon
+        * config files under /etc/ssh/
+
     * systemd-networkd
         * yet another network manager
         * disable by default on Ubuntu
@@ -46,6 +50,9 @@ $ systemctl isolate graphical
 $ systemctl status network-manager
     * this is the network manger for gnome
     * we can replace it with systemd-networkd
+
+$ systemctl enable sshd
+    * make ssh daemon start at boot
     
 $ systemctl status systemd-resolved
     * check the status of network name resolution

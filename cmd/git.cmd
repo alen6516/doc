@@ -78,6 +78,22 @@
     $ git branch -a --contains <commit>
 
 
+## tag
+* list all tags
+    $ git tag
+
+* list all tags with given pattern ex: v-
+    $ git tag --list 'v-*'
+
+* create lightweight tag
+    $ git tag v1.0
+
+* delete tag
+    $ git tag -d v1.0
+
+* clone to a tag
+    $ git clone --depth 1 --branch <tag> <url>
+
 ## Recovery
 * cancel modify before git add (be careful)
     $ git checkout -- <file>
@@ -126,6 +142,13 @@
         * stash the output into a patch file
     $ git apply --check my.patch && git apply my.patch
         * verify no errors and apply the patch
+
+* remove untracked files
+    $ git clean -dfx
+        * -d will recursively untrack files
+        * -f means forcely
+        * -x will also remove files specified in .gitignore
+        * this command is used to clean-up repo for building
 
 
 ## Show

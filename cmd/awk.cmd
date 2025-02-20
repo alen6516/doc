@@ -12,6 +12,9 @@
     set a local variable
 
 # Example
+$ awk '{$1=$1;print}'
+    * removing leading spaces of a string
+
 $ awk 'NR==2{ print; }' filename
     * print line 2 of the file
 

@@ -3,6 +3,14 @@
         * eg. int __register_chrdev()
 # }
 
+# .config {
+    $ grep 'CONFIG_HZ=' /boot/config-$(uname -r)
+        * check HZ value
+
+    $ make kernelversion
+        * in linux root, use this command to check kernel version
+# }
+
 # printk {
     * to print without new line, use KERN_CONT
     printk(KERN_CONT "this is");
@@ -83,6 +91,9 @@
     extern u64 nsec_to_clock_t(u64 x);
     extern u64 nsecs_to_jiffies64(u64 n);
     extern unsigned long nsecs_to_jiffies(u64 n);
+
+    jiffies / HZ;           # jiffies to seconds
+    jiffies * 1000 / HZ     # jiffies to milliseconds
 # }
 
 # copy_from_user / copy_to_user {
@@ -98,7 +109,7 @@
      */
 
     #define BUF_SIZE 1024
-    static my_buf[BUF_SIZE];    /* buffer to store data */
+    static my_buf[BUF_SIZE];    /* buffer to store data in kernel */
     static ssize_t my_buf_size  /* size of data in buffer */
 
     static ssize_t device_write(struct file *fs, const char __user *buf, size_t count, loff_t *pos)

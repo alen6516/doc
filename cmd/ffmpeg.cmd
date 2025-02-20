@@ -29,6 +29,21 @@ ffmpeg video converter
     none/auto/vdpau/dxva2/d3d11va/vaapi/qsv
     * use -hwaccels to check the hw acceleeration current ffmpeg build supports
 
+-codecs
+    show ffmpeg encoding/decoding capability
+
+-formats
+    show support encoding/decoding format
+
+-decoders
+    show decoders
+
+-loglevel debug
+    * show how decoding processed
+
+-v verbose
+    * show how video stream is processed
+
 # Example
 $ ffmpeg -i INPUT.mp4 -vf fps=30 OUTPUT.mp4
     * convert frame rate to 30
@@ -51,8 +66,13 @@ $ ffprobe -v error -select_streams v:0 -show_entries stream=codec_name -of defau
 $ ffmpeg -i input.mp4 > output.txt 2>&1
     * output to a file
 
+$ ffmpeg -s 1920x1080 -pix_fmt yuv420p -depth 8 -i input.yuv output.png
+    * convert yuv raw image file to png file of resoluton 1920x1080
+    * -pix_fmt yuv420p: specifies the pixel format for the yuv image
+    * -depth 8: 8 bits per channel is common for YUV
+
 $ ffmpeg -i input.mp4 -c:v libx264 -pix_fmt yuv420p output.mp4
-    * convert YUV444p to YUV420p
+    * convert YUV444p video to YUV420p video
 
 $ ffmpeg -i HDR.mov -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=tonemap=hable:desat=0,zscale=t=bt709:m=bt709:r=tv,format=yuv420p output.mp4
     * convert 10bpc to 8bpc
@@ -60,10 +80,16 @@ $ ffmpeg -i HDR.mov -vf zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,
 $ ffmpeg -hwaccels
     * show all hardware acceleration methods
 
-$ ffmpeg -re -hwaccel vaapi -hwaccel_output_format vaapi -i bbb_1080p_30fps.mp4 -f null -
+$ ffmpeg -hwaccel vaapi -i input_video.mp4 -f null -
+    * hardware decoding through vaapi
+
+$ ffmpeg -re -hwaccel vaapi -hwaccel_output_format vaapi -i video.mp4 -f null -
     * ask ffmpeg to only do hardware decoding
     * -f null -
         * tells ffmpeg to throw away the output, which is important to avoid additional memory transfers/io operations with saving the output
+
+$ ffmpeg -re -hwaccel vaapi -hwaccel_output_format vaapi -i video.mp4 -vf 'scale_vaapi=format=rgba' -f null -
+    * ask ffmpeg to do hardware decoding and post-processing, and throw away output
 
 $ ffmpeg.exe -re -hwaccel d3d11va -hwaccel_output_format d3d11 -i xxx.mp4 -f null -
     * windows cmd command, using MS d3d11va API to decode

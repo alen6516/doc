@@ -16,5 +16,5 @@ $ rsync -avh 10.98.34.139:~/ws/dmub_test/dmu_new .
     * only new or changed files are updated
     * we can add --delete to update the deletion to the target side
 
-$ rsync -avhz src/ dst
-    
+$ rsync -avhz Folder 10.98.34.139:~/Folder
+    * need to assign Folder in the dest side
