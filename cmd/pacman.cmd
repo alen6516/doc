@@ -15,3 +15,16 @@ $ sudo pacman -S xxx
 
 $ sudo pacman -Ss xxx
     * apt search xxx
+
+* install deb file by pacman
+    $ git clone https://github.com/helixarch/debtap.git && cd debtap
+    $ sudo ./debtap -U
+    $ ./debtap xxx.deb
+        * xxx.pkg.tar.zst file will be generated
+    $ sudo pacman -U xxx.pkg.tar.zst
+
+$ pacman -Qe
+    * list all explicitly installed packages
+
+$ pacman -Qn
+    * list all explicitly installed native packages (present in the sync database)

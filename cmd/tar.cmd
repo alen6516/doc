@@ -16,7 +16,7 @@ $ tar xf archive.tar
 	* tar xvf folder.tar
 
 * Compress & Uncompress
-    * gzip
+    * tgz
         $ tar zcvf folder.tgz folder
         $ tar zxvf folder.tgz
 
@@ -36,5 +36,18 @@ $ tar xf archive.tar
         $ zip -r myfolder.zip folder/
         $ unzip myfolder.zip
 
+    * xz
+        $ unxz file.xz
+
+* Send data in folder without creating tar file
+    $ tar cvf - MyBackups | ssh user@server "cat > path/to/backup/foo.tar"
+
 * Compress and send data without creating zip
-   $ tar zcvf -  MyBackups | ssh user@server "cat > /path/to/backup/foo.tgz"
+   $ tar zcvf - MyBackups | ssh user@server "cat > /path/to/backup/foo.tgz"
+
+* Update a tar.gz file
+    $ tar -cvf my.tar some-dir
+        * create a tar file first
+    * update/add some files in some-dir
+    $ tar -uvf my.tar some-dir
+    $ gzip my.tar

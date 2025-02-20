@@ -7,6 +7,8 @@ s
     screenshot
 
 # Options
+ref: https://github.com/dyphire/mpv-config/blob/master/mpv.conf
+
 --version
     check the version of lib
 
@@ -31,6 +33,9 @@ s
 --geometry=50%+20+10
     * resize to 50% of the display, and move window position to (20, 10) from the top left corner
     * weston doesn't support
+
+--vo=help
+    * show all supported vo type
 
 # Example
 $ mpv file.mp4 --start=540 --frames=1 -o out.png

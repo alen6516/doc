@@ -7,6 +7,10 @@
     * lsof
         * list all open files including loaded modules
     * lshw
+    * lscpu
+        * cat /proc/cpuinfo
+    * cpufreq-info
+        * from cpufrequtils package
     * hwinfo
     * dmidecode
         * a handy command-line utility for sysadmin to find out hardware information right from the operating system
@@ -27,9 +31,15 @@
         * check if a obj file has debug_info or stripped
     * strings
         * print any readable symbols in a obj file
+    * readelf
 
 ## lib
     * ldd
+        * show all libs needed to load an app or shared lib
+    * lddtree
+        * show dependencies in tree
+    * readelf
+    * cat /proc/PID/maps
     * ldconfig
         * search default searching path (/lib, /usr/lib) and the path defined in /etc/ld.so.conf, to find avaliable dynamic linking libraries (in format of lib*.so*), and create the link and cache files that dynamic loading process needs (ld.so).
         * The default cache file is /etc/ld.so.cache
@@ -49,6 +59,11 @@
     * cmp
         * compare two files byte by byte
 
+## power tool
+    * powertop
+    * powerprofilesctl
+        * gnome's power backend daemon
+
 ## misc tool
     * w3m
         * command-line based browser
@@ -66,6 +81,10 @@
         * Windows tool
     * mediainfo
     * gstreamer
+
+    * git-diff-image
+        * GUI tool to show images diff
+        * https://github.com/ewanmellor/git-diff-image
 
 ## network related tool
     * < web perf tool >

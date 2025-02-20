@@ -32,6 +32,10 @@ for file in os.listdir():
 if (os.path.isfile(file):
     print("file exists")
 
+## check file last modified time
+if (os.path.getmtime(file1) > os.path.getmtime(file2)):
+    print("file1 is newer")
+
 ## execute command
 os.system("mv file1 file2")
 
@@ -124,5 +128,8 @@ df = pd.read_csv(filename, index_col=0)   # read data from csv file, and use col
         * select all rows with some particular columns
 
 # Misc
+if __name__ == "__main__":
+    main()
+
 type(obj)
     * check class type of an obj

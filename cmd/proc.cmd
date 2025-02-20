@@ -7,7 +7,7 @@ cat /proc/<number>/maps
     * as well as the mapping address of the process and the libs
 
 cat /proc/<number>/cmdline
-    * see the command line command
+    * see the bootup command line command
 
 cat /proc/<number>/environ
     * 当前进程的环境变量列表，彼此间用空字符（NULL）隔开；变量用大写字母表示，其值用小写字母表示
@@ -17,6 +17,9 @@ cat /proc/<number>/exe
 
 cat /proc/<number>/fd
     * the file descriptors of the file opened by this process
+
+grep "kernel_function" /proc/kallsyms
+    * grep specific kernel function
 
 cat /proc/cpuinfo
     * cpu info
