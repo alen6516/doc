@@ -24,9 +24,10 @@
 
 # Example
 $ meson build --prefix=$PWD/install/
-    * like "configure"
+    * like "make configure"
     * create build/ and generate configuration files for compilation
     * --prefix=path/to/install specifies the dir to place to install binaries
+    * we can check the configuration again in build/meson-logs/
 
 $ meson build/ --reconfigure
     * configure again
