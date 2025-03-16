@@ -16,3 +16,6 @@ $ ffprobe -v error -show_streams video.mp4
     * color_space=bt2020nc
     * color_transfer=smpte2084
     * color_primaries=bt2020
+
+$ ffprobe -v 0 -select_streams v:0 -count_frames -show_entries stream=nb_read_frames -of csv=p=0 in.mp4
+    * calculate how many frames in a video

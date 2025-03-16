@@ -225,7 +225,7 @@ FILE['key']='value'
 
 
 # $() 與 ${} 區別
-$(cmd) 相當於 `cmd`
+$(cmd) 相當於 `cmd`, cmd will be executed in a subshell
 ${VAR} 是為了讓 bash 明白 VAR 是個變數
 
 
@@ -388,6 +388,11 @@ if [[ $VAR =~ ^[0-9a-zA-Z]+$ ]]; then
 
 # Check if string starts with character
 if [[ $VAR =~ ^[aA] ]]; then
+
+# check if string partially match
+VAR="hello"
+if [[ $VAR == hel* ]]; then
+if [[ "$var1" =~ ^hel.* ]]; then
 
 ## check if a variable is set
 if [ -z "$var" ]; then
@@ -574,7 +579,7 @@ do
 done
 
 
-# Function
+# Function {
 function PRINT_FUNCTION(){
   echo "args is $1"
 }
@@ -589,6 +594,27 @@ if [[ -z $1 ]]; then
     shift
     foo $@                  # pass the 2nd and rest arguments to foo
 fi
+
+# return value from function
+function func1() {
+    return 87
+}
+function func2() {
+    echo 78
+}
+function func3() {
+    ret1=$(func1)
+    echo $ret1
+
+    func2
+    ret2=$?
+    echo $ret2
+}
+
+# run function in current shell or subshell
+func1       # run in current shell
+$(func1)    # run in subshell, variable changed in func1 won't affect current shell
+# }
 
 # 等候某個事件發生
 FILE_EXISTED=0;

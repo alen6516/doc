@@ -23,6 +23,9 @@ grep [options] PATTERN [FILE...]
 -n
     print line number
 
+-o
+    only print matched text
+
 -m NUM
     Stop reading the file after NUM matches
 

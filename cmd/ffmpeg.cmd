@@ -110,3 +110,18 @@ $ ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -i $1 -c:v rawvideo -p
 
 $ ffmpeg -hwaccel vaapi -vaapi_device /dev/dri/renderD128 -f rawvideo -pix_fmt yuv420p -s:v 1920x1080 -i $1 -vs 'fps=30, hwupload' -c:v h264_vaapi -bf 0 encode_out.mp4
     * hardware encode yuv420p format into h264 video
+
+* decode into yuv raw file and compute the hash
+    $ ffmpeg -loglevel quiet -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -i $video -vf format=yuv420p -y -f rawvideo - | sha256sum - | awk '{print $1}'
+        * -f rawvideo -
+            * makes ffmpeg keep outputting to stdout
+
+* decode the last frame of a video
+    $frame_count="$(ffprobe -v 0 -select_streams v:0 -count_frames -show_entries stream=nb_read_frames -of csv=p=0 in.mp4)";
+    $ ffmpeg -i in.mp4 -filter_complex "select='eq(n,$frame_count)'" -vframes 1 out.jpg
+* decode the 2nd to the last frame
+    $ ffmpeg -i in.mp4 -filter_complex "select='eq(n,$frame_count-1)'" -vframes 1 out.jpg
+* decode first N frames
+    $ ffmpeg -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -i $video -frames:v $N out.jpg
+    $ ffmpeg -loglevel quiet -hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -i $video -vf "select='lte(n\,$frame_count)',format=yuv420p" -fps_mode vfr -frames:v $N out.jpg
+

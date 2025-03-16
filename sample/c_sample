@@ -137,7 +137,7 @@
 	printf("%d\n", sizeof(str));		# pointer => 8
 
 
-    ## use 
+    ## use
     char const *arr[] = {"abc", "def", "ghi"};
     # rather than
     char *arr[] = {"abc", "def", "ghi"};
@@ -443,6 +443,19 @@
     printf("%08x", 4779); # gives 000012ab
     printf("%08X", 4779); # gives 000012AB
     printf("%#08x", 4779); # gives 0x000012ab
+
+    # print binary
+    #define BYTE_TO_BINARY_PATTERN "0b%c%c%c%c%c%c%c%c"
+    #define BYTE_TO_BINARY(byte)  \
+      ((byte) & 0x80 ? '1' : '0'), \
+      ((byte) & 0x40 ? '1' : '0'), \
+      ((byte) & 0x20 ? '1' : '0'), \
+      ((byte) & 0x10 ? '1' : '0'), \
+      ((byte) & 0x08 ? '1' : '0'), \
+      ((byte) & 0x04 ? '1' : '0'), \
+      ((byte) & 0x02 ? '1' : '0'), \
+      ((byte) & 0x01 ? '1' : '0')
+    printf(BYTE_TO_BINARY_PATTERN, BYTE_TO_BINARY(byte));
 # }
 
 # get {
@@ -559,7 +572,7 @@
 ## process exit
     exit(int status)
         * all functions registered in atexit() and on_exit() are called
-        * return status to caller (command line) 
+        * return status to caller (command line)
 
     _exit(int status)
         * exit the process immediately
