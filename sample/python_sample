@@ -182,3 +182,6 @@ if __name__ == "__main__":
 
 type(obj)
     * check class type of an obj
+
+import random
+print(random.randint(0,9))  # get random number between 0~9
