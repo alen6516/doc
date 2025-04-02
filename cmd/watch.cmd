@@ -12,3 +12,8 @@
 # Example
 $ watch "ps aux | grep 'Z'"
     * keep watching if there is a zombie process
+
+$ watch -n 1 '
+    echo "command 1"; \
+    echo "command 2";'
+    * watch multiple commands
