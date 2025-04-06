@@ -1,0 +1,59 @@
+# virtual function {
+    # need to declare function as virtual in parent class
+    # child class can override virtual function
+    # dynamic binding: virtual function will decide which implementation to call at runtime
+
+    #include <iostream>
+    using namespace std;
+
+    class Animal {
+    public:
+        virtual void sound() {  // 定義虛擬函數
+            cout << "Some generic animal sound!" << endl;
+        }
+    };
+
+    class Dog : public Animal {
+    public:
+        void sound() override {  // 重寫父類別的虛擬函數
+            cout << "Woof!" << endl;
+        }
+    };
+
+    class Cat : public Animal {
+    public:
+        void sound() override {  // 重寫父類別的虛擬函數
+            cout << "Meow!" << endl;
+        }
+    };
+
+    int main() {
+        Animal* animal1 = new Dog();  // 父類別指標指向子類別對象
+        Animal* animal2 = new Cat();
+
+        animal1->sound();  // 呼叫的是Dog的sound方法
+        animal2->sound();  // 呼叫的是Cat的sound方法
+
+        delete animal1;
+        delete animal2;
+
+        return 0;
+    }
+
+    # 虛擬函數的運行時綁定:
+    # C++的虛擬函數是通過 運行時多型（runtime polymorphism） 實現的。
+    # 這是因為在編譯時，C++無法確定應該調用哪個函數版本，只有在運行時通過指標或引用指向的具體對象來決定。
+    # 因此，這種行為是由 虛擬表（vtable） 和 虛擬表指標（vptr） 在底層實現的。
+
+    # 為什麼要使用虛擬函數？
+    # 靈活性：通過虛擬函數，你可以寫出更具擴展性和靈活性的代碼。可以編寫處理父類型的代碼，但仍然能夠調用子類型中重寫的特定函數。
+    # 代碼重用：父類別提供公共接口，子類別提供具體實現，這樣你可以在不改變父類別的情況下，對功能進行擴展。
+
+    # 虛擬析構函數：如果一個類別包含虛擬函數，最好也將析構函數設為虛擬的，這樣在刪除派生類型的物件時，能夠正確調用析構函數，避免內存洩漏。
+    class Animal {
+    public:
+        virtual ~Animal() {  // 虛擬析構函數
+            cout << "Animal destroyed!" << endl;
+        }
+    };
+# }

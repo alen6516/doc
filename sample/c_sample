@@ -333,6 +333,7 @@
 	};
 
     struct inner in = {0};          #// init all member to 0, guranteed by C99 standard
+    struct inner in = {1};          #// only the first member is initialized to 1
 
     struct inner in = {0, 'b'};
 
