@@ -7,7 +7,7 @@
     show threads, possibly with SPID column
     SPID is thread id, thread ID and Process ID on Windows are allocated from the same pool, so they will be unique.
 
-    
+
 # Example
 $ ps aux | grep PROCESS
     * show pid of the process
@@ -18,6 +18,9 @@ $ ps -efj | grep PROCESS
 $ ps -o nlwp <pid>
 $ ps -o thcount <pid>
     * check how many threads used by a process, nlwp stands for Number of Light Weight Processes.
+
+$ ps -o  ppid= 9487
+    * find the parent pid of process 9487
 
 $ ps -eo nlwp | tail -n +2 | awk '{ num_threads += $1 } END { print num_threads }'
     * check the snm of all threads running in the system.
@@ -63,3 +66,8 @@ $ ps -p 677 -T
   677   684 ?        00:00:00 mysqld
   677   685 ?        00:00:00 mysqld
   677   686 ?        00:00:00 mysqld
+
+* show per thread name
+$ ps -eLl
+$ ps -eTl
+    * -f option will replace thread name with full command line which is the same for all threads of a process

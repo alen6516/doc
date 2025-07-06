@@ -270,6 +270,9 @@
     $ git remote set-url origin git@github.com:username/REPO.git
         * this step actually switch remote URLs from HTTPS to SSH, don't need if it is already cloned with SSH
 
+## git autocrlf
+* ref: https://www.opasschang.com/blog/confusing-git-autocrlf
+
 ## Example
 * done a commit and pushed it to remote master, but want to destory that commit
     $ git log --oneline

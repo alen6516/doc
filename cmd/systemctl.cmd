@@ -33,7 +33,7 @@ Services:
         * resolvectl is a tool to test if systemd-resolved is working
 
 # Options
-    
+
 # Example
 $ sudo systemctl list-units --type=service
     * list all services under systemctl
@@ -53,7 +53,8 @@ $ systemctl status network-manager
 
 $ systemctl enable sshd
     * make ssh daemon start at boot
-    
+    * add --now after enable to make sshd active rightaway
+
 $ systemctl status systemd-resolved
     * check the status of network name resolution
     * to lookup domain name, linux will first check /etc/hosts, if not found then check the config in /etc/resolv.conf and access DNS server

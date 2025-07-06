@@ -18,10 +18,10 @@ trace system calls and signals
 
 -p PID
     trace PID
-    
+ 
 # Example
 $ strace -f -e open ps
-    * trace where does ps command get process' information
+    * trace which file does ps command get process' information
 
 $ strace -f -e open man ps 2>&1 | grep open | grep ps
     * trace where is the document that man command lookup
@@ -29,3 +29,5 @@ $ strace -f -e open man ps 2>&1 | grep open | grep ps
 $ strace -f -e open bash -c "echo hello"
     * trace whether bash script will read config file
     * the result is no
+
+$ strace -f ./firefox > run.txt 2>&1

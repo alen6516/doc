@@ -3,7 +3,7 @@
 # Overview
 
 # Options
-    
+
 # Example
 $ dpkg -i xxx.deb
     * install deb file
@@ -23,6 +23,10 @@ $ dpkg --search libc.so
 
 $ dpkg -s amd-nonfree-radeon
     * Report status of specified package
+
+$ dpkg -S *wayland*pc
+    * Search for a filename from "installed" packages
+    * useful to search which package provides a specific pc file
 
 $ mkdir tmp && dpkg-deb -R xxx.deb tmp
     * create a folder and unpack a deb package into it

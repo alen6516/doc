@@ -54,3 +54,5 @@ $ systemctl restart networking/network-manager
 
 $ sudo systemd-resolve --flush-caches
     * clear dns cache in the system
+    * if command not found, use this instead
+        $ resolvectl flush-caches

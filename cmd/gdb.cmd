@@ -22,6 +22,8 @@
 * command
     * adv LINE
         * execute until LINE
+    * adv bar
+        * execute until entering bar function
 
     * alias ir = info registers
         * set ir as alias to "info registers"
@@ -58,23 +60,28 @@
     * where
         * show where are we
     * b (breakpoint)
-    * b NN if VAR > 10
-        * condition break point
-        * add break point on line NN when variable VAR > 10
+        * b NN if VAR > 10
+            * condition break point
+            * add break point on line NN when variable VAR > 10
 
-    * b NN thread thread-ID
-        * trace under certain thread NT
-        * when stop, all threads are stop
+        * b NN thread thread-ID
+            * trace under certain thread NT
+            * when stop, all threads are stop
 
-    * add breakpoint in C code
-        * #include <signal.h>
-        * raise(SIGINT);
+        * add breakpoint in C code
+            * #include <signal.h>
+            * raise(SIGINT);
 
-    * condition 2 if a==b
-        * add condition to a existing breakpoint
+        * condition 2 if a==b
+            * add condition to a existing breakpoint
 
-    * ignore 2 10
-        * ignore breakpoint 2 for 10 times
+        * ignore 2 10
+            * ignore breakpoint 2 for 10 times
+
+        * clear main
+            delete breakpoint on main function
+        * clear 2
+            * delete breakpoint 2
 
     * commands
         * let gdb do something automatically when hit a break point
@@ -90,20 +97,39 @@
             * run with arguments
 
     * info
-        * $ info b
+        * info b
             * see informatin of breakpoint
-        * $ info threads
+        * info threads
             * see information of threads
-        * $ info sharedlibrary
+        * info sharedlibrary
             * see at which addr each library is loaded
-        * $ info frame N
+        * info frame N
             * show more information about frame number N
-        * $ info locals
+        * info locals
             * show all local variable is this frame
-        * $ info reg
+        * info reg
             * show all register values
-        * $ info macro CONST
+        * info macro CONST
             * show a constant defined by #define, but program must be compiled with -g3
+        * info symbol
+            ```
+            int x;
+            int y = 42;
+            const int z = 24;
+
+            int main() {
+              return x + y + z;
+            }
+            ```
+            $ gcc -g t.c && gdb -q ./a.out
+            (gdb) info sym &x
+            x in section .bss
+            (gdb) info sym &y
+            y in section .data
+            (gdb) info sym &z
+            z in section .rodata
+            (gdb) info sym &main
+            main in section .text
 
     * disable
         * $ disable NUM
@@ -124,6 +150,11 @@
             * print variable in hex
         * $ p /t VAR
             * print variable in binary
+        * p {struct test} pt
+        * p {struct test} 0x7fffffffe2c0
+            * print structure
+        * p i = 100
+            * change the value of variable
 
     * x
         * print variable in hex
@@ -154,7 +185,8 @@
 
     * set
         * assign a value to a program variable
-            * $ set VAR=100
+            * $ set variable VAR = 100
+            * $ set (VAR=100)
         * create a gdb convenicence variable and increase it
             * $ set $var=1
             * $ set $var=$var+1
@@ -197,6 +229,10 @@
     - set detach-on-fork on
         * when process call fork, system call, continue with the child
         * also detach other processes when process call fork
+
+    - set solib-search-path /path/to/libs
+        * specify library search path
+    - show solib-search-path
 
     * s (step)
         * when going to enter a function, use "$ s" to go into the function
@@ -389,6 +425,49 @@ $ gdb ./a.out core
         End of assembler dump.
         (gdb)
         ```
+
 * disassemble a function called foo
     $ gdb ./a.out -batch -ex 'disassemble foo'
 
+* how to check if an obj file contains debugging symbols?
+    $ objdump -h a.out | grep .debug_info
+    $ file a.out
+      * it will tell you "with debug_info" and "not stripped"
+
+* debug vainfo with customized mesa lib with debugging symbol, setting breakpoint at vlVaQueryConfigProfiles, and want to check code line by line
+    $ gdb vainfo
+    (gdb) set env LIBVA_DRIVERS_PATH /opt/mesa_ee9edd46254/lib/x86_64-linux-gnu/dri/
+        * after setting this, gdb and vainfo will use this mesa lib
+    (gdb) dir /home/alan/mesa/src
+        * if we don't add this, though we can see callstack, but we can't check line by line because gdb can't find source code
+        * adding the source path, than gdb knows where to find the source code
+
+$ WAYLAND_DISPLAY=wayland-1 mesa_glthread=false gdb --args $firefox -no-remote $video
+    * start gdb to run firefox
+
+$ eu-stack -p 2209
+    * a shell script wrapper around gdb to print stack
+    PID 2209 - process
+    TID 2209:
+    #0  0x00007f53476b667b __poll
+    #1  0x00007f5348f98e99 g_main_context_iterate.isra.23
+    #2  0x00007f5348f99232 g_main_loop_run
+    #3  0x000055e604b1e56a main
+    #4  0x00007f53475cc00a __libc_start_main
+    #5  0x000055e604b1e76a _start
+    TID 2223:
+    #0  0x00007f53476b667b __poll
+    #1  0x00007f5348f98e99 g_main_context_iterate.isra.23
+    #2  0x00007f5348f98fac g_main_context_iteration
+    #3  0x00007f5348f98ff1 glib_worker_main
+    #4  0x00007f5348fc0486 g_thread_proxy
+    #5  0x00007f534813761b start_thread
+    #6  0x00007f53476c2c2f __clone
+    TID 2224:
+    #0  0x00007f53476b667b __poll
+    #1  0x00007f5348f98e99 g_main_context_iterate.isra.23
+    #2  0x00007f5348f99232 g_main_loop_run
+    #3  0x00007f5349581b56 gdbus_shared_thread_func
+    #4  0x00007f5348fc0486 g_thread_proxy
+    #5  0x00007f534813761b start_thread
+    #6  0x00007f53476c2c2f __clone

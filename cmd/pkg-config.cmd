@@ -31,8 +31,7 @@
 $ pkg-config --exist foo && echo yes
     * check if a lib exists
 
-$ pkg-config --cflags bar
+$ pkg-config --cflags --libs bar
     * tell user how to include header files of bar when compiling
-
-$ pkg-config --libs bar
-    * tell user how to find the this lib for linker when compiling
+    * tell user how to find the bar for linker when compiling
+    * need bar.pc existing in xxx/x86_64-linux-gnu/pkgconfig/

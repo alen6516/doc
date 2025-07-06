@@ -29,3 +29,6 @@ $ ssh -T user@server user@server << 'EOL'
         $ ssh -R 9000:localhost:22 user@RemoteServer
     * on RemoteServer
         $ ssh -p 9000 user@localhost
+
+* WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!
+    $ ssh-keygen -R <target-ip>

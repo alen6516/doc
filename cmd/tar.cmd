@@ -16,7 +16,7 @@ $ tar xf archive.tar
 	* tar xvf folder.tar
 
 * Compress & Uncompress
-    * tgz
+    * tgz or tar.gz
         $ tar zcvf folder.tgz folder
         $ tar zxvf folder.tgz
 
@@ -38,6 +38,18 @@ $ tar xf archive.tar
 
     * xz
         $ unxz file.xz
+
+    * gz
+        $ gzip -d file.gz
+
+* select files/folders and add to tar
+    $ tar -cvf my.tar file1 folder2/
+
+* add files/folders to an existing tar file
+    $ tar -f my.tar --append file2 folder2
+
+* check tar file contents without extracting it
+    $ tar -tf my.tar
 
 * Send data in folder without creating tar file
     $ tar cvf - MyBackups | ssh user@server "cat > path/to/backup/foo.tar"

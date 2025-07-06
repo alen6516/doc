@@ -33,6 +33,12 @@
         * print any readable symbols in a obj file
     * readelf
 
+## debugging tool
+    * gdb
+    * eu-stack
+    * strace
+    * ftrace
+
 ## lib
     * ldd
         * show all libs needed to load an app or shared lib
@@ -40,11 +46,14 @@
         * show dependencies in tree
     * readelf
     * cat /proc/PID/maps
+        * show libs a process loads
     * ldconfig
         * search default searching path (/lib, /usr/lib) and the path defined in /etc/ld.so.conf, to find avaliable dynamic linking libraries (in format of lib*.so*), and create the link and cache files that dynamic loading process needs (ld.so).
         * The default cache file is /etc/ld.so.cache
     * lld
     * pkg-config
+    * dpkg -S libav.so
+        * show which package installs libav.so
 
 ## binary tool
     * xxd

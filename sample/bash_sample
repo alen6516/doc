@@ -616,6 +616,19 @@ func1       # run in current shell
 $(func1)    # run in subshell, variable changed in func1 won't affect current shell
 # }
 
+# nested functin
+function foo {
+    function bar {
+        var1="var1"
+        local var2="var2"
+        echo "in bar"
+    }
+    echo "in foo"
+    bar
+}
+# var1 is visible by foo, but var2 is not
+
+
 # 等候某個事件發生
 FILE_EXISTED=0;
 while [ $FILE_EXISTED -ne "1" ];

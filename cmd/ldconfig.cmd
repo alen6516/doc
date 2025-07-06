@@ -16,6 +16,18 @@
 * LD_DEBUG=help ls
 * LD_DEBUG=libs ls
     * see how share lib is loaded by loader when executing a process
+* LD_DEBUG=files /bin/date
+    * show which files are needs by the command
+* LD_LIBRARY_PATH
+    * is consulted at run time, not at link time
+    * to tell linker where to find lib at build time, use -L /usr/lib64
+    * usage 1
+        $ LD_LIBRARY_PATH=xxx:$LD_LIBRARY_PATH ./a.out
+    * usage 2
+        $ export LD_LIBRARY_PATH=xxx:$LD_LIBRARY_PATH
+        $ ./a.out
+    * usage 3
+        * insert the library path to use ld.conf file for permanent usage
 
 # Options
 
@@ -24,7 +36,7 @@
 * then use ldconfig to update lib to /etc/ld.so.cache
 
 $ ldconfig -p | grep libxxx
-    * find the full path of a lib
+    * find the full path of a lib in cache
     - there may be 2 libva.so.2, one from /opt/amdgpu/lib/x86_64-linux-gnu/ and another from /lib/x86_64-linux-gnu/
     - we can edit /etc/ld.so.conf.d/20-amdgpu.conf and sudo ldconfig to specify the preferred lib
     - or for libva, we can use $ env LIBVA_DRIVER_PATH="xxx" mpv to specify

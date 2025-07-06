@@ -21,4 +21,4 @@ $ lsinitramfs /boot/initrd.img-5.18.0xxxx
     * if so, then everytime we update the module, we need to update-initramfs
 
 $ mkinitcpio -P
-    * regenerate initramfs images based on all existing presets
+    * regenerate initramfs images based on all existing presets /etc/mkinitcpio.d/linuxXXX.preset

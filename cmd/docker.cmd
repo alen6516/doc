@@ -46,9 +46,10 @@ $ docker search <image>
     * search an image in docker's hub
 
 $ docker pull ubuntu:22.04
+$ docker pull manjarolinux/base:latest
     * pull ubuntu 22.04 image from docker's hub
 
-$ docker run --name my_ws -itd -v $WS:/ws ubuntu:22.04 /bin/bash
+$ docker run --name my_ws -itd -v $WS:/ws ubuntu:24.04 /bin/bash
     * mount the directory specified in $WS to the directory /ws in the container
 
 $ docker ps -a

@@ -35,3 +35,14 @@ Disk nvme0n1p2: 930.51 GiB, 999129350144 bytes, 1951424512 sectors
 Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+# init a linux data disk
+$ sudo fdisk -l
+$ sudo mkfs -t ext4 <DISK_DEVICE>
+$ sudo mkdir <DIRECTORY>
+$ sudo mount <DISK_DEVICE> <DIRECTORY>
+$ df -h
+
+# install img file to a disk
+$ sudo umount /media/alan/xxxx
+$ zcat win.img.gz | dd of=/dev/sda
