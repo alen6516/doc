@@ -26,7 +26,7 @@
 * DS
 * ES
 * SS
-* GS	
+* GS
 * RSP (Stack pointer)
 
 ## EFLAGS
@@ -35,7 +35,7 @@
 	* set to 1 if there is a carry or a borrow happens to the most-significant bit of the result.
 	* This bit indicates the overflow status of a unsigned integer.
 * PF (bit 2) (Parity flag)
-* AF (bit 4) (Adjust flag): 
+* AF (bit 4) (Adjust flag):
 * ZF (bit 6) (Zero flag)
 	* set it to 0 if result is 1, else set it to 0
 * SF (bit 7) (Sign flag)
@@ -100,8 +100,8 @@ mov     eax, dword ptr [ebx]          | movl    (%ebx),%eax
 s  (signed)
 z  (zero)
  
-bl (from byte to long) 
-bw (from byte to word) 
+bl (from byte to long)
+bw (from byte to word)
 wl (from word to long)
 
 movsbl %al, %edx

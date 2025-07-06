@@ -967,6 +967,13 @@
 }
 # }
 
+# math {
+    #include <math.h>
+    root = sqrt(number);    #// returns the square root of a number
+    out = pow(2,3);         #// return 2^3
+# }
+
+
 # Misc {
     ## How to define 32-bit long 0xFFFFFFFF ?
     u32 = ~(u32)0;
