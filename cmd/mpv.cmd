@@ -48,6 +48,11 @@ ref: https://github.com/dyphire/mpv-config/blob/master/mpv.conf
     * after meson setup build, make sure see "Dependency lcms2 found: YES"
     * run mpv with --gpu-dumb-mode=yes --icc-profile=xxx
 
+--mute=yes
+--osc=no
+--terminal=no
+    * mute, no osc, no terminal
+
 # Example
 $ mpv file.mp4 --start=540 --frames=1 -o out.png
     * take screenshot at specific timing, --start also accepts percentage

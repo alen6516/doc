@@ -61,12 +61,12 @@ void upcase(char *s)
     while (*s)
     {
         *s = toupper(*s);
-        s++;        
+        s++;
     }
 }
 
 int main(void)
-{    
+{
     for (int sig = 1; sig < NSIG; sig++)
     {
         char *str = strdup(sys_signame[sig]);

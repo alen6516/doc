@@ -63,3 +63,11 @@ $ tar xf archive.tar
     * update/add some files in some-dir
     $ tar -uvf my.tar some-dir
     $ gzip my.tar
+
+$ tar --extract --file firmware_bin.tar --directory ./ --exclude='*_unsigned' --strip-components 1
+    * --exclude='*_unsigned'
+        * skip all *_unsigned files
+
+    * --strip-components 1
+        * Removes the first level of directory hierarchy from the extracted files
+        * folder/file will be extracted as file

@@ -96,19 +96,19 @@
     printf("");
 
 
-	## size of int array
+	# size of int array
 	int arr[] = {1, 2, 3};
 	printf("%d\n", (int)sizeof(arr));	# 3 個 int => 12
     printf("%d\n", (int)sizeof(arr)/sizeof(arr[0]));    # 3 (arr needs to be an array, not pointer)
     pinntf("%p, %p\n", arr, arr+1);     # 0x7ffee6ba7e70, 0x7ffee6ba7e74
 
 
-	## size of char array
+	# size of char array
 	char str[] = {'1', '2', '3'};
 	printf("%d\n", (int)sizeof(str));	# 3 個 char => 3
 
 
-	## size of string
+	# size of string
 	char str[] = "123";
 	printf("%d\n", (int)sizeof(str));	# 結尾有一個 '\0' => 4
 
@@ -116,85 +116,98 @@
 	printf("%d\n", (int)sizeof(str)); 	# str 是 pointer!! => 8
 
 
-    ## scanf a string
+    # scanf a string
     char str[100];
     scanf(" %99[^\n]", str);
-    ### first space is used to skip a ' ', '\t', '\n' in the input buffer left by the previous scanf
-    ### %[^\n] means match a string not equal to '\n' and stores it (plus a '\0')
-    ### 99 means at most read 99 chars from the input
+    ## first space is used to skip a ' ', '\t', '\n' in the input buffer left by the previous scanf
+    ## %[^\n] means match a string not equal to '\n' and stores it (plus a '\0')
+    ## 99 means at most read 99 chars from the input
 
 
-	## int array shift
+	# int array shift
 	int arr[] = {1, 2, 3};
 	printf("%d\n", (arr+1)[1]);			# 出現 + 時，arr 視為 pointer ，arr+1 指向 2，而 (arr+1)[] 則又視為陣列 {2, 3} ，該陣列第 1 項 => 3
 	printf("%d\n", (int)sizeof(arr+0));	# 出現 + 時，arr 視為 pointer => 8
 
 
-	## char arr shift
+	# char arr shift
 	char *str = "abc";
 	printf("%c\n", (str+1)[1]); 		# c
 	printf("%d\n", sizeof(str+1));		# pointer => 8
 	printf("%d\n", sizeof(str));		# pointer => 8
 
 
-    ## use
+    # use
     char const *arr[] = {"abc", "def", "ghi"};
-    # rather than
+    ## rather than
     char *arr[] = {"abc", "def", "ghi"};
 
 
-    ## designated initializers
+    # designated initializers
     int a[6] = { [4] = 29, [2] = 15 };
-    # this is ISO C99 standard, also supported in gcc gnu89 as an extension
-    # is equivalent to int a[6] = { 0, 0, 15, 0, 0, 29, 0 }
+    ## this is ISO C99 standard, also supported in gcc gnu89 as an extension
+    ## is equivalent to int a[6] = { 0, 0, 15, 0, 0, 29, 0 }
 
     int widths[] = { [0 ... 9] = 1, [10 ... 99] = 2, [100] = 3 };
-    # this is gcc extension
-    # the length of the array will the highest value specified plus one.
- 
+    ## this is gcc extension
+    ## the length of the array will the highest value specified plus one.
+
     int whitespace[256]
        = { [' '] = 1, ['\t'] = 1, ['\h'] = 1,
            ['\f'] = 1, ['\n'] = 1, ['\r'] = 1 };
 
 
-    ## array type cast
+    # array type cast
     int arr[3] = {1, 2, 3};
     int a[4] = (int[4]*) arr;
 
-    ## multidimensional array
+    # multidimensional array
     int arr[][] = {{1, 2}, {3, 4}};  # error, declaration of ‘arr’ as multidimensional array must have bounds for all dimensions except the first
     int arr[][2] = {{1, 2}, {3, 4}}; # correct
+    int *p[2] = arr;    # error, invalid array assignment
+    int *p[2]; p[0] = arr[0]; p[1] = arr[1];    # correct
 
-    ## how to pass 2D array to a function?
-
-    # void foo1(int arr[ROW][COL]);
+    # how to pass 2D array to a function?
+    ## void foo1(int arr[ROW][COL]);
     int arr1[ROW][COL] = {{...}, ...};
     foo1(arr1);
 
-    # void foo2(int arr[][COL], int row);
+    ## void foo2(int arr[][COL], int row);
     int arr2[][COL] = {{...}, ...};
     foo2(arr2, ROW)
 
-    # void foo3(int *arr, int row, int col);
+    ## void foo3(int *arr, int row, int col);
     int arr3[][COL] = {{...}, ...};
     int row = ROW, int col = COL;
     foo3((int *)arr3, row, col);
 
-    # void foo4(int (*arr)[M]);
+    ## void foo4(int (*arr)[M]);
     int arr4[][COL] = {{...}, ...};
     foo4(arr4);
 
-    # void foo5(int **arr, int row, int col);
+    ## void foo5(int **arr, int row, int col);
     int **arr5;
-    x = malloc(ROW * sizeof(*arr5));
+    arr5 = malloc(ROW * sizeof(*arr5));
     for (int i=0; i<ROW; i++) {
-        arr[i] = malloc(COL * sizeof(*arr5[i]));
+        arr5[i] = malloc(COL * sizeof(*arr5[i]));
     }
-    foo5(arr, ROW, COL);
+    foo5(arr5, ROW, COL);
     for (int i=0; i<ROW; i++) {
         free(arr[i]);
     }
     free(arr);
+
+    # pass 2d array by **arr
+    int arr[][2] = {{1,2},{3,4}}
+    int *p = arr[0];
+    foo(&p);
+    void foo(int **arr) {
+        printf("arr = %p\n", arr);
+        printf("arr[0][0] = %d\n", arr[0][0]);
+        printf("arr[0][1] = %d\n", arr[0][1]);
+        printf("arr[1][0] = %d\n", arr[1][0]);
+        printf("arr[1][1] = %d\n", arr[1][1]);
+    }
 
     ## passing array to a function, it will be treated as pointer
     void foo(int arr[])

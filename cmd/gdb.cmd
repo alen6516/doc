@@ -442,7 +442,7 @@ $ gdb ./a.out core
         * if we don't add this, though we can see callstack, but we can't check line by line because gdb can't find source code
         * adding the source path, than gdb knows where to find the source code
 
-$ WAYLAND_DISPLAY=wayland-1 mesa_glthread=false gdb --args $firefox -no-remote $video
+$ WAYLAND_DISPLAY=wayland-1 mesa_glthread=false gdb --args firefox -no-remote $video
     * start gdb to run firefox
 
 $ eu-stack -p 2209

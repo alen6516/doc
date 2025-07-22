@@ -55,6 +55,9 @@ $ docker run --name my_ws -itd -v $WS:/ws ubuntu:24.04 /bin/bash
 $ docker ps -a
     * list all docker containers
 
+$ docker ps -s
+    * check the size of each container
+
 $ docker ps -a -f status=running
     * list running docker containers
 

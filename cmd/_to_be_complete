@@ -37,7 +37,9 @@
     * gdb
     * eu-stack
     * strace
-    * ftrace
+    * trace-cmd (ftrace)
+    * ltrace
+    * perf
 
 ## lib
     * ldd
@@ -132,6 +134,10 @@
             * see network traffic
         * iptraf
             * see network traffic
+
+    * < scan >
+        * netcat / nc
+        * nmap
 
 ## every linux networking tool I know -- Julia Evans
 * ss, netstat, lsof, fuser

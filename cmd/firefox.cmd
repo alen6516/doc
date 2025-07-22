@@ -25,7 +25,7 @@
     * https://www.mozilla.org/en-US/firefox/all/desktop-nightly/linux64/en-US/
     * has debug info
 
-* check firefox source code
+* firefox code search
     * https://searchfox.org/mozilla-central/source/
 
 * build firefox

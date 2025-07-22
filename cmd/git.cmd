@@ -102,7 +102,7 @@
     $ git checkout COMMIT
         * go to certain commit
 
-* cancel git add before git commit 
+* cancel git add before git commit
     $ git reset
 
 * cancel <file>'s git add before git commit
@@ -273,6 +273,21 @@
 ## git autocrlf
 * ref: https://www.opasschang.com/blog/confusing-git-autocrlf
 
+
+## git bisect
+$ git bisect start <Bad Commit> <Good Commit>
+...
+$ git bisect good
+...
+$ git bisect bad
+...
+xxxxxxx is the first bad commit
+$ git bisect log > ./log
+$ git bisect replay ./log
+$ git bisect visualize
+$ git bisect reset
+    * stop
+
 ## Example
 * done a commit and pushed it to remote master, but want to destory that commit
     $ git log --oneline
@@ -343,3 +358,6 @@
         $ eval $(ssh-agent -s)
             * make sure ssh-agent is running
         $ ssh-add ~/.ssh/id_ed25519
+
+* create archive of specific files from a remote git repo
+    $ git archive --format tar -o filename.tar --remote ssh://<git-url> <branch-name>:<folder-path>
