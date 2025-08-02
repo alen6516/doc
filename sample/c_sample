@@ -1064,4 +1064,20 @@
     ## __FILE__, __LINE__
     #define __FILENAME__ (strrchr(__FILE__, '/') ? strrchr(__FILE__, '/') + 1 : __FILE__)
     // __FILE__ gives full path, use this macro to only get file name.
+
+
+    ## hex substruction
+    0x20 - 0x1b = ?
+
+    because:
+    a => 10
+    b => 11
+    c => 12
+    d => 13
+    e => 14
+    f => 15
+    0 => 16
+
+    so:
+    0 - b = 16 - 11 = 5
 # }
