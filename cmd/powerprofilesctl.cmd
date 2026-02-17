@@ -1,6 +1,7 @@
 # Description
 
 # Overview
+pacman -S power-profiles-daemon
 
 # Options
 

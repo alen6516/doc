@@ -6,5 +6,5 @@ change login shell for current user
 # Options
 
 # Example
-$ sudo chsh yourusername  -s /bin/bash
+$ sudo chsh yourusername -s /bin/bash
     * change login shell to bash on manjaro

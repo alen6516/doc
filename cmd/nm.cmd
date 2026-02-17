@@ -30,6 +30,22 @@ T
     * linker will fail if it detects global symbol redefination
 t
     * the symbol is in text (code) section, and it is local (static function)
+D
+    * Global data (initialized)
+d
+    * Local data (initialized)
+B
+    * Global data (uninitialized)
+b
+    * Local data (uninitialized)
+R
+    * Read-only data
+r
+    * Read-only local data
+A
+    * Absolute symbol (address fixed)
+U
+    * Undefined (external) symbol
 
 # Example
 $ nm obj_file

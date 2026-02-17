@@ -24,6 +24,12 @@
     $ git fetch origin dev
         * fetch dev branch from origin
 
+    $ git fetch --unshallow
+    $ git fetch --depth=100
+        * if we clone a repo without history, we can fetch with this option
+    $ git fetch --unshallow --tags --all
+        * fetch all branches and tags
+
 * pull
     * base on local .git/FETCH_HEAD, git fetch remote branch and git merge those data with local branch
     $ git pull origin master
@@ -39,6 +45,8 @@
 
     $ git clone --shallow-since=<date> <url>
 
+    $ git rev-parse --is-shallow-repository
+        * check whether the repo is shallow or full clone
 
 ## Branch
 * create branch
@@ -53,8 +61,9 @@
 * rename a branch
     $ git branch -m <new-name>
 
-* checkout to other branch
+* checkout
     $ git chechout bugfix
+        * checkout to another branch
 
     $ git checkout -b sister
         * create and checkout to a non-exist branch
@@ -73,6 +82,28 @@
 * merge a branch (to current branch)
     $ git merge bugfix
         * if current branch is master, bugfix branch will be merged to master
+
+    $ git merge --ff/--ff-only/--no-ff bugfix
+        * --ff
+            * default merge behavior, when fast-forward is possible, do fast-forward, else create a merge commit
+            * use this when we want linear history
+        * --ff-only
+            * only merge when fast-forward is possible, else refuse
+        * --no-ff
+            * always create a merge commit to merge, so we can see bugfix branch from graph
+            * use this when we want to preserve branch history for clarity
+        ```
+        main branch:   A--B--C
+        bugfix bracch:        \-D--E
+        In this case fast-forward works, after merging maiin will point to the same commit as bugfix
+
+        main branch:   A--B--C--F
+        bugfix branch:        \-D--E
+        In this case fast-forward doesn't work. After merging with --no-ff:
+        main branch:   A--B--C--F-----G
+                              \-D--E-/
+        G: (main) Merge branch "bugfix"
+        ```
 
 * find branches the commit is on
     $ git branch -a --contains <commit>
@@ -209,12 +240,17 @@
 * find the most recent common commit of 2 branches
     $ git merge-base branch1 branch2
 
+* check if a commit is contained in certain branch/tag
+    $ git merge-base --is-ancestor <commit> <branch>
+    $ echo $?
+        * 0 means yes
+
 ## git grep
-# git grep is very similar. The main difference is that git grep defaults to searching in the files that are tracked by git
+# git grep is very similar to git. The main difference is that git grep defaults to searching in the files that are tracked by git
 * find the keyword with line number
     $ git grep -n WORD
 
-* count the times of keywork
+* count the times of keyword
     $ git grep -c WORD
 
 * find keyword and show the function it is in
@@ -254,7 +290,7 @@
     $ git cherry-pick -n 55669487
         * cherry-pick but not commit, we can unstage some files and then commit, the message will be stored by cherry-pick
 
-## rebase/merge/suqash
+## rebase/merge/squash
 * rebase
     $ git rebase -i COMMIT
         * interactive mode to do rebase:
@@ -273,6 +309,8 @@
 ## git autocrlf
 * ref: https://www.opasschang.com/blog/confusing-git-autocrlf
 
+## git blame
+$ git blame <file>
 
 ## git bisect
 $ git bisect start <Bad Commit> <Good Commit>
@@ -287,6 +325,13 @@ $ git bisect replay ./log
 $ git bisect visualize
 $ git bisect reset
     * stop
+
+## gerrit git push
+$ git push origin HEAD:refs/for/<branch-name>
+    * create a review request
+
+$ git push origin HEAD:refs/head/<branch-name>
+    * push to the branch, need to have push right
 
 ## Example
 * done a commit and pushed it to remote master, but want to destory that commit

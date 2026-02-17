@@ -4,6 +4,8 @@ tool to measure the execute time of a command
 # Overview
 
 # Options
+-v
+    verbose
     
 # Example
 $ time curl 87.87.87.87/index.html

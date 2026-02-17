@@ -11,6 +11,9 @@
     * /boot/grub/grub
         * to check the bootable kernel list (menuentry)
 
+* no such command on arch system, add by:
+    $ sudo echo "grub-mkconfig -o /boot/grub/grub.cfg" > ~/.local/bin/update-grub
+
 # Options
 
 # Example

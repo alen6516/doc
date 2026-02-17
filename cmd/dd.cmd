@@ -6,3 +6,4 @@ $ zcat win.img.gz | dd of=/dev/sda
 
 # install .img file to a disk
 $ dd if=/dev/backup.img of=/dev/sda bs=4M status=progress oflag=sync
+$ zcat backup.img.gz | dd of=/dev/sda bs=4M status=progress oflag=sync

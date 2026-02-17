@@ -9,9 +9,9 @@
 -e
     interpret backslash escape
 
--n  
+-n
     do not change line
-    
+
 # Example
 $ echo -e "GET / HTTP/1.0\r\n\r\n" | nc 87.87.87.87 8080
     Use echo to send data which allow escape character

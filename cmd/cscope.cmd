@@ -23,3 +23,6 @@ $ cscope -d
 * use cscope on python code (also works for php code)
     * go to top dir of the python code
     * $ find . -name '*.py' > cscope.files && cscope -Rb
+
+* change the default editor, add this line in .bashrc
+    export CSCOPE_EDITOR=nvim

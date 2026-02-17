@@ -16,9 +16,57 @@
     printk(KERN_CONT "this is");
     printk(KERN_CONT "an apple.\n");
 
+    #include "include/linux/printk.h"
     #define pr_info(fmt, arg ...) \
         printk(KERN_INFO fmt, ##arg)
-    pr_err()
+
+    pr_info("info\n");
+    pr_warn("warn\n");
+    pr_err("error\n");
+
+    * print stack
+    dump_stack();
+# }
+
+# utils {
+    # include/linux/minmax.h
+    u32 min = min_t(u32, x, y);
+
+    # include/linux/container_of.h
+    # struct out {
+    #       ...
+    #       struct in member;
+    # };
+    # struct in *ptr = &out->member;
+    # // you have pointer to member, and you want to get pointer to out
+    struct out *ret = container_of(ptr, struct out, member)
+
+    # WARN_ON
+    WARN(condition, "warning message\n");
+    WARN_ONCE(condition, "warning message\n");
+    WARN_ON(condition);
+    WARN_ON_ONCE(condition);
+
+    # BUG_ON
+    # // actually, use WARN instead of BUG because BUG is dangerous
+    BUG();
+    BUG_ON(size < sizeof(struct xxx));
+
+    # likely/unlikely
+    if (likely(a > b)) { ... }
+# }
+
+# list_head {
+    # include/linux/list.h
+    INIT_LIST_HEAD(struct list_head *list)
+# }
+
+# memory allocation {
+    # kzalloc(size, flag)
+    # kvmalloc(size, flag)
+    # kvzalloc(size, flag)
+    # kcalloc(n, size, flags)      // allocate to array, memset to 0
+    ptr = kvzalloc(size, GFP_KERNEL);
 # }
 
 # task_struct {
@@ -182,6 +230,10 @@
     }
 # }
 
+# atomic {
+    /* If (@v == @old), atomically updates @v to @new with full ordering */
+    int atomic_cmpxchg(atomic_t *v, int old, int new);
+# }
 
 # completion {
     # a synchronization mechanism in kernel

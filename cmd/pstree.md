@@ -9,6 +9,9 @@
 -p
     show pid of all sub-process
 
+-s
+    displayi parents processes
+
 # Example
 $ pstree -a -p 12345
     * see the process tree about process with pid 12345

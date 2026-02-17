@@ -3,6 +3,8 @@
 # Overview
 
 # Options
+-f
+    * force rebuild
 
 # Example
 * build kernel with PKGBUILD

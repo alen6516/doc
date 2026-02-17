@@ -1,0 +1,15 @@
+
+# Some(), is_some() {
+    let x: Option<u32> = Some(10);
+    let y: Option<u32> = None;
+
+    if x.is_some() {
+        // This block executes because x is Some(10)
+        println!("x contains a value: {}", x.unwrap());
+    }
+
+    if y.is_some() {
+        // This block does not execute because y is None
+        println!("y contains a value");
+    }
+# }

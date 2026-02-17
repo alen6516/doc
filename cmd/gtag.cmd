@@ -62,3 +62,11 @@
             * can generate tag file and let user jump in vim
             * no control panel
         * gtags and cscope are bascially the same, but cscope is no longer maintained
+
+    * Use GTAGSLIBPATH for System Libraries
+        * if programs use symbols from system lib header, gtags can't find them by default
+        * step to solve it:
+            * generate GTAGS under system lib path like /usr/include
+            * export GTAGSLIBPATH=/usr/include
+            * but with that we can only jump to structs defined under /usr/include, for functions declared under /usr/include we still can't jump to. Because GTAGS is optimized for code navigation, not API browsing, so function prototypes are often ignored.
+            * use `global -x <symbol>` to verify

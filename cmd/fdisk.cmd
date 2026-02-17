@@ -2,6 +2,7 @@
 Display or manipulate a disk partition table.
 
 # Overview
+* Use Gparted for GUI
 
 # Options
 
@@ -45,4 +46,4 @@ $ df -h
 
 # install img file to a disk
 $ sudo umount /media/alan/xxxx
-$ zcat win.img.gz | dd of=/dev/sda
+$ zcat win.img.gz | dd of=/dev/sda bs=4M status=progress oflag=sync

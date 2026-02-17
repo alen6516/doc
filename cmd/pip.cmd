@@ -29,5 +29,19 @@ $ pip install <pkg> --upgrade
     * upgrade a pkg
 
 $ pip install poetry
-$ poetry search <pkg>
-    * search pip package using PyPI entry, as pip search is not avaliable
+
+* search
+    * poetry search
+        $ sudo apt install python3-poetry
+        $ poetry search <pkg>
+            * search pip package using PyPI entry, as pip search is not avaliable
+    * pip_search
+        $ sudo pip install pip-search
+        $ pip_search <pkg>
+            * this is the community tool
+    * or search pip package on https://pypi.org/search/
+
+* pip install error: externally-managed-environment
+    $ python3 -m venv my_venv
+    $ source my_venv/bin/activate
+    $ pip install <package>

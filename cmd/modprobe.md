@@ -16,3 +16,7 @@ $ modprobe -r amdgpu
     $ sudo modprobe -r DEPENDED_MODULE MODULE
     $ echo -e "blacklist MODULE\n" | sudo tee -a /etc/modprobe.d/blacklist.conf
         * add the module to blacklist to prevent it from loading on next boot
+
+$ insmod example.ko
+$ rmmod example
+    * load and unload a custom module

@@ -26,6 +26,9 @@ find PATH -name FILE_NAME
 -empty
     * find empty file or dir (by assigning -type f/d)
 
+-delete
+    * delete the files found
+
 -size SIZE
     * specify size of the target
 
@@ -47,6 +50,9 @@ find PATH -name FILE_NAME
 # Example
 $ find . -type f -name "*.php"
     * find all .php file under current dir
+
+$ find ./ -name *.rej -delete
+    * find all *.rej file and delete
 
 $ find . -type f -name ".mp3" -exec rm -f {} \;
     * {} means the result

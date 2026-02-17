@@ -1,3 +1,8 @@
+## new tool
+    * gitui
+        * https://github.com/gitui-org/gitui
+        
+
 ## system/hardware information tool
     * lspci
         * list devices connecting to PCIe
@@ -18,6 +23,10 @@
         * check driver info
     * inxi
 
+## disk tool
+    * fdisk
+    * parted
+
 ## elf related tool
     * nm
         * list symbols from obj files
@@ -35,6 +44,8 @@
 
 ## debugging tool
     * gdb
+    * rr
+        * rr is a time-travel debugger for Linux. It records a program’s execution so you can replay it deterministically and step backward in time using gdb
     * eu-stack
     * strace
     * trace-cmd (ftrace)
@@ -74,6 +85,39 @@
     * powertop
     * powerprofilesctl
         * gnome's power backend daemon
+
+## cpu tool
+    * top
+    * htop
+    * pidstat
+        $ pidstat -u -I 1
+            * show per-process CPU usage on each CPU every sec
+    * mpstat
+        $ mpstat -P ALL 1
+            * Shows per-CPU usage (-P ALL) updated every 1 second.
+    * /proc/stat
+
+## gpu tool
+    * amdgpu_top
+        * check usage
+    * amd-smi
+        $ sudo pacman -S amdsmi
+            * amd-smi in /opt/rocm/bin/
+        * set frequency
+    * agt & agm
+    * drm_info
+        * install drm-info
+    * gpuvis
+    * modetest
+        * install libdrm-tests
+    * glxinfo
+    * vainfo
+    * umr
+
+## grub
+    * update-grub
+    * grub-reboot
+    * grub-editenv
 
 ## misc tool
     * w3m

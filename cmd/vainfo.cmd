@@ -1,6 +1,7 @@
 # Description
 
 # Overview
+* sudo pacman -S libva-utils
 
 # Options
 -E

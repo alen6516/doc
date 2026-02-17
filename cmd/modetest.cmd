@@ -8,6 +8,7 @@
     $ meson build
     $ ninja -C build
     $ ./build/tests/modetest/modetest
+* or sudo apt isntall libdrm-tests
 * Modetest is also available in ChromeOS under the folder src/third_party/libdrm/tests/.
 
 # Options

@@ -7,8 +7,8 @@ trace system calls and signals
 -f
     also list the system calls executed by the child process
 
--e FUNCTION
-    only list FUNCTION, multiple functions can be assigned
+-e SYSCALL
+    only list SYSCALL, multiple functions can be assigned
 
 -e trace={network,signal}
     * trace network related system calls like socket, connect, getsockopt, ...
@@ -32,11 +32,17 @@ trace system calls and signals
 -c
     count number of each system call
 
+-k
+    print stack trace
+
 -p PID
     trace PID
 
 -s SIZE
     adjust the length of output log
+
+-v
+    show arguments
 
 # Example
 $ strace -f -e open ps
@@ -49,7 +55,13 @@ $ strace -f -e open bash -c "echo hello"
     * trace whether bash script will read config file
     * the result is no
 
-$ strace -f ./firefox > run.txt 2>&1
+$ strace -f ./firefox -o strace.log > run.txt 2>&1
+    * strace outputs to strace.log
+    * firefox outputs to run.txt
 
 $ strace -e trace=write,open ls
+$ strace -e ioctl ./app
     * trace a particular system calls
+
+$ strace -k -e trace=ioctl ./app
+    * print stack trace of the system call

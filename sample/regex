@@ -1,3 +1,10 @@
+## example
+^music          | start with `music`
+mp3$            | end with `mp3`
+'word           | strictly match `word`
+!word           | exclude `word`
+!.mp3$          | not end with `mp3`
+
 ## [::]
 [:alnum:]       | 0-9, A-Z, a-z
 [:alpha:]       | A-Z, a-z

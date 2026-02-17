@@ -42,20 +42,26 @@ $ tar xf archive.tar
     * gz
         $ gzip -d file.gz
 
+    * pkg.tar.zst
+        $ tar -xvf file.pkg.tar.zst
+
 * select files/folders and add to tar
     $ tar -cvf my.tar file1 folder2/
 
-* add files/folders to an existing tar file
+* add files/folders to an existing tar archive
     $ tar -f my.tar --append file2 folder2
+
+* update files to an existing tar archive
+    $ tar -uf my.tar my/newfile
 
 * check tar file contents without extracting it
     $ tar -tf my.tar
 
 * Send data in folder without creating tar file
-    $ tar cvf - MyBackups | ssh user@server "cat > path/to/backup/foo.tar"
+    $ tar cvf - MyDir | ssh user@server "cat > path/to/backup/foo.tar"
 
 * Compress and send data without creating zip
-   $ tar zcvf - MyBackups | ssh user@server "cat > /path/to/backup/foo.tgz"
+   $ tar zcvf - MyDir | ssh user@server "cat > /path/to/backup/foo.tgz"
 
 * Update a tar.gz file
     $ tar -cvf my.tar some-dir
@@ -71,3 +77,12 @@ $ tar --extract --file firmware_bin.tar --directory ./ --exclude='*_unsigned' --
     * --strip-components 1
         * Removes the first level of directory hierarchy from the extracted files
         * folder/file will be extracted as file
+
+* best practice to compress source code
+    $ tar -I 'zstd -T0 -19' -cf chromium-src.tar.zst chromium/
+        * -T0: use all CPU core
+        * -19: good for source code compression and decompression
+        * after decompression, simply update by:
+            $ git status
+            $ git pull
+            $ gclient sync

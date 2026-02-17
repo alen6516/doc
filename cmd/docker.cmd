@@ -80,3 +80,18 @@ $ docker image ls
 
 $ docker image rm <IMAGE_ID>
     * remove image by ID
+
+* move docker data out of /
+    * docker data by default is in /var/lib/docker, which occupies /
+    * move it to /home/alan/docker:
+        $ sudo systemctl stop docker
+        $ sudo systemctl stop docker.socket
+        $ sudo systemctl stop containerd
+        $ sudo mv /var/lib/docker /home/alan/docker/
+        $ sudo vim /etc/docker/daemon.json
+            ```
+            {
+                "data-root": "/mnt/docker-data/docker"
+            }
+            ```
+        $ sudo systemct start docker

@@ -33,3 +33,6 @@ $ mkdir tmp && dpkg-deb -R xxx.deb tmp
 
 $ sudo dpkg-repack gparted
     * create a .deb file from installed package
+
+$ dpkg-deb -x linux-image-6.x.x-custom_amd64.deb kernel/
+    * extract deb file

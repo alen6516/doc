@@ -103,6 +103,7 @@
             * see information of threads
         * info sharedlibrary
             * see at which addr each library is loaded
+        * info sharedlibrary libdrm
         * info frame N
             * show more information about frame number N
         * info locals
@@ -111,6 +112,9 @@
             * show all register values
         * info macro CONST
             * show a constant defined by #define, but program must be compiled with -g3
+        * info functions
+        * info variables
+        * info types
         * info symbol
             ```
             int x;
@@ -202,6 +206,9 @@
     - set non-stop on
         * when debugging a multithreaded application, while a breakpoint hits, the debugger will freeze all the threads. You can tell the debugger to let the other threads continue run by this
 
+    - set pagination off
+        * disable gdb to ask "Type <return> to continue, or q <return> to quit"
+
     - set disassemble-next-line on/off
         * let gdb show the x86 instruction of next line
 
@@ -214,11 +221,11 @@
     - set print pretty on/off
         * print a data member line by line when print a object
 
-    - set pagination off
-        * disable gdb to ask "Type <return> to continue, or q <return> to quit"
-
     - set print repeats 0
         * gdb will omit repeated elements, set this to avoid
+
+    - set print address off
+        * don't display hex address in bt
 
     - set history save on
     - set history size 4096
@@ -231,14 +238,22 @@
         * also detach other processes when process call fork
 
     - set solib-search-path /path/to/libs
-        * specify library search path
+        * specify library search path to make gdb use libs here
     - show solib-search-path
+
+    - logging
+        - set logging file log.txt
+        - set logging on
+        - bt full
+        - set logging off
 
     * s (step)
         * when going to enter a function, use "$ s" to go into the function
 
     * bt (back trace)
         * check the call stack of function
+    * bt full
+        * also prints local variables for every stack frame
 
     * finish
         * execute to the return of the caller of current function
@@ -317,6 +332,9 @@
     * add-symbol-file FILE ADDR
         * add a symbol file to certain address
 
+    * symbol-file /path/to/libdrm.so
+        * specify symbols
+
     * show
         * $ show conv
             * show all convenicence variable in list
@@ -393,12 +411,20 @@
         * add "set debuginfod enabled on" to ~/.gdbinit
             * if not adding this line, gdb will ask you at every launch
         * after that, when running program, gdb will download symbols automatically
+    * if using manjaro
+        $ export DEBUGINFOD_URLS="https://debuginfod.archlinux.org"
+        * after that, when running program, gdb will download symbols automatically
+
+* cache
+    * When GDB attempts to resolve addresses into function names by reading millions of debug symbols, sometimes it runs out of memory and GDB got killed by OOM killer. We can reduce memory and time to load symbols by caching them on disk
+    $ set index-cache enabled on
+    $ set index-cache directory ~/.cache/gdb-index
 
 
 # Options
 -ex "command"
     * execute command after start gdb
-    
+
 # Example
 $ gdb --tui ./a.out
 
@@ -429,6 +455,14 @@ $ gdb ./a.out core
 * disassemble a function called foo
     $ gdb ./a.out -batch -ex 'disassemble foo'
 
+$ gdb -batch \
+    -ex "break ioctl" \
+    -ex "run" \
+    -ex "bt" \
+    -ex "quit" \
+    ./amdgpu_test > ioctl_trace.log
+    * save backtrace of ioctl calls to log file
+
 * how to check if an obj file contains debugging symbols?
     $ objdump -h a.out | grep .debug_info
     $ file a.out
@@ -444,6 +478,16 @@ $ gdb ./a.out core
 
 $ WAYLAND_DISPLAY=wayland-1 mesa_glthread=false gdb --args firefox -no-remote $video
     * start gdb to run firefox
+
+* how to set breakpoint to C++ functions?
+    * A:
+        * (gdb) info functions RenderVideoFrames
+            * find full function name and signature
+        * (gdb) break 'NamespaceName::ClassName::RenderVideoFrames
+    * B:
+        * (gdb) rbreak RenderVideoFrames
+        * (gdb) rbreak 'mozilla::VideoSink::RenderVideoFrames.*'
+
 
 $ eu-stack -p 2209
     * a shell script wrapper around gdb to print stack

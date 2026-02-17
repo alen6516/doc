@@ -6,6 +6,12 @@
 # Options
 
 # Example
+$ compare image1.png image2.png diff.png
+    * save the diff to diff.png, where differences are highlighted in red
+
+$ compare -metric AE image1.png image2.png null:
+    * check only if they differ without saving an image
+
 $ convert -size 1920x1080 -depth 8 rgba:$image_in $png_out
     * convert raw image file to png
     * we can also run ffmpeg to convert

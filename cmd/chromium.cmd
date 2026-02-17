@@ -31,7 +31,9 @@
     * download src (several GB)
         $ mkdir chromium && cd chromium
         $ fetch --nohooks chromium
+            * can add --no-history to save time
         $ cd src
+    * (don't download the code by cloning https://chromium.googlesource.com/chromium/src.git, it doesn't contain dependencies for build)
     * sync third-party code
         $ gclient sync
     * install dep
@@ -55,6 +57,9 @@
             is_component_build = false
             is_debug = false
 
+            # reduce binary size and turn on all optimizations
+            is_official_build = true
+
             # (Optional) Vulkan, ANGLE, Wayland
             use_ozone = true
             ozone_platform_wayland = true
@@ -67,13 +72,22 @@
             * use_vaapi = true, enable_vaapi = true → compiles VA-API support.
     * build (2 hours)
         $ autoninja -C out/Release chrome
+        * to save building log
+            $ autoninja -C out/Release chrome -v > build_verbose.log 2>&1
     * run
         $ out/Release/chrome --ozone-platform=wayland \
           --enable-features=VaapiVideoDecoder,VaapiIgnoreDriverChecks,AcceleratedVideoDecodeLinuxZeroCopyGL,AcceleratedVideoDecodeLinuxGL \
           --enable-zero-copy --enable-gpu-memory-buffer-video-frames --enable-native-gpu-memory-buffers
 
+* sometimes chromium can't play h264 video because it wasn't built with that codec, so can only play av1 and vp9 video
+    * https://superuser.com/questions/1541739/h-264-video-support-in-chromium-missing-codec
+    * https://www.chromium.org/audio-video/
 
 # Options
+--enable-features=AcceleratedVideoDecodeLinuxZeroCopyGL
+    * only works on wayland but not X11
+
+
 * in chrome://gpu
     * check if hardware decoding is enabled
 

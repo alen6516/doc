@@ -1,6 +1,24 @@
 # Description
 
 # Overview
+* build
+    $ git clone https://github.com/mpv-player/mpv.git
+    $ cd mpv && mkdir -p subprojects && git clone https://code.videolan.org/videolan/libplacebo.git --depth=1 --recursive subprojects/libplacebo
+    $ meson setup build
+    $ meson compile -C build
+
+* troubleshoot
+    * See "Error opening/initializing the selected video_out (--vo) device." when running mpv
+        * make sure you export WAYLAND_DISPLAY=wayland-0
+        * make sure you see "wayland   : YES" like this when you run "$ meson setup build"
+            * if not, check meson.build and install required packages to support mpv wayland feature
+
+    * See "Option gpu-context: 'drm' isn't supported." when running mpv with option "--gpu-context=drm" in text mode
+        * make sure you installed libgbm-dev before building mpv.
+
+    * Latest MPV usually requires to link latest ffmpeg libs (libavcodec.so… etc) at build time. In this case we need to build latest ffmpeg lib first and specify PKG_CONFIG_PATH, for example:
+        $ PKG_CONFIG_PATH=/opt/ffmpeg/lib/pkgconfig meson setup build
+        $ meson compile -C build
 
 # Shortcut
 s

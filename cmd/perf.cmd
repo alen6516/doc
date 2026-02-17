@@ -7,7 +7,7 @@
     * the target process
 
 -C CPU_ID
-    * tha target cpu
+    * the target cpu
 
 sleep SEC
     * how many sec to watch
@@ -17,6 +17,8 @@ $ perf list
     * show all supported metric
 
 $ perf stat -C 1 sleep 1
+
+$ perf state ./program args...
 
 $ perf record -C 10 sleep 1
 $ perf report

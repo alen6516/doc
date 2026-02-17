@@ -1,8 +1,9 @@
 # Description
 
 # Overview
-* server config is at /etc/sshd_config
-* client config is at /etc/ssh_config
+* server config is at /etc/ssh/sshd_config
+    * PermitRootLogin yes
+* client config is at /etc/ssh/ssh_config
 * keys are at ~/.ssh/
     * ssh-keygen
 

@@ -26,6 +26,7 @@ $ ps -eo nlwp | tail -n +2 | awk '{ num_threads += $1 } END { print num_threads 
     * check the snm of all threads running in the system.
 
 $ ps -T -p `pidof mpv`
+  * show all threads of a process
     PID    SPID TTY          TIME CMD
   35684   35684 pts/0    00:00:00 mpv
   35684   35685 pts/0    00:00:00 mpv/terminal
@@ -52,7 +53,6 @@ $ ps -T -p `pidof mpv`
   35684   35708 pts/0    00:00:00 mpv:sh4
   35684   35709 pts/0    00:00:00 ao-pipewire
   35684   35710 pts/0    00:00:00 mpv
-  * show how mpv uses its threads
 
 $ ps -p 677 -T
   PID  SPID TTY          TIME CMD
@@ -71,3 +71,6 @@ $ ps -p 677 -T
 $ ps -eLl
 $ ps -eTl
     * -f option will replace thread name with full command line which is the same for all threads of a process
+
+$ ps -ef | grep '\[.*\]'
+    * show kernel thread (typically identified by their names being enclosed in square brackets)

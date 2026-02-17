@@ -20,7 +20,7 @@ string = "abc123"
 len(string) = 6
 string.lstrip("abc")    # 123
 string.rstrip("123")    # abc
-string.striip("a3")     # bc12
+string.strip("a3")      # bc12
 string[1:]              # bc123
 string[:-1]             # abc12
 
@@ -52,10 +52,22 @@ import tool
 ret = tool.get_value()
 
 # print formt
-print("%d %d", % (3, 5))
+print("%d %d\n" % (3, 5))
+print(key, "=", value)
 
 # str to int
 ten = int("10")
+
+# functions
+* print all parameter name and value in a function
+    ```
+    def foo(a, b, c=10):
+        for key, value in locals().items():
+            print(key, "=", value)
+    ```
+* print current function name
+    import inspect
+    print("Current function:", inspect.currentframe().f_code.co_name)
 
 # class
 class Dog():

@@ -18,6 +18,9 @@ cat /proc/<number>/exe
 cat /proc/<number>/fd
     * the file descriptors of the file opened by this process
 
+cat /proc/cmdline
+    * check kernel command-line parameters
+
 grep "kernel_function" /proc/kallsyms
     * grep specific kernel function
 
@@ -60,6 +63,10 @@ cat /proc/version
     * root can modify the file under sys to change kernel config
     * e.g.: $ echo 1 > /proc/sys/net/ipv4/ip_forward
         * enable ip routing function in kernel
+    * /proc/sys/kernel/panic_on_oops
+        * 0: just log kernel oops, try to continue (default)
+        * 1: panic immediately when oops happens
+        * 2: panic only if not in process context
 
 
 # Options

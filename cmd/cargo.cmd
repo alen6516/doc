@@ -1,6 +1,8 @@
 # Description
 
 # Overview
+cargo install binary in ~/.cargo/bin, so do:
+$ export PATH=~/.cargo/bin/:$PATH
 
 # Options
 

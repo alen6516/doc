@@ -1,0 +1,32 @@
+               1 2                 3
+0000000000000000 t cpu_startup_entry
+1: the kernel virtual address of the symbol
+    * if staring with ffffffffc0 means loadable kernel modules
+2: type
+    * T: global text (code) symbol
+    * t: local (static) symbol
+    * D: global initialized data
+    * d: local initialized data
+    * B: global uninitialized data
+    * b: local uninitialized data (BSS)
+    * R: read-only data
+    * r: local read-only data
+    * W: Weak symbol
+    * A: Absolute symbol
+    * N: Debugging symbol
+3: symbol name
+    * if starting with __, usually means a helper function
+    * inlined symbol will not apprear
+    * perf_trace_xxxxxx
+    	* not a real driver function, it is kernel auto generated symbol used by perf/ftrace. Called after a tracepoint fires. Don't kprobe this.
+    * trace_event_raw_event_xxxx
+    	* internal ftrace glue code, don't kprobe this
+    * trace_raw_output_xxxx
+        * Another ftrace formatting helper, don't kprobe this
+    * __bpf_trace_xxxx
+        * for eBPF programs to attach to, don't kprobe it.
+	* eg. `tracepoint:amdgpu:amdgpu_bo_create`
+    * __bpf_trace_tp_map_xxxx
+        * Map helper for tracepoints, don't probe it
+    * event_xxxx
+        * ftrace event descripter. Metadata, not executable code

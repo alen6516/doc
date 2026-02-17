@@ -33,3 +33,11 @@ $ awk '/foo/ {print FNR $0; exit}' log.txt
 
 $ awk NF file.txt
     * NF only set on non-blank lines, so this command will print non-blank linee
+
+* save fields to different variables
+    input="example@domain:123"
+    $ eval $(echo $input | awk -F'[@:]' '{print "var1=" $1, "var2=" $2, "var3=" $3}')
+    $ echo "var1=$var1, var2=$var2, var3=$var3"
+        * var1=example
+        * var2=domain
+        * var3=123

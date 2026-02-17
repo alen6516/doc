@@ -12,6 +12,7 @@ $ sudo pacman -Sy
 
 $ sudo pacman -S xxx
     * apt install xxx
+    * apt upgrade xxx
 
 $ sudo pacman -Ss xxx
     * apt search xxx
@@ -32,8 +33,14 @@ $ sudo pacman -Rs xxx
 $ sudo pacman -U --noconfirm your-package.pkg.tar.zst
     * install *.pkg.tar.zst
 
+$ sudo pacman -U https://archive.archlinux.org/packages/l/libdisplay-info/libdisplay-info-0.1.1-3-x86_64.pkg.tar.zst
+    * install a pkg from archlinux archive, useful when the pkg is missing
+
 $ pacman -Qe
     * list all explicitly installed packages
 
 $ pacman -Qn
     * list all explicitly installed native packages (present in the sync database)
+
+$ pacman -Qi libdrm
+    * query info of the package
